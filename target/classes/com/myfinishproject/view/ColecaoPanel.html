@@ -1,0 +1,16 @@
+<wicket:panel>
+	<h1 wicket:id="message"></h1>
+	<p>
+	<form wicket:id="form">
+		<div>
+			<Label class="text">Nome: </label>
+			<input type="text" class="text" wicket:id="nome" placeholder="Digite um nome " /><br /><br />
+		</div>
+		<div class="form-group col-xs-3">
+			<Label class="text2">Data da Coleção: </label><br />
+			<input type="text" wicket:id="dtEntrada" class="form-data" placeholder="dd/MM/yyyy"/>
+		</div>
+		<a class="btn btn-success" type="submit" wicket:id="submit">Salvar</a>
+	</form>
+	
+</wicket:panel>
