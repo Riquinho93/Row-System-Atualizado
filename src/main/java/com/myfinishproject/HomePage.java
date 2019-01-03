@@ -1,5 +1,6 @@
 package com.myfinishproject;
 
+import com.myfinishproject.view.Cadastro;
 import com.myfinishproject.view.ColecaoForm;
 import com.myfinishproject.view.Login;
 
@@ -28,19 +29,12 @@ public class HomePage extends WebPage {
 				setResponsePage(ColecaoForm.class);
 			}
 		});
-add(new Link<Void>("logar"){
-			
-			private static final long serialVersionUID = 1L;
-
-			public void onClick() {
-				getSession().invalidate();
-				setResponsePage(ColecaoForm.class);
-			}
-		});
 
 		add(rederizandoPagina());
 
 		add(principalPagina());
+		
+		add(cadastro());
 
 	}
 
@@ -79,5 +73,23 @@ add(new Link<Void>("logar"){
 		add(button);
 		return button;
 	}
+	
+	// Chamada do cadastro
+		public AjaxLink<?> cadastro() {
+			// Botão normal
+			AjaxLink<Object> button = new AjaxLink<Object>("pagCadastro") {
+
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void onClick(AjaxRequestTarget arg0) {
+					setResponsePage(Cadastro.class);
+
+				}
+			};
+			button.setOutputMarkupId(true);
+			add(button);
+			return button;
+		}
 
 }

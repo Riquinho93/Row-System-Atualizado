@@ -15,7 +15,7 @@ import com.googlecode.genericdao.search.Search;
 import com.mysql.jdbc.PreparedStatement;
 
 public abstract class GenericDao<Entidade, id extends Serializable> extends GenericDAOImpl<Entidade, id> {
-	
+
 	private Session session;
 
 	@Override
@@ -56,14 +56,6 @@ public abstract class GenericDao<Entidade, id extends Serializable> extends Gene
 		session.close();
 	}
 
-	@SuppressWarnings("unchecked")
-//	@Transactional(readOnly = true)
-	public List<Entidade> listar() {
-		Query query = getSessionFactory().getCurrentSession().createQuery("select c from Colecao c order by c.nome");
-		List<Entidade> userList = query.list();
-		return userList;
-	}
-
 	public Session getSession() {
 		return session;
 	}
@@ -71,27 +63,27 @@ public abstract class GenericDao<Entidade, id extends Serializable> extends Gene
 	public void setSession(Session session) {
 		this.session = session;
 	}
-	
+
 	public List<Entidade> searchDao(Search search) {
 		session = getSessionFactory().openSession();
 		session.beginTransaction();
 		List<Entidade> userList = search(search);
 		session.close();
 		return userList;
-	
+
 	}
-	
+
 	public void pesquisar(String nome) {
 		try {
 			Connection conexao = null;
-			String sql= "select * from Contato where nome like ?";
+			String sql = "select * from Contato where nome like ?";
 			PreparedStatement ps = (PreparedStatement) conexao.prepareStatement(sql);
 			ps.setString(1, nome + "%");
 			ps.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

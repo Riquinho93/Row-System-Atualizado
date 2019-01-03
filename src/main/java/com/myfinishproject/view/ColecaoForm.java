@@ -46,7 +46,7 @@ public class ColecaoForm extends HomePage {
 	private ColecaoService colecaoService;
 
 	public ColecaoForm() {
-		
+		Colecao listaColecao = new Colecao();
 		colecaoModels = colecaoService.listar();
 		
 		/*
