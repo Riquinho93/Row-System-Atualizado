@@ -30,8 +30,8 @@ public class ColecaoForm extends HomePage {
 
 	private static final long serialVersionUID = 1L;
 
-	Form<Colecao> form = new Form<Colecao>("form");
-	Form<Colecao> form2; 
+	private Form<Colecao> form = new Form<Colecao>("form");
+	private Form<Colecao> form2; 
 	private ModalWindow modalWindow;
 	private ModalWindow modalWindowDel;
 	private List<Colecao> colecaoModels = new LinkedList<Colecao>();
@@ -40,7 +40,7 @@ public class ColecaoForm extends HomePage {
 	// Criando um container
 	private WebMarkupContainer listContainer = null;
 	private LoadableDetachableModel<List<Colecao>> loadList;
-	Colecao colecaoForm;
+	private Colecao colecaoForm;
 
 	@SpringBean(name = "colecaoService")
 	private ColecaoService colecaoService;
@@ -85,7 +85,7 @@ public class ColecaoForm extends HomePage {
 
 		add(modalWindow);
 
-		// Criando janela do Perfil
+		// Criando janela da cole
 		add(new AjaxLink<String>("viewLink") {
 			private static final long serialVersionUID = -182677973237618503L;
 

@@ -1,5 +1,6 @@
 package com.myfinishproject.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +9,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "funcionario")
-public class Funcionario {
+public class Funcionario implements Serializable {
+
+	private static final long serialVersionUID = 5017402120950084420L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +28,8 @@ public class Funcionario {
 	private String telefone;
 	private String email;
 	private Endereco endereco;
+	@Transient
+	private boolean answer;
 
 	public Integer getId() {
 		return id;
@@ -55,7 +63,8 @@ public class Funcionario {
 		this.email = email;
 	}
 
-	@Embedded
+	@OneToOne
+	@JoinColumn(name = "idEndereco")
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -70,6 +79,14 @@ public class Funcionario {
 
 	public void setFuncao(String funcao) {
 		this.funcao = funcao;
+	}
+
+	public boolean isAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(boolean answer) {
+		this.answer = answer;
 	}
 
 }

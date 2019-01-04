@@ -34,6 +34,8 @@
 			<!-- passando a bean anotado -->
 			<list>
 				<value>com.myfinishproject.model.Colecao</value>
+				<value>com.myfinishproject.model.Funcionario</value>
+				<value>com.myfinishproject.model.Endereco</value>
 			</list>
 		</property>
 		<!-- configurações para o hibernate properties -->
@@ -54,7 +56,14 @@
 		<property name="colecaoDao" ref="colecaoDao"></property>
 
 	</bean>
-
+	
+	<bean id="funcionarioDao" class="com.myfinishproject.dao.FuncionarioDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="funcionarioService" class="com.myfinishproject.service.FuncionarioService">
+		<property name="funcionarioDao" ref="funcionarioDao"></property>
+	</bean>
 	 <bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
