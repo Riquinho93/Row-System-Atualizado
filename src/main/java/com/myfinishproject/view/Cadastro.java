@@ -24,6 +24,7 @@ import com.googlecode.genericdao.search.Search;
 import com.myfinishproject.HomePage;
 import com.myfinishproject.model.Endereco;
 import com.myfinishproject.model.Funcionario;
+import com.myfinishproject.service.EnderecoService;
 import com.myfinishproject.service.FuncionarioService;
 
 public class Cadastro extends HomePage {
@@ -43,6 +44,9 @@ public class Cadastro extends HomePage {
 	private ModalWindow modalWindowDel;
 	@SpringBean(name = "funcionarioService")
 	private FuncionarioService funcionarioService;
+	@SpringBean(name= "enderecoService")
+	private EnderecoService enderecoService;
+	private Funcionario filtrar;
 
 	public Cadastro() {
 
@@ -52,6 +56,19 @@ public class Cadastro extends HomePage {
 		// CompoundPropertyModel<Endereco>(endereco));
 
 		funcionariosList = funcionarioService.listar();
+		
+		endereco.setLogradouro("Rua dosFortes");
+		endereco.setEstado("MMA");
+		endereco.setCidade("Desconhecida");
+	//	enderecoService.SalvarOuAlterar(endereco);
+		
+		
+		funcionario.setNome("Jiren");
+		funcionario.setFuncao("Forte");
+		funcionario.setTelefone("1010101010");
+		funcionario.setEmail("jiren@forte.com");
+		funcionario.setEndereco(endereco);
+	//	funcionarioService.SalvarOuAlterar(funcionario);
 
 		add(filtrar());
 
@@ -87,7 +104,10 @@ public class Cadastro extends HomePage {
 
 					private static final long serialVersionUID = 277997013286385910L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario) {
+					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
+						
+						funcionario.setEndereco(endereco);
+						enderecoService.SalvarOuAlterar(endereco);
 						funcionarioService.SalvarOuAlterar(funcionario);
 						funcionariosList.add(funcionario);
 						target.add(listContainer);
@@ -103,7 +123,6 @@ public class Cadastro extends HomePage {
 
 		});
 
-		// add(form2);
 
 	}
 
@@ -131,11 +150,11 @@ public class Cadastro extends HomePage {
 				Funcionario user = item.getModelObject();
 				item.add(new Label("id", user.getId()));
 				item.add(new Label("nome", user.getNome()));
-				// item.add(new Label("funcao", user.getFuncao()));
+				item.add(new Label("funcao", user.getFuncao()));
 				item.add(new Label("telefone", user.getTelefone()));
 				item.add(new Label("email", user.getEmail()));
-				item.add(new Label("endereco", user.getEndereco()));
-				item.add(editando(user));
+				item.add(new Label("endereco", user.getEndereco().getId()));
+				item.add(editando(user, user.getEndereco()));
 				item.add(remover(user.getId()));
 			}
 		};
@@ -149,8 +168,8 @@ public class Cadastro extends HomePage {
 	}
 
 	public Form<Funcionario> filtrar() {
-
-		form2 = new Form<Funcionario>("form2", new CompoundPropertyModel<Funcionario>(funcionario));
+		filtrar = new Funcionario();
+		form2 = new Form<Funcionario>("form2", new CompoundPropertyModel<Funcionario>(filtrar));
 		TextField<String> nome = new TextField<String>("nome");
 		nome.setOutputMarkupId(true);
 		form2.add(nome);
@@ -162,8 +181,8 @@ public class Cadastro extends HomePage {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				Search search = new Search(Funcionario.class);
 
-				if (funcionario.getNome() != null && !funcionario.getNome().equals("")) {
-					search.addFilterLike("nome", "%" + funcionario.getNome() + "%");
+				if (filtrar.getNome() != null && !filtrar.getNome().equals("")) {
+					search.addFilterLike("nome", "%" + filtrar.getNome() + "%");
 				}
 
 				funcionariosList = funcionarioService.search(search);
@@ -179,18 +198,20 @@ public class Cadastro extends HomePage {
 	}
 
 	// Editando
-	AjaxLink<Funcionario> editando(final Funcionario funcionario) {
+	AjaxLink<Funcionario> editando(final Funcionario funcionario, Endereco endereco) {
 		AjaxLink<Funcionario> editar = new AjaxLink<Funcionario>("alterar") {
-
+			
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				CadastroPanel cadastroPanel = new CadastroPanel(modalWindow.getContentId(), funcionario) {
+				CadastroPanel cadastroPanel = new CadastroPanel(modalWindow.getContentId(), funcionario, endereco) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario) {
+					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
+						funcionario.setEndereco(endereco);
+						enderecoService.SalvarOuAlterar(endereco);
 						target.add(listContainer);
 						funcionarioService.SalvarOuAlterar(funcionario);
 						modalWindow.close(target);

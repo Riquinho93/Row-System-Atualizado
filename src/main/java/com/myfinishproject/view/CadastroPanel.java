@@ -5,54 +5,43 @@ import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 
 import com.myfinishproject.model.Endereco;
+import com.myfinishproject.model.Funcao;
 import com.myfinishproject.model.Funcionario;
 
-public class CadastroPanel extends Panel{
+public class CadastroPanel extends Panel {
 
 	private static final long serialVersionUID = 8991195474675368668L;
-	
+
 	private Form<Funcionario> formFunc;
 	private Form<Endereco> formEnd;
-	private Funcionario funcionario;
-	private Endereco endereco;
-	private List<String> funcoes;
-	
+//	private Funcionario funcionario;
+//	private Endereco endereco;
+
 	public CadastroPanel(String id) {
-		this(id, new Funcionario());
+		this(id, new Funcionario(), new Endereco());
 	}
 
-	public CadastroPanel(String id, Funcionario funcionario) {
+	public CadastroPanel(String id, Funcionario funcionario, Endereco endereco) {
 		super(id);
-		endereco = new Endereco();
-		funcoes = new ArrayList<String>();
-		funcoes.add("Cortador");
-		funcoes.add("Faccionista");
-		funcoes.add("Funcionario");
-		
 		formFunc = new Form<Funcionario>("formFunc", new CompoundPropertyModel<Funcionario>(funcionario));
 		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(endereco));
-		
-		add(formFunc);
-		add(formEnd);
-		cadastrar();
 
-	}
-	
-	private void cadastrar() {
 		TextField<String> nome = new TextField<>("nome");
-//		TextField<String> funcao = new TextField<>("funcao");
 		TextField<String> telefone = new TextField<>("telefone");
 		TextField<String> email = new TextField<>("email");
-//		TextField<Endereco> endereco =  new TextField<>("endereco");
 
 		TextField<String> logradouro = new TextField<>("logradouro");
 		NumberTextField<Integer> numero = new NumberTextField<>("numero");
@@ -60,30 +49,35 @@ public class CadastroPanel extends Panel{
 		TextField<String> estado = new TextField<>("estado");
 		
 
-		/*formFunc.add(new DropDownChoice("funcao", new Model(), funcoes) {
-			protected boolean localizeDisplayValues() {
-				return true;
-			}
-		});*/
-
-		estado.setOutputMarkupId(true);
 		nome.setOutputMarkupId(true);
-//		funcao.setOutputMarkupId(true);
 		telefone.setOutputMarkupId(true);
 		email.setOutputMarkupId(true);
 		logradouro.setOutputMarkupId(true);
 		numero.setOutputMarkupId(true);
 		cidade.setOutputMarkupId(true);
+		estado.setOutputMarkupId(true);
+
+		ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao", "descricao");
+		IModel<List<Funcao>> model = new LoadableDetachableModel() {
+
+			@Override
+			protected List<Funcao> load() {
+				return Funcao.funcoes();
+			}
+		};
+
+		DropDownChoice<Funcao> funcoes = new DropDownChoice<>("funcao", model, renderer);
 
 		// funcionario.setEndereco(endereco);
-		add(new AjaxLink<String>("submit") {
+		AjaxButton button = new AjaxButton("submit") {
 
 			private static final long serialVersionUID = 994698440577863113L;
 
 			@Override
-			public void onClick(AjaxRequestTarget target) {
-				
-				executarAoSalvar(target, funcionario);
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+				super.onSubmit(target, form);
+
+				executarAoSalvar(target, funcionario, endereco);
 				target.add(nome);
 				target.add(telefone);
 				target.add(email);
@@ -91,25 +85,31 @@ public class CadastroPanel extends Panel{
 				target.add(numero);
 				target.add(cidade);
 				target.add(estado);
-			}
 
-		});
+			}
+		};
+		button.setOutputMarkupId(true);
+	
+//		add(formEnd);
 		formFunc.add(nome);
-//		formFunc.add(funcao);
 		formFunc.add(telefone);
 		formFunc.add(email);
-//		formFunc.add(endereco);
 
 		formEnd.add(logradouro);
 		formEnd.add(numero);
 		formEnd.add(cidade);
 		formEnd.add(estado);
+		formFunc.add(funcoes);
+		formFunc.add(formEnd);
+		formFunc.add(button);
+		add(formFunc);
+		
 
 	}
-	
-	// Enviando os dados para o HomePage
-		public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario) {
 
-		}
+	// Enviando os dados para o HomePage
+	public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
+
+	}
 
 }

@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:head>
-	<meta charset="UTF-8">
+	<!-- <meta charset="UTF-8">
 	<title>Row System</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" href="estilo.css" type="text/css" media="screen">
 	<link rel="stylesheet"
 		href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
 		integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-		crossorigin="anonymous">
+		crossorigin="anonymous"> -->
 </wicket:head>
 <body>
- <wicket:extend>
- 
+	<wicket:extend>
+
 		<div class="container">
-		<h1>Cadastro</h1><br />
+			<h1>Cadastro</h1>
+			<br />
 			<div class="container-fluid">
 				<form wicket:id="form2">
 					<div class="form-row">
 						<div class="col-sm-2">
-							<label type="text">Nome</label> 
-							<input wicket:id="nome" type="text" class="form-control" placeholder="Informe o nome">
+							<label type="text">Nome</label> <input wicket:id="nome"
+								type="text" class="form-control" placeholder="Informe o nome">
 						</div>
 					</div>
 					<br /> <a wicket:id="filtrar" class="btn btn-secondary"
@@ -29,11 +30,10 @@
 				<div>
 					<a class="btn btn-success" margin:-2px; wicket:id="viewLink"
 						style="float: right;">Novo <i class="fas fa-plus"></i>
-					</a><br />
-					<br />
+					</a><br /> <br />
 				</div>
 			</div>
- <table class="table table-bordered">
+			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -49,23 +49,23 @@
 					<tr wicket:id="listView">
 						<td class="text" wicket:id="id"></td>
 						<td class="text" wicket:id="nome"></td>
-						<td class="text"></td>
+						<td class="text" wicket:id="funcao"></td>
 						<td class="text" wicket:id="telefone"></td>
 						<td class="text" wicket:id="email"></td>
 						<td class="text" wicket:id="endereco"></td>
-						<td class="text-center"><a wicket:id="alterar"
-							class="btn btn-default" rel="tooltip" title="Editar"> <i
-								class="fas fa-pencil-alt"></i>
+						<td class="text-center">
+						 <a wicket:id="alterar" class="btn btn-default" rel="tooltip"
+							title="Editar"> <i class="fas fa-pencil-alt"></i>
 						</a> <a wicket:id="excluir" class="btn btn-default modal-confirm"
 							title="Excluir"> <i class="fa fa-trash"></i>
 						</a></td>
 					</tr>
 				</tbody>
-				<div wicket:id="pag"></div> 
+				<div wicket:id="pag"></div>
 			</table>
 			<div wicket:id="modalWindow"></div>
-			<div wicket:id="modalWindowDel"></div> 
+			<div wicket:id="modalWindowDel"></div>
 		</div>
- </wicket:extend>
+	</wicket:extend>
 </body>
 </html>

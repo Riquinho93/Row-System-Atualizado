@@ -64,6 +64,23 @@
 	<bean id="funcionarioService" class="com.myfinishproject.service.FuncionarioService">
 		<property name="funcionarioDao" ref="funcionarioDao"></property>
 	</bean>
+	
+	<bean id="enderecoDao" class="com.myfinishproject.dao.EnderecoDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="enderecoService" class="com.myfinishproject.service.EnderecoService">
+		<property name="enderecoDao" ref="enderecoDao"></property>
+	</bean>
+	
+	<bean id="produtoDao" class="com.myfinishproject.dao.ProdutoDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="produtoService" class="com.myfinishproject.service.ProdutoService">
+		<property name="produtoDao" ref="produtoDao"></property>
+	</bean>
+	
 	 <bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

@@ -27,6 +27,8 @@ public class Funcionario implements Serializable {
 	private String funcao;
 	private String telefone;
 	private String email;
+	@OneToOne //	
+	@JoinColumn(name = "idEndereco")
 	private Endereco endereco;
 	@Transient
 	private boolean answer;
@@ -63,8 +65,6 @@ public class Funcionario implements Serializable {
 		this.email = email;
 	}
 
-	@OneToOne
-	@JoinColumn(name = "idEndereco")
 	public Endereco getEndereco() {
 		return endereco;
 	}

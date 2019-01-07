@@ -19,6 +19,7 @@ import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.googlecode.genericdao.search.Search;
@@ -168,7 +169,7 @@ public class ColecaoForm extends HomePage {
 				// item.add(new Label("ID", user.getId()));
 				item.add(new Label("nome", user.getNome()));
 				item.add(new Label("dtEntrada", user.getDtEntrada()));
-				// item.add(visualizar(item.getIndex(), user));
+			    item.add(visualizar(item.getIndex(), user));
 				item.add(editando(user));
 				item.add(removendo(user.getColecaoId()));
 			}
@@ -186,6 +187,22 @@ public class ColecaoForm extends HomePage {
 		add(new PagingNavigator("pag", listView));
 
 		return listContainer;
+	}
+	//Indo para a pagina dos produtos
+	private AjaxLink<ProdutoForm> visualizar(final int index, Colecao colecao){
+		AjaxLink<ProdutoForm> button = new AjaxLink<ProdutoForm>("vis") {
+			
+			private static final long serialVersionUID = -2066063362744885278L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				PageParameters parametro = new PageParameters();
+				parametro.add("nome", colecao.getNome());
+				parametro.add("dtEntrada", colecao.getDtEntrada());
+				setResponsePage(ProdutoForm.class, parametro);
+			}
+		};
+		return button;
 	}
 
 	// Removendo modelo com ajaxLink

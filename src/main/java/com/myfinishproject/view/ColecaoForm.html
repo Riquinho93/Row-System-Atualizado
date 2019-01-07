@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:head>
-	<meta charset="utf-8" />
+	<!-- <meta charset="utf-8" />
 	<title>Row System</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" href="estilo.css" type="text/css" media="screen">
 	<link rel="stylesheet"
 		href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
 		integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-		crossorigin="anonymous">
+		crossorigin="anonymous"> -->
 </wicket:head>
 <body>
 	<wicket:extend>
@@ -50,7 +50,11 @@
 					<tr wicket:id="listview">
 						<td><a class="text" wicket:id="nome"></a></td>
 						<td wicket:id="dtEntrada" />
-						<td class="text-center"><a wicket:id="alt"
+						<td class="text-center">
+						<a wicket:id="vis" class="btn btn-default" rel="tooltip" title="Visualizar"> 
+							<i class="fas fa-eye"></i>
+						</a>
+						<a wicket:id="alt"
 							class="btn btn-default" rel="tooltip" title="Editar"> <i
 								class="fas fa-pencil-alt"></i>
 						</a> <a wicket:id="del" class="btn btn-default modal-confirm"

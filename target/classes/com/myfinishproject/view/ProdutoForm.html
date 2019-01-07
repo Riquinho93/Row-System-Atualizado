@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<wicket:head>
+	<meta charset="utf-8" />
+	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+ 	<link rel="stylesheet" href="estilo.css" type="text/css" media="screen"> 
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+		integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+		crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</wicket:head>
+<body>
+	<wicket:extend>
+	<div class="container">
+			<h1>PRODUTOS</h1>
+			<span><strong>COLEÇÃO: </strong></span>
+			<span wicket:id="nome"></span>
+			<span><strong>DATA DE ENTRADA:</strong></span>
+			<span wicket:id="dtEntrada"></span>
+			<div class="container-fluid">
+				<form action="">
+					<div class="form-row">
+						<div class="col-md-3">
+							<label class="text">Modelo</label>
+							<input class="form-control" type="text" placeholder="Informe o nome do modelo"/>
+						</div>
+					</div>
+				</form>
+			</div>
+			<a class="btn btn-secondary" margin:-px; style="float: right; color:white;">Filtrar</a>
+			<a wicket:id="criarProduto" class="btn btn-success" margin:-px; style="float: right">Novo
+				<i class="fas fa-plus"></i>
+			</a>
+			
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Modelo</th>			
+						<th>Data de Saida</th>
+						<th>Data de Retorno</th>
+						<th>Largura</th>
+						<th>Tipo de Enfesto</th>
+						<th>Status</th>
+						<th>Ações</th>	
+					</tr>
+				</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="text-center">
+						<a class="btn btn-default" rel="tooltip" title="Editar">
+							<i class="fas fa-pencil-alt"></i>
+						</a>
+						<a class="btn btn-default model-confirm" title="Excluir">
+							<i class="fa fa-trash"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+			</table>
+			<div wicket:id="modalWindow"></div>
+	</div>
+	</wicket:extend>
+</body>
+</html>
