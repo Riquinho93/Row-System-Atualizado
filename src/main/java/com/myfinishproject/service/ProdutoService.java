@@ -36,8 +36,8 @@ public class ProdutoService implements IProdutoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Produto> listar() {
-		return produtoDao.listar();
+	public List<Produto> listar(Integer id) {
+		return produtoDao.listar(id);
 	}
 
 	@Override

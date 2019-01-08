@@ -1,5 +1,35 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <wicket:panel>
 	<h1>PAINEL DO PRODUTO</h1>
-
-
+	<div class="cardy-body">
+		<form wicket:id="formProduto">
+			<div class="row" >
+				<div class="form-group col-md-3">
+					<Label class="text">Modelo: </label>
+					<input type="text" class="form-control" wicket:id="modelo" placeholder="Digite nome do modelo" />
+				</div>
+				<div class="form-group col-md-3">
+					<Label class="text">Largura do Tecido: </label>
+					<input type="text" class="form-control" wicket:id="largura" placeholder="Digite a largura" />
+				</div>
+				<div class="form-group col-md-3">
+					<Label class="text">Tipo de Enfesto: </label>
+					<select wicket:id="tipoEnfesto" class="form-control"></select>
+				</div>
+				<div class="form-group col-md-3">
+					<Label class="text2">Data Entrada: </label>
+					<input type="text" wicket:id="dataSaida" class="form-data" placeholder="dd/MM/yyyy"/>
+				</div>
+				<div class="form-group col-md-3">
+					<Label class="text2">Data Saida: </label>
+					<input type="text" wicket:id="dataRetorno" class="form-data" placeholder="dd/MM/yyyy"/>
+				</div>
+				<div class="form-group col-md-3">
+					<Label class="text">Status: </label>
+					<select wicket:id="status" class="form-control"></select>
+				</div>
+			</div>
+			<a class="btn btn-success" type="submit" wicket:id="salvarTudo">Salvar</a>
+		</form>
+	</div>
 </wicket:panel>

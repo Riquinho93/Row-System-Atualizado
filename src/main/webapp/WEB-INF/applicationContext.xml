@@ -36,6 +36,7 @@
 				<value>com.myfinishproject.model.Colecao</value>
 				<value>com.myfinishproject.model.Funcionario</value>
 				<value>com.myfinishproject.model.Endereco</value>
+				<value>com.myfinishproject.model.Produto</value>
 			</list>
 		</property>
 		<!-- configurações para o hibernate properties -->

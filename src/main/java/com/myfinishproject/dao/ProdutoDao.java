@@ -10,8 +10,8 @@ import com.myfinishproject.model.Produto;
 public class ProdutoDao extends GenericDao<Produto, Serializable> {
 
 	@SuppressWarnings("unchecked")
-	public List<Produto> listar() {
-		Query query = getSessionFactory().getCurrentSession().createQuery("select c from Produto order by c.modelo");
+	public List<Produto> listar(Integer id) {
+		Query query = getSessionFactory().getCurrentSession().createQuery("select distinct p from Produto p, Colecao c where "+id +" = p.idColecao");
 		List<Produto> lists = query.list();
 		return lists;
 	}

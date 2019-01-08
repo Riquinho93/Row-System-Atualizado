@@ -32,7 +32,7 @@ public class ColecaoForm extends HomePage {
 	private static final long serialVersionUID = 1L;
 
 	private Form<Colecao> form = new Form<Colecao>("form");
-	private Form<Colecao> form2; 
+	private Form<Colecao> form2;
 	private ModalWindow modalWindow;
 	private ModalWindow modalWindowDel;
 	private List<Colecao> colecaoModels = new LinkedList<Colecao>();
@@ -49,7 +49,7 @@ public class ColecaoForm extends HomePage {
 	public ColecaoForm() {
 		Colecao listaColecao = new Colecao();
 		colecaoModels = colecaoService.listar();
-		
+
 		/*
 		 * Session session = HibernateUtil.getFactory().openSession();
 		 * 
@@ -169,7 +169,7 @@ public class ColecaoForm extends HomePage {
 				// item.add(new Label("ID", user.getId()));
 				item.add(new Label("nome", user.getNome()));
 				item.add(new Label("dtEntrada", user.getDtEntrada()));
-			    item.add(visualizar(item.getIndex(), user));
+				item.add(visualizar(item.getIndex(), user));
 				item.add(editando(user));
 				item.add(removendo(user.getColecaoId()));
 			}
@@ -188,19 +188,23 @@ public class ColecaoForm extends HomePage {
 
 		return listContainer;
 	}
-	//Indo para a pagina dos produtos
-	private AjaxLink<ProdutoForm> visualizar(final int index, Colecao colecao){
+
+	// Indo para a pagina dos produtos
+	private AjaxLink<ProdutoForm> visualizar(final int index, Colecao colecao) {
 		AjaxLink<ProdutoForm> button = new AjaxLink<ProdutoForm>("vis") {
-			
+
 			private static final long serialVersionUID = -2066063362744885278L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				PageParameters parametro = new PageParameters();
+				parametro.add("colecaoId", colecao.getColecaoId());
 				parametro.add("nome", colecao.getNome());
 				parametro.add("dtEntrada", colecao.getDtEntrada());
-				setResponsePage(ProdutoForm.class, parametro);
+//				setResponsePage(ProdutoForm.class, parametro);
+				setResponsePage(new ProdutoForm(parametro, colecao));
 			}
+
 		};
 		return button;
 	}
@@ -221,8 +225,8 @@ public class ColecaoForm extends HomePage {
 
 					public void executarAoSalvar(AjaxRequestTarget target, Colecao colecaoModel) {
 						if (colecaoModel.isAnswer() == true) {
-		//					colecaoModels.remove(index);
-							System.out.println("ID "+ index);
+							// colecaoModels.remove(index);
+							System.out.println("ID " + index);
 							colecaoService.excluir(index);
 							target.add(listContainer);
 						}
@@ -271,7 +275,7 @@ public class ColecaoForm extends HomePage {
 		form.add(button1);
 		return button1;
 	}
-	
+
 	public Form<Colecao> filtrar() {
 		colecaoForm = new Colecao();
 		form2 = new Form<Colecao>("form2", new CompoundPropertyModel<Colecao>(colecaoForm));

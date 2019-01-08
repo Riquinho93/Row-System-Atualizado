@@ -13,7 +13,7 @@ public interface IProdutoService{
 	
 	public void excluir(Integer id);
 	
-	public List<Produto> listar();
+	public List<Produto> listar(Integer id);
 	
 	public List<Produto> search(Search search);
 

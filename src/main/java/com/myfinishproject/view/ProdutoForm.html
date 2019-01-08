@@ -16,7 +16,7 @@
 			<h1>PRODUTOS</h1>
 			<span><strong>COLEÇÃO: </strong></span>
 			<span wicket:id="nome"></span>
-			<span><strong>DATA DE ENTRADA:</strong></span>
+			<span><strong>DATA:</strong></span>
 			<span wicket:id="dtEntrada"></span>
 			<div class="container-fluid">
 				<form action="">
@@ -36,7 +36,8 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th>Modelo</th>			
+						<th>Modelo</th>	
+						<th>Colecao</th>		
 						<th>Data de Saida</th>
 						<th>Data de Retorno</th>
 						<th>Largura</th>
@@ -45,14 +46,15 @@
 						<th>Ações</th>	
 					</tr>
 				</thead>
-			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+			<tbody wicket:id="container">
+				<tr wicket:id="listView">
+					<td wicket:id="modelo"></td>
+					<td wicket:id="idColecao"></td>
+					<td wicket:id="dataSaida"></td>
+					<td wicket:id="dataRetorno"></td>
+					<td wicket:id="largura"></td>
+					<td wicket:id="tipoEnfesto"></td>
+					<td wicket:id="status"></td>
 					<td class="text-center">
 						<a class="btn btn-default" rel="tooltip" title="Editar">
 							<i class="fas fa-pencil-alt"></i>
@@ -63,6 +65,7 @@
 					</td>
 				</tr>
 			</tbody>
+			<div wicket:id="pag"></div>
 			</table>
 			<div wicket:id="modalWindow"></div>
 	</div>

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -22,11 +24,15 @@ public class Produto implements Serializable {
 	private String modelo;
 	@Transient
 	private boolean answer;
-	private Date dataEntrada;
+	private Date dataSaida;
 	private Date dataRetorno;
-	private TipoManifesto tipoManisfesto;
+	private TipoEnfesto tipoEnfesto;
 	private String largura;
 	private Status status;
+
+	@ManyToOne
+	@JoinColumn(name = "idColecao")
+	private Colecao idColecao;
 
 	public Integer getId() {
 		return id;
@@ -52,12 +58,12 @@ public class Produto implements Serializable {
 		this.answer = answer;
 	}
 
-	public Date getDataEntrada() {
-		return dataEntrada;
+	public Date getDataSaida() {
+		return dataSaida;
 	}
 
-	public void setDataEntrada(Date dataEntrada) {
-		this.dataEntrada = dataEntrada;
+	public void setDataSaida(Date dataSaida) {
+		this.dataSaida = dataSaida;
 	}
 
 	public Date getDataRetorno() {
@@ -68,12 +74,12 @@ public class Produto implements Serializable {
 		this.dataRetorno = dataRetorno;
 	}
 
-	public TipoManifesto getTipoManisfesto() {
-		return tipoManisfesto;
+	public TipoEnfesto getTipoEnfesto() {
+		return tipoEnfesto;
 	}
 
-	public void setTipoManisfesto(TipoManifesto tipoManisfesto) {
-		this.tipoManisfesto = tipoManisfesto;
+	public void setTipoEnfesto(TipoEnfesto tipoEnfesto) {
+		this.tipoEnfesto = tipoEnfesto;
 	}
 
 	public String getLargura() {
@@ -90,6 +96,14 @@ public class Produto implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public Colecao getIdColecao() {
+		return idColecao;
+	}
+
+	public void setIdColecao(Colecao idColecao) {
+		this.idColecao = idColecao;
 	}
 
 }

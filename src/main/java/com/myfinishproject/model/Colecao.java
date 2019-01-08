@@ -5,9 +5,11 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -29,9 +31,9 @@ public class Colecao implements Serializable {
 	@Transient
 	private boolean answer;
 
-//	//@OneToMany(mappedBy = "colecaoId")
-//	private Collection<ProdutoModel> listOs;
-//	
+	@OneToMany(mappedBy = "idColecao", targetEntity = Produto.class , fetch =  FetchType.LAZY)
+	private Collection<Produto> listaProdutos;
+
 	public Colecao() {
 	}
 
@@ -50,7 +52,7 @@ public class Colecao implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public boolean isAnswer() {
 		return answer;
 	}
@@ -67,10 +69,12 @@ public class Colecao implements Serializable {
 		this.dtEntrada = dtEntrada;
 	}
 
-	public Colecao(String nome, String dtEntrada) {
-		super();
-		this.nome = nome;
-		this.dtEntrada = dtEntrada;
+	public Collection<Produto> getListaProdutos() {
+		return listaProdutos;
+	}
+
+	public void setListaProdutos(Collection<Produto> listaProdutos) {
+		this.listaProdutos = listaProdutos;
 	}
 
 }
