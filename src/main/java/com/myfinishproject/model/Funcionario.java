@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,8 +28,8 @@ public class Funcionario implements Serializable {
 	private String funcao;
 	private String telefone;
 	private String email;
-	@OneToOne //	
-	@JoinColumn(name = "idEndereco")
+	
+	@OneToOne(mappedBy = "funcionario", targetEntity = Endereco.class, fetch = FetchType.LAZY) 	
 	private Endereco endereco;
 	@Transient
 	private boolean answer;

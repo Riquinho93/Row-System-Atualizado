@@ -93,9 +93,9 @@ public class Cadastro extends HomePage {
 
 					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
 						
-						funcionario.setEndereco(endereco);
-						enderecoService.SalvarOuAlterar(endereco);
 						funcionarioService.SalvarOuAlterar(funcionario);
+						endereco.setFuncionario(funcionario);
+						enderecoService.SalvarOuAlterar(endereco);
 						funcionariosList.add(funcionario);
 						target.add(listContainer);
 						modalWindow.close(target);
@@ -141,7 +141,7 @@ public class Cadastro extends HomePage {
 				item.add(new Label("telefone", user.getTelefone()));
 				item.add(new Label("email", user.getEmail()));
 				item.add(new Label("endereco", user.getEndereco().getId()));
-				item.add(editando(user, user.getEndereco()));
+				item.add(editando(user));
 				item.add(remover(user.getId()));
 			}
 		};
@@ -185,7 +185,7 @@ public class Cadastro extends HomePage {
 	}
 
 	// Editando
-	AjaxLink<Funcionario> editando(final Funcionario funcionario, Endereco endereco) {
+	AjaxLink<Funcionario> editando(final Funcionario funcionario) {
 		AjaxLink<Funcionario> editar = new AjaxLink<Funcionario>("alterar") {
 			
 			private static final long serialVersionUID = 1L;
@@ -197,10 +197,11 @@ public class Cadastro extends HomePage {
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
-						funcionario.setEndereco(endereco);
+						enderecoService.buscarPorId(funcionario.getId());
+						funcionarioService.SalvarOuAlterar(funcionario);
+						endereco.setFuncionario(funcionario);
 						enderecoService.SalvarOuAlterar(endereco);
 						target.add(listContainer);
-						funcionarioService.SalvarOuAlterar(funcionario);
 						modalWindow.close(target);
 					};
 				};

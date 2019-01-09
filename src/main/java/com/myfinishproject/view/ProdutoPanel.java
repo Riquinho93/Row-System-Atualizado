@@ -40,9 +40,9 @@ public class ProdutoPanel extends Panel {
 	private PageableListView<Peca> listViewPecas;
 	private LoadableDetachableModel<List<Peca>> atualizarPecas;
 	private List<Peca> listaPecas = new LinkedList<Peca>();
-	private Peca peca;
+	private Peca peca = new Peca();
 	private Form<Produto> formProduto ;
-	private Produto idProduto = new Produto();
+	private Produto produtoPeca = new Produto();
 	
 	public ProdutoPanel(String id) {
 		this(id, new Produto());
@@ -50,8 +50,7 @@ public class ProdutoPanel extends Panel {
 
 	public ProdutoPanel(String id, final Produto produto) {
 		super(id);
-		idProduto = produto;
-		System.out.println("Produto: " + produto.getId());
+		
 		listaPecas = pecaService.listar();
 		//Metodo de Peca
 		pecaMetodo();
@@ -146,9 +145,18 @@ public class ProdutoPanel extends Panel {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
 				
-//				pecaService.SalvarOuAlterar(peca);
-				System.out.println("ProdutoSubimit: " + produto.getId());
 				executarAoSalvar(target, produto);
+				produtoPeca = produto;
+				produto.setListaPecas(listaPecas);
+				peca.setProduto(produtoPeca);
+				/*
+				 * Fazer um laço para percorrer toda a lista
+				 * 
+				 * */
+				
+				
+				pecaService.SalvarOuAlterar(peca);
+				System.out.println("ProdutoSubimit: " + produto.getId());
 
 				target.add(modelo);
 				target.add(largura);
@@ -178,7 +186,6 @@ public class ProdutoPanel extends Panel {
 		// Metodo Peças
 		private void pecaMetodo() {
 
-			peca = new Peca();
 			CompoundPropertyModel<Peca> compoundPropertyModel = new CompoundPropertyModel<Peca>(peca);
 			formPeca = new Form<Peca>("formPeca", compoundPropertyModel);
 
@@ -197,11 +204,10 @@ public class ProdutoPanel extends Panel {
 				@Override
 				protected void onSubmit(AjaxRequestTarget target, Form<?> form2) {
 					super.onSubmit(target, form2);
-					Peca coresAjax = (Peca) form2.getModelObject();
-					listaPecas.add(coresAjax);
+					Peca pecaAjax = (Peca) form2.getModelObject();
+					listaPecas.add(pecaAjax);
 					target.add(listContainerPecas);
-//					peca.setIdProduto(idProduto);
-					System.out.println("IdProduto: " + idProduto.getId());
+					peca.setProduto(produtoPeca);
 					target.add(cor);
 					target.add(tamanho);
 					target.add(quantidade);

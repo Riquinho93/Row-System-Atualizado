@@ -28,7 +28,7 @@ public class Peca implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "idProduto")
-	private Produto idProduto;
+	private Produto produto;
 
 	public Integer getId() {
 		return id;
@@ -54,12 +54,12 @@ public class Peca implements Serializable {
 		this.tamanho = tamanho;
 	}
 
-	public Produto getIdProduto() {
-		return idProduto;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setIdProduto(Produto idProduto) {
-		this.idProduto = idProduto;
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public int getQuantidade() {

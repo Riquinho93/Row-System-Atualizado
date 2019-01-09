@@ -24,6 +24,9 @@ public class Endereco implements Serializable {
 	private Integer numero;
 	private String cidade;
 	private String estado;
+	@OneToOne
+	@JoinColumn(name = "idFuncionario")
+	private Funcionario funcionario;
 
 	public Integer getId() {
 		return id;
@@ -63,6 +66,14 @@ public class Endereco implements Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 }

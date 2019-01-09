@@ -1,8 +1,8 @@
 package com.myfinishproject.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,10 +37,10 @@ public class Produto implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "idColecao")
-	private Colecao idColecao;
+	private Colecao colecao;
 
-	@OneToMany(mappedBy = "idProduto", targetEntity = Peca.class, fetch = FetchType.LAZY)
-	private Collection<Peca> listaPecas;
+	@OneToMany(mappedBy = "produto", targetEntity = Peca.class, fetch = FetchType.LAZY)
+	private List<Peca> listaPecas;
 
 	public Integer getId() {
 		return id;
@@ -122,19 +122,19 @@ public class Produto implements Serializable {
 		this.status = status;
 	}
 
-	public Colecao getIdColecao() {
-		return idColecao;
+	public Colecao getColecao() {
+		return colecao;
 	}
 
-	public void setIdColecao(Colecao idColecao) {
-		this.idColecao = idColecao;
+	public void setColecao(Colecao colecao) {
+		this.colecao = colecao;
 	}
 
-	public Collection<Peca> getListaPecas() {
+	public List<Peca> getListaPecas() {
 		return listaPecas;
 	}
 
-	public void setListaPecas(Collection<Peca> listaPecas) {
+	public void setListaPecas(List<Peca> listaPecas) {
 		this.listaPecas = listaPecas;
 	}
 

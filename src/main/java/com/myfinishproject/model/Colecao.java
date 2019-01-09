@@ -31,7 +31,7 @@ public class Colecao implements Serializable {
 	@Transient
 	private boolean answer;
 
-	@OneToMany(mappedBy = "idColecao", targetEntity = Produto.class , fetch =  FetchType.LAZY)
+	@OneToMany(mappedBy = "colecao", targetEntity = Produto.class , fetch =  FetchType.LAZY)
 	private Collection<Produto> listaProdutos;
 
 	public Colecao() {

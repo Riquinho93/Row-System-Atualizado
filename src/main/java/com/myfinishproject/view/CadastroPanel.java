@@ -57,8 +57,10 @@ public class CadastroPanel extends Panel {
 		cidade.setOutputMarkupId(true);
 		estado.setOutputMarkupId(true);
 
-		ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao", "descricao");
+		ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao");
 		IModel<List<Funcao>> model = new LoadableDetachableModel() {
+
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected List<Funcao> load() {

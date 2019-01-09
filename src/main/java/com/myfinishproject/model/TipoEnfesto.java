@@ -26,5 +26,7 @@ public enum TipoEnfesto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	
 
 }

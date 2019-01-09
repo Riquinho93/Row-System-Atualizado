@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Status {
+	
 	ANDAMENTO("Andamento"), ATRASADO("Atrasado"), ADIATADO("Adiatado"), FINALIZADO("Finalizado");
 	private String descricaoStatus;
 
-	private Status(String descricao) {
-		this.descricaoStatus = descricao;
+	private Status(String descricaoStatus) {
+		this.descricaoStatus = descricaoStatus;
 	}
 
 	public static List<Status> status() {
@@ -27,5 +28,15 @@ public enum Status {
 	public void setDescricao(String descricao) {
 		this.descricaoStatus = descricao;
 	}
+
+	public String getDescricaoStatus() {
+		return descricaoStatus;
+	}
+
+	public void setDescricaoStatus(String descricaoStatus) {
+		this.descricaoStatus = descricaoStatus;
+	}
+	
+	
 
 }

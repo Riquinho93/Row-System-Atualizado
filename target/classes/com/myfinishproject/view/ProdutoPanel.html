@@ -2,49 +2,11 @@
 <wicket:panel>
 	<h1>PAINEL DO PRODUTO</h1>
 	<div class="cardy-body">
-		<form wicket:id="formProduto">
-			<div class="row">
-				<div class="form-group col-sm-3">
-					<Label class="text">Modelo: </label> <input type="text"
-						class="form-control" wicket:id="modelo"
-						placeholder="Digite nome do modelo" />
-				</div>
-				<div class="form-group col-sm-3">
-					<Label class="text">Largura do Tecido: </label> <input type="text"
-						class="form-control" wicket:id="largura"
-						placeholder="Digite a largura" />
-				</div>
-				<div class="form-group col-sm-3">
-					<Label class="text">Tipo de Enfesto: </label> <select
-						wicket:id="tipoEnfesto" class="form-control"></select>
-				</div>
-				<div class="form-group col-sm-3">
-					<label class="text">Faccionista:</label> <input
-						wicket:id="faccionista" type="text" class="form-control"
-						placeholder="Digite nome da Faccionista" />
-				</div>
-				<div class="form-group col-sm-3">
-					<label class="text">Cortador:</label> <input wicket:id="cortador"
-						type="text" class="form-control"
-						placeholder="Digite nome do Cortador" />
-				</div>
-				<div class="form-group col-sm-3">
-					<Label class="text2">Data Entrada: </label> <input type="text"
-						wicket:id="dataSaida" class="form-data" placeholder="dd/MM/yyyy" />
-				</div>
-				<div class="form-group col-sm-3">
-					<Label class="text2">Data Saida: </label> <input type="text"
-						wicket:id="dataRetorno" class="form-data" placeholder="dd/MM/yyyy" />
-				</div>
-				<div class="form-group col-sm-3">
-					<Label class="text">Status: </label> <select wicket:id="status"
-						class="form-control"></select>
-				</div>
-			</div>
-			<a class="btn btn-success" type="submit" wicket:id="salvarTudo">Salvar</a>
-		</form>
 		<div class="card-body">
 			<ul class="nav nav-tabs">
+				<li><a type="button"
+					class="btn btn-outline-info nav-item nav-link in active"
+					onclick="abaService('#geral')">Geral </a></li>
 				<li><a type="button"
 					class="btn btn-outline-info nav-item nav-link"
 					onclick="abaService('#peca')">Peças</a></li>
@@ -58,6 +20,52 @@
 					class="btn btn-outline-info nav-item nav-link"
 					onclick="abaService('#adicionais')">Adicionais</a></li>
 			</ul>
+
+			<div id="#geral" class="tab-content teste">
+				<h2>Geral</h2>
+				<form wicket:id="formProduto">
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<Label class="text">Modelo: </label> <input type="text"
+								class="form-control" wicket:id="modelo"
+								placeholder="Digite nome do modelo" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text">Largura do Tecido: </label> <input
+								type="text" class="form-control" wicket:id="largura"
+								placeholder="Digite a largura" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text">Tipo de Enfesto: </label> <select
+								wicket:id="tipoEnfesto" class="form-control"></select>
+						</div>
+						<div class="form-group col-sm-3">
+							<label class="text">Faccionista:</label> <input
+								wicket:id="faccionista" type="text" class="form-control"
+								placeholder="Digite nome da Faccionista" />
+						</div>
+						<div class="form-group col-sm-3">
+							<label class="text">Cortador:</label> <input wicket:id="cortador"
+								type="text" class="form-control"
+								placeholder="Digite nome do Cortador" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text2">Data Entrada: </label> <input type="text"
+								wicket:id="dataSaida" class="form-data" placeholder="dd/MM/yyyy" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text2">Data Saida: </label> <input type="text"
+								wicket:id="dataRetorno" class="form-data"
+								placeholder="dd/MM/yyyy" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text">Status: </label> <select wicket:id="status"
+								class="form-control"></select>
+						</div>
+					</div>
+					<a class="btn btn-success" type="submit" wicket:id="salvarTudo">Salvar</a>
+				</form>
+			</div>
 
 			<div id="#peca" class="tab-content teste" style="display: none">
 				<h2>Peça</h2>
@@ -266,7 +274,7 @@
 				</table>
 			</div>
 		</div>
-		
+
 		<script>
 			function abaService(aba) {
 				var i;

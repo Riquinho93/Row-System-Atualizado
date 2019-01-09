@@ -6,10 +6,10 @@ import java.util.List;
 public enum Funcao {
 
 	FACCIONISTA("Faccionista"), CORTADOR("Cortador"), FUNCIONARIO("Funcionario");
-	private String descricao;
+	private String descricaoFuncao;
 
-	private Funcao(String descricao) {
-		this.descricao = descricao;
+	private Funcao(String descricaoFuncao) {
+		this.descricaoFuncao = descricaoFuncao;
 	}
 
 	public static List<Funcao> funcoes() {
@@ -20,11 +20,20 @@ public enum Funcao {
 		return funcao;
 	}
 
+	public String getDescricaoFuncao() {
+		return descricaoFuncao;
+	}
+
+	public void setDescricaoFuncao(String descricaoFuncao) {
+		this.descricaoFuncao = descricaoFuncao;
+	}
+	
 	public String getDescricao() {
-		return descricao;
+		return descricaoFuncao;
 	}
 
 	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+		this.descricaoFuncao = descricao;
 	}
+	
 }

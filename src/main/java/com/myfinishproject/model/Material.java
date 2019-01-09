@@ -13,7 +13,7 @@ import com.sun.mail.imap.protocol.UID;
 
 @Entity
 @Table(name = "tbMateriais")
-public class MateriaisModel implements Serializable{
+public class Material implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
