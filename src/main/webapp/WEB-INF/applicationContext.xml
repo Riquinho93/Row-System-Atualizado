@@ -37,6 +37,7 @@
 				<value>com.myfinishproject.model.Funcionario</value>
 				<value>com.myfinishproject.model.Endereco</value>
 				<value>com.myfinishproject.model.Produto</value>
+				<value>com.myfinishproject.model.Peca</value>
 			</list>
 		</property>
 		<!-- configurações para o hibernate properties -->
@@ -80,6 +81,14 @@
 	
 	<bean id="produtoService" class="com.myfinishproject.service.ProdutoService">
 		<property name="produtoDao" ref="produtoDao"></property>
+	</bean>
+	
+	<bean id="pecaDao" class="com.myfinishproject.dao.PecaDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="pecaService" class="com.myfinishproject.service.PecaService">
+		<property name="pecaDao" ref="pecaDao"></property>
 	</bean>
 	
 	 <bean id="transactionManager"

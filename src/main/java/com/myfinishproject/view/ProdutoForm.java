@@ -19,6 +19,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.myfinishproject.HomePage;
 import com.myfinishproject.model.Colecao;
 import com.myfinishproject.model.Produto;
+import com.myfinishproject.service.PecaService;
 import com.myfinishproject.service.ProdutoService;
 
 public class ProdutoForm extends HomePage {
@@ -33,6 +34,8 @@ public class ProdutoForm extends HomePage {
 	private LoadableDetachableModel<List<Produto>> atualizarLista;
 	@SpringBean(name = "produtoService")
 	private ProdutoService produtoService;
+	@SpringBean(name = "pecaService")
+	private PecaService pecaService;
 
 	public ProdutoForm(Colecao colecao) {
 		this(new PageParameters(), new Colecao());
@@ -42,7 +45,6 @@ public class ProdutoForm extends HomePage {
 
 		add(new Label("nome", parameters.get("nome")));
 		add(new Label("dtEntrada", parameters.get("dtEntrada")));
-		System.out.println("Id: " + colecao.getColecaoId());
 		produtoLista = produtoService.listar(colecao.getColecaoId());
 
 		modalWindow = new ModalWindow("modalWindow");
@@ -67,6 +69,7 @@ public class ProdutoForm extends HomePage {
 					public void executarAoSalvar(AjaxRequestTarget target, Produto produto) {
 						produto.setIdColecao(colecao);
 						produtoService.SalvarOuAlterar(produto);
+						System.out.println("ProdutoForm: " + produto.getId());
 						produtoLista.add(produto);
 						target.add(listcontainer);
 						modalWindow.close(target);

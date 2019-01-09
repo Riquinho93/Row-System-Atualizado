@@ -57,19 +57,6 @@ public class Cadastro extends HomePage {
 
 		funcionariosList = funcionarioService.listar();
 		
-		endereco.setLogradouro("Rua dosFortes");
-		endereco.setEstado("MMA");
-		endereco.setCidade("Desconhecida");
-	//	enderecoService.SalvarOuAlterar(endereco);
-		
-		
-		funcionario.setNome("Jiren");
-		funcionario.setFuncao("Forte");
-		funcionario.setTelefone("1010101010");
-		funcionario.setEmail("jiren@forte.com");
-		funcionario.setEndereco(endereco);
-	//	funcionarioService.SalvarOuAlterar(funcionario);
-
 		add(filtrar());
 
 //		add(formEnd);

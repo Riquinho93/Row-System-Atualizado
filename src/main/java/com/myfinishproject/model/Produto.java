@@ -1,14 +1,17 @@
 package com.myfinishproject.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -22,6 +25,8 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String modelo;
+	private String faccionista;
+	private String cortador;
 	@Transient
 	private boolean answer;
 	private Date dataSaida;
@@ -33,6 +38,9 @@ public class Produto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idColecao")
 	private Colecao idColecao;
+
+	@OneToMany(mappedBy = "idProduto", targetEntity = Peca.class, fetch = FetchType.LAZY)
+	private Collection<Peca> listaPecas;
 
 	public Integer getId() {
 		return id;
@@ -48,6 +56,22 @@ public class Produto implements Serializable {
 
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
+	}
+
+	public String getFaccionista() {
+		return faccionista;
+	}
+
+	public void setFaccionista(String faccionista) {
+		this.faccionista = faccionista;
+	}
+
+	public String getCortador() {
+		return cortador;
+	}
+
+	public void setCortador(String cortador) {
+		this.cortador = cortador;
 	}
 
 	public boolean isAnswer() {
@@ -104,6 +128,14 @@ public class Produto implements Serializable {
 
 	public void setIdColecao(Colecao idColecao) {
 		this.idColecao = idColecao;
+	}
+
+	public Collection<Peca> getListaPecas() {
+		return listaPecas;
+	}
+
+	public void setListaPecas(Collection<Peca> listaPecas) {
+		this.listaPecas = listaPecas;
 	}
 
 }

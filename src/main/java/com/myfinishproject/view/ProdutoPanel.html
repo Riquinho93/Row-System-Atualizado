@@ -3,33 +3,279 @@
 	<h1>PAINEL DO PRODUTO</h1>
 	<div class="cardy-body">
 		<form wicket:id="formProduto">
-			<div class="row" >
-				<div class="form-group col-md-3">
-					<Label class="text">Modelo: </label>
-					<input type="text" class="form-control" wicket:id="modelo" placeholder="Digite nome do modelo" />
+			<div class="row">
+				<div class="form-group col-sm-3">
+					<Label class="text">Modelo: </label> <input type="text"
+						class="form-control" wicket:id="modelo"
+						placeholder="Digite nome do modelo" />
 				</div>
-				<div class="form-group col-md-3">
-					<Label class="text">Largura do Tecido: </label>
-					<input type="text" class="form-control" wicket:id="largura" placeholder="Digite a largura" />
+				<div class="form-group col-sm-3">
+					<Label class="text">Largura do Tecido: </label> <input type="text"
+						class="form-control" wicket:id="largura"
+						placeholder="Digite a largura" />
 				</div>
-				<div class="form-group col-md-3">
-					<Label class="text">Tipo de Enfesto: </label>
-					<select wicket:id="tipoEnfesto" class="form-control"></select>
+				<div class="form-group col-sm-3">
+					<Label class="text">Tipo de Enfesto: </label> <select
+						wicket:id="tipoEnfesto" class="form-control"></select>
 				</div>
-				<div class="form-group col-md-3">
-					<Label class="text2">Data Entrada: </label>
-					<input type="text" wicket:id="dataSaida" class="form-data" placeholder="dd/MM/yyyy"/>
+				<div class="form-group col-sm-3">
+					<label class="text">Faccionista:</label> <input
+						wicket:id="faccionista" type="text" class="form-control"
+						placeholder="Digite nome da Faccionista" />
 				</div>
-				<div class="form-group col-md-3">
-					<Label class="text2">Data Saida: </label>
-					<input type="text" wicket:id="dataRetorno" class="form-data" placeholder="dd/MM/yyyy"/>
+				<div class="form-group col-sm-3">
+					<label class="text">Cortador:</label> <input wicket:id="cortador"
+						type="text" class="form-control"
+						placeholder="Digite nome do Cortador" />
 				</div>
-				<div class="form-group col-md-3">
-					<Label class="text">Status: </label>
-					<select wicket:id="status" class="form-control"></select>
+				<div class="form-group col-sm-3">
+					<Label class="text2">Data Entrada: </label> <input type="text"
+						wicket:id="dataSaida" class="form-data" placeholder="dd/MM/yyyy" />
+				</div>
+				<div class="form-group col-sm-3">
+					<Label class="text2">Data Saida: </label> <input type="text"
+						wicket:id="dataRetorno" class="form-data" placeholder="dd/MM/yyyy" />
+				</div>
+				<div class="form-group col-sm-3">
+					<Label class="text">Status: </label> <select wicket:id="status"
+						class="form-control"></select>
 				</div>
 			</div>
 			<a class="btn btn-success" type="submit" wicket:id="salvarTudo">Salvar</a>
 		</form>
+		<div class="card-body">
+			<ul class="nav nav-tabs">
+				<li><a type="button"
+					class="btn btn-outline-info nav-item nav-link"
+					onclick="abaService('#peca')">Peças</a></li>
+				<li><a type="button"
+					class="btn btn-outline-info nav-item nav-link"
+					onclick="abaService('#service')">Serviços</a></li>
+				<li><a type="button"
+					class="btn btn-outline-info nav-item nav-link"
+					onclick="abaService('#materiais')">Materiais</a></li>
+				<li><a type="button"
+					class="btn btn-outline-info nav-item nav-link"
+					onclick="abaService('#adicionais')">Adicionais</a></li>
+			</ul>
+
+			<div id="#peca" class="tab-content teste" style="display: none">
+				<h2>Peça</h2>
+				<form wicket:id="formPeca">
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<Label class="text">Cor: </label> <input wicket:id="cor"
+								type="text" class="form-control" placeholder="Digite a cor" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text">Tamanho: </label> <input wicket:id="tamanho"
+								type="text" class="form-control" placeholder="Digite o tamanho" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text">Quantidade: </label> <input
+								wicket:id="quantidade" type="number" class="form-control"
+								placeholder="Digite a quantidade" />
+						</div>
+						<div class="form-group col-sm-3">
+							<br /> <a wicket:id="addPeca" class="btn btn-success"
+								type="submit">Add</a>
+						</div>
+					</div>
+					<div class="form-group col-sm-3" style="float: right;">
+						<Label class="text">Total: </label> <input type="number"
+							class="form-control" placeholder="Total" />
+					</div>
+				</form>
+				<div class="container">
+
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Cor</th>
+								<th>Tamanho</th>
+								<th>Quantidade</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody wicket:id="containerPecas">
+							<tr wicket:id="listViewPecas">
+								<td wicket:id="cor"></td>
+								<td wicket:id="tamanho"></td>
+								<td wicket:id="quantidade"></td>
+								<td class="text-center"><a class="btn btn-outline-danger"
+									title="Excluir"> <i class="fa fa-trash"></i>
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
+			<div id="#service" class="tab-content teste" style="display: none">
+				<h2>Serviços</h2>
+				<form>
+					<div class="row">
+						<div class="form-group col-md-4">
+							<Label class="text">Nome: </label> <input type="text"
+								class="form-control" placeholder="Digite o nome do tecido" />
+						</div>
+						<div class="form-group col-md-4">
+							<Label class="text">Cor: </label> <input type="text"
+								class="form-control" placeholder="Digite a cor" />
+						</div>
+						<div class="form-group col-md-4">
+							<Label class="text">Composição: </label> <input type="text"
+								class="form-control" placeholder="Digite a composição" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text">Codigo: </label> <input type="text"
+								class="form-control" placeholder="Digite o codigo" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text">Valor: </label> <input type="number"
+								class="form-control" placeholder="Digite o valor" />
+						</div>
+						<div class="form-group col-sm-3">
+							<br /> <a class="btn btn-success" type="submit">Add</a>
+						</div>
+					</div>
+					<div class="form-group col-sm-3" style="float: right;">
+						<Label class="text">Valor Total: </label> <input type="number"
+							class="form-control" placeholder="Valor total" />
+					</div>
+				</form>
+				<div class="container">
+
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Tecido</th>
+								<th>Cor</th>
+								<th>Composição</th>
+								<th>Código</th>
+								<th>Valor</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td class="text-center"><a class="btn btn-outline-danger"
+									title="Excluir"> <i class="fa fa-trash"></i>
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div id="#materiais" class="tab-content teste" style="display: none">
+				<h2>Materiais</h2>
+				<form>
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<Label class="text">Material: </label> <input type="text"
+								class="form-control" placeholder="Digite o material" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text">Quantidade: </label> <input type="number"
+								class="form-control" placeholder="Digite a quantidade" />
+						</div>
+						<div class="form-group col-sm-3">
+							<Label class="text">Medida: </label> <input type="text"
+								class="form-control" placeholder="Digite a medida" />
+						</div>
+						<div class="form-group col-sm-3">
+							<br /> <a class="btn btn-success" type="submit">Add</a>
+						</div>
+					</div>
+					<div class="form-group col-sm-3" style="float: right;">
+						<Label class="text">Valor Total: </label> <input type="number"
+							class="form-control" placeholder="Valor total" />
+					</div>
+				</form>
+				<div class="container">
+
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Material</th>
+								<th>Quantidade</th>
+								<th>Medida</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td class="text-center"><a class="btn btn-outline-danger"
+									title="Excluir"> <i class="fa fa-trash"></i>
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="#adicionais" class="tab-content teste" style="display: none">
+			<h2>Adicionais</h2>
+			<form>
+				<div class="row">
+					<div class="form-group col-sm-3">
+						<Label class="text">Serviço: </label> <input type="text"
+							class="form-control" placeholder="Digite o serviço" />
+					</div>
+					<div class="form-group col-md-4">
+						<Label class="text">Descrição: </label>
+						<textarea type="text" class="form-control"
+							placeholder="Digite a descrição" />
+					</div>
+					<div class="form-group col-sm-3">
+						<br /> <a class="btn btn-success" type="submit">Add</a>
+					</div>
+				</div>
+			</form>
+			<div class="container">
+
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Serviço</th>
+							<th>Descrição</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td class="text-center"><a class="btn btn-outline-danger"
+								title="Excluir"> <i class="fa fa-trash"></i>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<script>
+			function abaService(aba) {
+				var i;
+				var x = document.getElementsByClassName("teste");
+				for (i = 0; i < x.length; i++) {
+					x[i].style.display = "none";
+				}
+				document.getElementById(aba).style.display = "block";
+			}
+		</script>
 	</div>
 </wicket:panel>
