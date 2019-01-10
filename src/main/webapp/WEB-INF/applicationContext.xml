@@ -38,6 +38,9 @@
 				<value>com.myfinishproject.model.Endereco</value>
 				<value>com.myfinishproject.model.Produto</value>
 				<value>com.myfinishproject.model.Peca</value>
+				<value>com.myfinishproject.model.Servico</value>
+				<value>com.myfinishproject.model.Material</value>
+				<value>com.myfinishproject.model.Adicional</value>
 			</list>
 		</property>
 		<!-- configurações para o hibernate properties -->
@@ -89,6 +92,30 @@
 	
 	<bean id="pecaService" class="com.myfinishproject.service.PecaService">
 		<property name="pecaDao" ref="pecaDao"></property>
+	</bean>
+	
+	<bean id="servicoDao" class="com.myfinishproject.dao.ServicoDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="servicoServico" class="com.myfinishproject.service.ServicoService">
+		<property name="servicoDao" ref="servicoDao"></property>
+	</bean>
+	
+	<bean id="materialDao" class="com.myfinishproject.dao.MaterialDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="materialService" class="com.myfinishproject.service.MaterialService">
+		<property name="materialDao" ref="materialDao"></property>
+	</bean>
+	
+	<bean id="adicionalDao" class="com.myfinishproject.dao.AdicionalDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="adicionalService" class="com.myfinishproject.service.AdicionalService">
+		<property name="adicionalDao" ref="adicionalDao"></property>
 	</bean>
 	
 	 <bean id="transactionManager"

@@ -31,6 +31,7 @@ public class Funcionario implements Serializable {
 	
 	@OneToOne(mappedBy = "funcionario", targetEntity = Endereco.class, fetch = FetchType.LAZY) 	
 	private Endereco endereco;
+	
 	@Transient
 	private boolean answer;
 

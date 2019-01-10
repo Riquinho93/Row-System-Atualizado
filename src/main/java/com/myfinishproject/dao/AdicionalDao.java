@@ -6,17 +6,17 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import com.myfinishproject.model.Funcionario;
+import com.myfinishproject.model.Adicional;
 
 @Repository
-public class FuncionarioDao extends GenericDao<Funcionario, Serializable>{
+public class AdicionalDao extends GenericDao<Adicional, Serializable>{
 	
 	@SuppressWarnings("unchecked")
 //	@Transactional(readOnly = true)
-	public List<Funcionario> listar() {
-		String hql = "select f from Funcionario f left join fetch f.endereco e";
+	public List<Adicional> listar() {
+		String hql = "select f from Adicional f left join fetch f.produto e";
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
-		List<Funcionario> userList = query.list();
+		List<Adicional> userList = query.list();
 		return userList;
 	}
 }

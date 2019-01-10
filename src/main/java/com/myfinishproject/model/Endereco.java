@@ -24,6 +24,7 @@ public class Endereco implements Serializable {
 	private Integer numero;
 	private String cidade;
 	private String estado;
+	
 	@OneToOne
 	@JoinColumn(name = "idFuncionario")
 	private Funcionario funcionario;

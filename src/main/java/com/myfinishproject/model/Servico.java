@@ -11,17 +11,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "material")
-public class Material implements Serializable {
+@Table(name = "servico")
+public class Servico implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String material;
-	private int quantidade = 1;
-	private String medida;
+	private String tecido;
+	private String cor;
+	private int quantidade;
+	private Double valor = 0.0;
+	private String composicao;
 
 	@ManyToOne
 	@JoinColumn(name = "idProduto")
@@ -35,12 +37,20 @@ public class Material implements Serializable {
 		this.id = id;
 	}
 
-	public String getMaterial() {
-		return material;
+	public String getTecido() {
+		return tecido;
 	}
 
-	public void setMaterial(String material) {
-		this.material = material;
+	public void setTecido(String tecido) {
+		this.tecido = tecido;
+	}
+
+	public String getCor() {
+		return cor;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
 	}
 
 	public int getQuantidade() {
@@ -51,12 +61,20 @@ public class Material implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	public String getMedida() {
-		return medida;
+	public Double getValor() {
+		return valor;
 	}
 
-	public void setMedida(String medida) {
-		this.medida = medida;
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public String getComposicao() {
+		return composicao;
+	}
+
+	public void setComposicao(String composicao) {
+		this.composicao = composicao;
 	}
 
 	public static long getSerialversionuid() {

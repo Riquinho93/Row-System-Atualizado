@@ -26,7 +26,7 @@ public class CadastroPanel extends Panel {
 	private static final long serialVersionUID = 8991195474675368668L;
 
 	private Form<Funcionario> formFunc;
-	private Form<Endereco> formEnd;
+//	private Form<Endereco> formEnd;
 //	private Funcionario funcionario;
 //	private Endereco endereco;
 
@@ -37,16 +37,16 @@ public class CadastroPanel extends Panel {
 	public CadastroPanel(String id, Funcionario funcionario, Endereco endereco) {
 		super(id);
 		formFunc = new Form<Funcionario>("formFunc", new CompoundPropertyModel<Funcionario>(funcionario));
-		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(endereco));
+//		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(endereco));
 
 		TextField<String> nome = new TextField<>("nome");
 		TextField<String> telefone = new TextField<>("telefone");
 		TextField<String> email = new TextField<>("email");
 
-		TextField<String> logradouro = new TextField<>("logradouro");
-		NumberTextField<Integer> numero = new NumberTextField<>("numero");
-		TextField<String> cidade = new TextField<>("cidade");
-		TextField<String> estado = new TextField<>("estado");
+		TextField<String> logradouro = new TextField<>("endereco.logradouro");
+		NumberTextField<Integer> numero = new NumberTextField<>("endereco.numero");
+		TextField<String> cidade = new TextField<>("endereco.cidade");
+		TextField<String> estado = new TextField<>("endereco.estado");
 		
 
 		nome.setOutputMarkupId(true);
@@ -97,12 +97,12 @@ public class CadastroPanel extends Panel {
 		formFunc.add(telefone);
 		formFunc.add(email);
 
-		formEnd.add(logradouro);
-		formEnd.add(numero);
-		formEnd.add(cidade);
-		formEnd.add(estado);
+		formFunc.add(logradouro);
+		formFunc.add(numero);
+		formFunc.add(cidade);
+		formFunc.add(estado);
 		formFunc.add(funcoes);
-		formFunc.add(formEnd);
+//		formFunc.add(formEnd);
 		formFunc.add(button);
 		add(formFunc);
 		

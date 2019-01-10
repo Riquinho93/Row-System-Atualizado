@@ -42,6 +42,15 @@ public class Produto implements Serializable {
 	@OneToMany(mappedBy = "produto", targetEntity = Peca.class, fetch = FetchType.LAZY)
 	private List<Peca> listaPecas;
 
+	@OneToMany(mappedBy = "produto", targetEntity = Servico.class, fetch = FetchType.LAZY)
+	private List<Servico> listaServico;
+
+	@OneToMany(mappedBy = "produto", targetEntity = Material.class, fetch = FetchType.LAZY)
+	private List<Material> listaMateriais;
+
+	@OneToMany(mappedBy = "produto", targetEntity = Adicional.class, fetch = FetchType.LAZY)
+	private List<Adicional> listaAdicionais;
+
 	public Integer getId() {
 		return id;
 	}
@@ -136,6 +145,30 @@ public class Produto implements Serializable {
 
 	public void setListaPecas(List<Peca> listaPecas) {
 		this.listaPecas = listaPecas;
+	}
+
+	public List<Servico> getListaServico() {
+		return listaServico;
+	}
+
+	public void setListaServico(List<Servico> listaServico) {
+		this.listaServico = listaServico;
+	}
+
+	public List<Material> getListaMateriais() {
+		return listaMateriais;
+	}
+
+	public void setListaMateriais(List<Material> listaMateriais) {
+		this.listaMateriais = listaMateriais;
+	}
+
+	public List<Adicional> getListaAdicionais() {
+		return listaAdicionais;
+	}
+
+	public void setListaAdicionais(List<Adicional> listaAdicionais) {
+		this.listaAdicionais = listaAdicionais;
 	}
 
 }

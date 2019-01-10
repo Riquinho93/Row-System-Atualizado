@@ -12,7 +12,8 @@ public class PecaDao extends GenericDao<Peca, Serializable>{
 	@SuppressWarnings("unchecked")
 //	@Transactional(readOnly = true)
 	public List<Peca> listar() {
-		Query query = getSessionFactory().getCurrentSession().createQuery("select c from Peca c order by c.cor");
+		String hql = "select f from Peca f left join fetch f.produto e";
+		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
 		List<Peca> userList = query.list();
 		return userList;
 	}

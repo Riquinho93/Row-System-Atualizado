@@ -122,30 +122,34 @@
 
 			<div id="#service" class="tab-content teste" style="display: none">
 				<h2>Serviços</h2>
-				<form>
+				<form wicket:id="formServico">
 					<div class="row">
 						<div class="form-group col-md-4">
-							<Label class="text">Nome: </label> <input type="text"
-								class="form-control" placeholder="Digite o nome do tecido" />
+							<Label class="text">Tecido: </label> <input wicket:id="tecido"
+								type="text" class="form-control"
+								placeholder="Digite o nome do tecido" />
 						</div>
 						<div class="form-group col-md-4">
-							<Label class="text">Cor: </label> <input type="text"
-								class="form-control" placeholder="Digite a cor" />
+							<Label class="text">Cor: </label> <input wicket:id="cor"
+								type="text" class="form-control" placeholder="Digite a cor" />
 						</div>
 						<div class="form-group col-md-4">
-							<Label class="text">Composição: </label> <input type="text"
-								class="form-control" placeholder="Digite a composição" />
+							<Label class="text">Composição: </label> <input
+								wicket:id="composicao" type="text" class="form-control"
+								placeholder="Digite a composição" />
 						</div>
 						<div class="form-group col-sm-3">
-							<Label class="text">Codigo: </label> <input type="text"
-								class="form-control" placeholder="Digite o codigo" />
+							<Label class="text">Quantidade: </label> <input
+								wicket:id="quantidade" type="number" class="form-control"
+								placeholder="Digite a quantidade" />
 						</div>
 						<div class="form-group col-sm-3">
-							<Label class="text">Valor: </label> <input type="number"
-								class="form-control" placeholder="Digite o valor" />
+							<Label class="text">Valor: </label> <input wicket:id="valor"
+								type="number" class="form-control" placeholder="Digite o valor" />
 						</div>
 						<div class="form-group col-sm-3">
-							<br /> <a class="btn btn-success" type="submit">Add</a>
+							<br /> <a wicket:id="addServico" class="btn btn-success"
+								type="submit">Add</a>
 						</div>
 					</div>
 					<div class="form-group col-sm-3" style="float: right;">
@@ -166,13 +170,13 @@
 								<th>Ações</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+						<tbody wicket:id="containerServico">
+							<tr wicket:id="listViewServico">
+								<td wicket:id="tecido"></td>
+								<td wicket:id="cor"></td>
+								<td wicket:id="composicao"></td>
+								<td wicket:id="quantidade"></td>
+								<td wicket:id="valor"></td>
 								<td class="text-center"><a class="btn btn-outline-danger"
 									title="Excluir"> <i class="fa fa-trash"></i>
 								</a></td>
@@ -184,22 +188,22 @@
 
 			<div id="#materiais" class="tab-content teste" style="display: none">
 				<h2>Materiais</h2>
-				<form>
+				<form wicket:id="formMaterial">
 					<div class="row">
 						<div class="form-group col-sm-3">
-							<Label class="text">Material: </label> <input type="text"
+							<Label class="text">Material: </label> <input wicket:id="material" type="text"
 								class="form-control" placeholder="Digite o material" />
 						</div>
 						<div class="form-group col-sm-3">
-							<Label class="text">Quantidade: </label> <input type="number"
+							<Label class="text">Quantidade: </label> <input wicket:id="quantidade" type="number"
 								class="form-control" placeholder="Digite a quantidade" />
 						</div>
 						<div class="form-group col-sm-3">
-							<Label class="text">Medida: </label> <input type="text"
+							<Label class="text">Medida: </label> <input wicket:id="medida" type="text"
 								class="form-control" placeholder="Digite a medida" />
 						</div>
 						<div class="form-group col-sm-3">
-							<br /> <a class="btn btn-success" type="submit">Add</a>
+							<br /> <a wicket:id="addMaterial" class="btn btn-success" type="submit">Add</a>
 						</div>
 					</div>
 					<div class="form-group col-sm-3" style="float: right;">
@@ -218,11 +222,11 @@
 								<th>Ações</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
+						<tbody wicket:id="containerMaterial">
+							<tr wicket:id="listViewMaterial">
+								<td wicket:id="material"></td>
+								<td wicket:id="quantidade"></td>
+								<td wicket:id="medida"></td>
 								<td class="text-center"><a class="btn btn-outline-danger"
 									title="Excluir"> <i class="fa fa-trash"></i>
 								</a></td>
@@ -236,19 +240,19 @@
 
 		<div id="#adicionais" class="tab-content teste" style="display: none">
 			<h2>Adicionais</h2>
-			<form>
+			<form wicket:id="formAdicional">
 				<div class="row">
 					<div class="form-group col-sm-3">
-						<Label class="text">Serviço: </label> <input type="text"
+						<Label class="text">Serviço: </label> <input wicket:id="adicional" type="text"
 							class="form-control" placeholder="Digite o serviço" />
 					</div>
 					<div class="form-group col-md-4">
 						<Label class="text">Descrição: </label>
-						<textarea type="text" class="form-control"
+						<textarea wicket:id="descricao" type="text" class="form-control"
 							placeholder="Digite a descrição" />
 					</div>
 					<div class="form-group col-sm-3">
-						<br /> <a class="btn btn-success" type="submit">Add</a>
+						<br /> <a wicket:id="addAdicional" class="btn btn-success" type="submit">Add</a>
 					</div>
 				</div>
 			</form>
@@ -262,10 +266,10 @@
 							<th>Ações</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td></td>
-							<td></td>
+					<tbody wicket:id="containerAdicional">
+						<tr wicket:id="listViewAdicionais">
+							<td wicket:id="adicional"></td>
+							<td wicket:id="descricao"></td>
 							<td class="text-center"><a class="btn btn-outline-danger"
 								title="Excluir"> <i class="fa fa-trash"></i>
 							</a></td>

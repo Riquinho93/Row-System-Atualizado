@@ -2,40 +2,44 @@ package com.myfinishproject.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbSerAdd")
-public class Adicional implements Serializable{
+@Table(name = "adicional")
+public class Adicional implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Integer addId;
-	private String nome;
-	private String descricao;
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getAddId() {
-		return addId;
+	private Integer id;
+	private String adicional;
+	private String descricao;
+
+	@ManyToOne
+	@JoinColumn(name = "idProduto")
+	private Produto produto;
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setAddId(Integer addId) {
-		this.addId = addId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getAdicional() {
+		return adicional;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setAdicional(String adicional) {
+		this.adicional = adicional;
 	}
 
 	public String getDescricao() {
@@ -48,6 +52,14 @@ public class Adicional implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 }
