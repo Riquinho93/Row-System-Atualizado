@@ -15,4 +15,5 @@ public class ProdutoDao extends GenericDao<Produto, Serializable> {
 		List<Produto> lists = query.list();
 		return lists;
 	}
+	
 }

@@ -1,5 +1,6 @@
 package com.myfinishproject.view;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
+import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -30,7 +32,10 @@ import com.myfinishproject.model.Produto;
 import com.myfinishproject.model.Servico;
 import com.myfinishproject.model.Status;
 import com.myfinishproject.model.TipoEnfesto;
+import com.myfinishproject.service.AdicionalService;
+import com.myfinishproject.service.MaterialService;
 import com.myfinishproject.service.PecaService;
+import com.myfinishproject.service.ServicoService;
 
 public class ProdutoPanel extends Panel {
 
@@ -45,32 +50,38 @@ public class ProdutoPanel extends Panel {
 	private WebMarkupContainer listContainerPecas;
 	private PageableListView<Peca> listViewPecas;
 	private LoadableDetachableModel<List<Peca>> atualizarPecas;
-	private List<Peca> listaPecas = new LinkedList<Peca>();
+	private List<Peca> listaPecas = new ArrayList<Peca>();
 	private Peca peca = new Peca();
 
 // Atributos do Servico
+	@SpringBean(name = "servicoServico")
+	private ServicoService servicoService;
 	private Form<Servico> formServico;
 	private WebMarkupContainer listContainerServico;
 	private PageableListView<Servico> listViewServico;
 	private LoadableDetachableModel<List<Servico>> atualizarServico;
 	private List<Servico> listaServicos = new LinkedList<>();
-	private Servico servico;
+	private Servico servico = new Servico();
 
 // Atributos do Material
+	@SpringBean(name = "materialService")
+	private MaterialService materialService;
 	private Form<Material> formMaterial;
 	private WebMarkupContainer listaContainerMaterial;
 	private PageableListView<Material> listViewMaterial;
 	private LoadableDetachableModel<List<Material>> atualizarMaterial;
 	private List<Material> listaMateriais = new LinkedList<>();
-	private Material material;
+	private Material material = new Material();
 
 // Atributos do Adicional
+	@SpringBean(name = "adicionalService")
+	private AdicionalService adicionalService;
 	private Form<Adicional> formAdicional;
 	private WebMarkupContainer listaContainerAdicional;
 	private PageableListView<Adicional> listViewAdicionais;
-	private LoadableDetachableModel<List<Adicional>> atualizarAdiconais;
-	private List<Adicional> listaAdicionais;
-	private Adicional adicional;
+	private LoadableDetachableModel<List<Adicional>> atualizarAdicionais;
+	private List<Adicional> listaAdicionais = new LinkedList<>();
+	private Adicional adicional = new Adicional();
 
 	public ProdutoPanel(String id) {
 		this(id, new Produto());
@@ -79,14 +90,13 @@ public class ProdutoPanel extends Panel {
 	public ProdutoPanel(String id, final Produto produto) {
 		super(id);
 
-		//Chamada Metodo de Peca
+		// Chamada Metodo de Peca
 		pecaMetodo();
 		add(pecasWebMarkupContainer());
-		listaPecas = pecaService.listar();
-		//Chamada Metodo de servico
+		// Chamada Metodo de servico
 		servicoMetodo();
 		add(servicoWebMarkupContainer());
-		//Chamada Metodo de Material
+		// Chamada Metodo de Material
 		materialMetodo();
 		add(materialWebMarkupContainer());
 		// Chamada metodo de Adicional
@@ -186,10 +196,35 @@ public class ProdutoPanel extends Panel {
 				produto.setListaPecas(listaPecas);
 
 				for (Peca lista : listaPecas) {
-					System.out.println("Id" + lista.getId() + "Peca2: " + lista.getCor());
-					System.out.println("Id" + lista.getId() + "Peca2: " + peca.getCor());
-//					peca.setProduto(produto);
-//					pecaService.SalvarOuAlterar(peca);
+					lista.setProduto(produto);
+				}
+
+				for (Peca lista : listaPecas) {
+					pecaService.SalvarOuAlterar(lista);
+				}
+				
+				for (Servico lista: listaServicos) {
+					lista.setProduto(produto);
+				}
+				
+				for(Servico lista: listaServicos) {
+					servicoService.SalvarOuAlterar(lista);
+				}
+				
+				for(Material lista: listaMateriais) {
+					lista.setProduto(produto);
+				}
+				
+				for(Material lista: listaMateriais) {
+					materialService.SalvarOuAlterar(lista);
+				}
+				
+				for(Adicional lista: listaAdicionais) {
+					lista.setProduto(produto);
+				}
+				
+				for(Adicional lista: listaAdicionais) {
+					adicionalService.SalvarOuAlterar(lista);
 				}
 
 				target.add(modelo);
@@ -231,17 +266,23 @@ public class ProdutoPanel extends Panel {
 		tamanho.setOutputMarkupId(true);
 		quantidade.setOutputMarkupId(true);
 
-		AjaxButton ajaxButton = new AjaxButton("addPeca") {
+		AjaxButton ajaxButton = new AjaxButton("addPeca", formPeca) {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form2) {
+
 				super.onSubmit(target, form2);
 				Peca pecaAjax = (Peca) form2.getModelObject();
 				listaPecas.add(pecaAjax);
 				target.add(listContainerPecas);
-				System.out.println("Cor " + pecaAjax.getCor());
+				peca = new Peca();
+				formPeca.clearInput();
+				formPeca.modelChanged();
+				formPeca.setModelObject(peca);
+				target.add(formPeca);
+
 			}
 		};
 		ajaxButton.setOutputMarkupId(true);
@@ -290,13 +331,13 @@ public class ProdutoPanel extends Panel {
 
 		// Aparecer no container
 		listContainerPecas.add(listViewPecas);
-
+		add(new PagingNavigator("pagPeca", listViewPecas));
 		return listContainerPecas;
 	}
 
 	// Metodo do Servico
 	private void servicoMetodo() {
-		servico = new Servico();
+
 		formServico = new Form<>("formServico", new CompoundPropertyModel<Servico>(servico));
 
 		final TextField<String> tecido = new TextField<>("tecido");
@@ -321,6 +362,11 @@ public class ProdutoPanel extends Panel {
 				Servico servico = (Servico) form.getModelObject();
 				listaServicos.add(servico);
 				target.add(listContainerServico);
+				servico = new Servico();
+				formServico.clearInput();
+				formServico.modelChanged();
+				formServico.setModelObject(servico);
+				target.add(formServico);
 			}
 		};
 		button.setOutputMarkupId(true);
@@ -364,13 +410,13 @@ public class ProdutoPanel extends Panel {
 		};
 		listViewServico.setOutputMarkupId(true);
 		listContainerServico.add(listViewServico);
-
+		add(new PagingNavigator("pagServico", listViewServico));
 		return listContainerServico;
 	}
 
 	// Metodo do Material
 	private void materialMetodo() {
-		material = new Material();
+
 		formMaterial = new Form<>("formMaterial", new CompoundPropertyModel<Material>(material));
 
 		final TextField<Material> material = new TextField<>("material");
@@ -391,6 +437,11 @@ public class ProdutoPanel extends Panel {
 				Material material = (Material) form.getModelObject();
 				listaMateriais.add(material);
 				target.add(listaContainerMaterial);
+				material = new Material();
+				formMaterial.clearInput();
+				formMaterial.modelChanged();
+				formMaterial.setModelObject(material);
+				target.add(formMaterial);
 			}
 		};
 		button.setOutputMarkupId(true);
@@ -429,22 +480,22 @@ public class ProdutoPanel extends Panel {
 		};
 		listViewMaterial.setOutputMarkupId(true);
 		listaContainerMaterial.add(listViewMaterial);
-
+		add(new PagingNavigator("pagMaterial", listViewMaterial));
 		return listaContainerMaterial;
 	}
 
 	// Metodo do Adicional
 	private void adicionalMetodo() {
-		adicional = new Adicional();
-		formAdicional = new Form<>("formAdicional", new CompoundPropertyModel<Adicional>(adicional));
 
-		final TextField<Adicional> adicional = new TextField<>("adicional");
+		formAdicional = new Form<Adicional>("formAdicional", new CompoundPropertyModel<Adicional>(adicional));
+
+		final TextField<Adicional> nome = new TextField<>("nome");
 		final TextArea<Adicional> descricao = new TextArea<>("descricao");
 
-		adicional.setOutputMarkupId(true);
+		nome.setOutputMarkupId(true);
 		descricao.setOutputMarkupId(true);
 
-		AjaxButton button = new AjaxButton("addAdicional") {
+		AjaxButton addAdicional = new AjaxButton("addAdicional") {
 
 			private static final long serialVersionUID = 1L;
 
@@ -454,27 +505,24 @@ public class ProdutoPanel extends Panel {
 				Adicional adicional = (Adicional) form.getModelObject();
 				listaAdicionais.add(adicional);
 				target.add(listaContainerAdicional);
-				
-				/*
-				 * 
-				 * ERRO AQUI NESTA PARTE
-				 * 
-				 * */
-				
-				
+				adicional = new Adicional();
+				formAdicional.clearInput();
+				formAdicional.modelChanged();
+				formAdicional.setModelObject(adicional);
+				target.add(formAdicional);
 			}
 		};
-		button.setOutputMarkupId(true);
-		formAdicional.add(adicional);
+		addAdicional.setOutputMarkupId(true);
+		formAdicional.add(nome);
 		formAdicional.add(descricao);
-		formAdicional.add(button);
+		formAdicional.add(addAdicional);
 		add(formAdicional);
 	}
 
 	private WebMarkupContainer adicionalWebMarkupContainer() {
 		listaContainerAdicional = new WebMarkupContainer("containerAdicional");
 		listaContainerAdicional.setOutputMarkupId(true);
-		atualizarAdiconais = new LoadableDetachableModel<List<Adicional>>() {
+		atualizarAdicionais = new LoadableDetachableModel<List<Adicional>>() {
 
 			private static final long serialVersionUID = 1L;
 
@@ -484,19 +532,20 @@ public class ProdutoPanel extends Panel {
 			}
 		};
 
-		listViewAdicionais = new PageableListView<Adicional>("listViewAdicionais", atualizarAdiconais, 5) {
+		listViewAdicionais = new PageableListView<Adicional>("listViewAdicionais", atualizarAdicionais, 5) {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void populateItem(ListItem<Adicional> item) {
 				Adicional user = item.getModelObject();
-				item.add(new Label("adicional", user.getAdicional()));
+				item.add(new Label("nome", user.getNome()));
 				item.add(new Label("descricao", user.getDescricao()));
 			}
 		};
 		listViewAdicionais.setOutputMarkupId(true);
 		listaContainerAdicional.add(listViewAdicionais);
+		add(new PagingNavigator("pagAdicional", listViewAdicionais));
 		return listaContainerAdicional;
 	}
 }

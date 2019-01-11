@@ -7,8 +7,8 @@ import org.hibernate.Query;
 
 import com.myfinishproject.model.Peca;
 
-public class PecaDao extends GenericDao<Peca, Serializable>{
-	
+public class PecaDao extends GenericDao<Peca, Serializable> {
+
 	@SuppressWarnings("unchecked")
 //	@Transactional(readOnly = true)
 	public List<Peca> listar() {
@@ -17,4 +17,5 @@ public class PecaDao extends GenericDao<Peca, Serializable>{
 		List<Peca> userList = query.list();
 		return userList;
 	}
+
 }

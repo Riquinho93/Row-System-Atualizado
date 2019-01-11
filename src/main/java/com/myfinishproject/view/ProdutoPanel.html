@@ -115,6 +115,7 @@
 								</a></td>
 							</tr>
 						</tbody>
+						<div wicket:id="pagPeca"></div>
 					</table>
 				</div>
 
@@ -182,6 +183,7 @@
 								</a></td>
 							</tr>
 						</tbody>
+						<div wicket:id="pagServico"></div>
 					</table>
 				</div>
 			</div>
@@ -232,6 +234,7 @@
 								</a></td>
 							</tr>
 						</tbody>
+						<div wicket:id="pagMaterial"></div>
 					</table>
 				</div>
 			</div>
@@ -243,13 +246,13 @@
 			<form wicket:id="formAdicional">
 				<div class="row">
 					<div class="form-group col-sm-3">
-						<Label class="text">Serviço: </label> <input wicket:id="adicional" type="text"
+						<Label class="text">Serviço: </label> <input wicket:id="nome" type="text"
 							class="form-control" placeholder="Digite o serviço" />
 					</div>
 					<div class="form-group col-md-4">
 						<Label class="text">Descrição: </label>
 						<textarea wicket:id="descricao" type="text" class="form-control"
-							placeholder="Digite a descrição" />
+							placeholder="Digite a descrição"></textarea>
 					</div>
 					<div class="form-group col-sm-3">
 						<br /> <a wicket:id="addAdicional" class="btn btn-success" type="submit">Add</a>
@@ -268,13 +271,14 @@
 					</thead>
 					<tbody wicket:id="containerAdicional">
 						<tr wicket:id="listViewAdicionais">
-							<td wicket:id="adicional"></td>
+							<td wicket:id="nome"></td>
 							<td wicket:id="descricao"></td>
 							<td class="text-center"><a class="btn btn-outline-danger"
 								title="Excluir"> <i class="fa fa-trash"></i>
 							</a></td>
 						</tr>
 					</tbody>
+					<div wicket:id="pagAdicional"></div>
 				</table>
 			</div>
 		</div>

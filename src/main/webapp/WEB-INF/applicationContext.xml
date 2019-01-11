@@ -41,6 +41,7 @@
 				<value>com.myfinishproject.model.Servico</value>
 				<value>com.myfinishproject.model.Material</value>
 				<value>com.myfinishproject.model.Adicional</value>
+				<value>com.myfinishproject.model.Usuario</value>
 			</list>
 		</property>
 		<!-- configurações para o hibernate properties -->
@@ -116,6 +117,15 @@
 	
 	<bean id="adicionalService" class="com.myfinishproject.service.AdicionalService">
 		<property name="adicionalDao" ref="adicionalDao"></property>
+	</bean>
+	
+	
+	<bean id="usuarioDao" class="com.myfinishproject.dao.UsuarioDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="usuarioService" class="com.myfinishproject.service.UsuarioService">
+		<property name="usuarioDao" ref="usuarioDao"></property>
 	</bean>
 	
 	 <bean id="transactionManager"

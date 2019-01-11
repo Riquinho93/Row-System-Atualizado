@@ -8,17 +8,17 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import com.myfinishproject.model.Funcionario;
 
-public class DeletCadastro extends Panel {
+public class DeletFuncionario extends Panel {
 
 	private static final long serialVersionUID = 992459292576872017L;
 	private Funcionario user = new Funcionario();
 
-	public DeletCadastro(String id, final Funcionario answer) {
+	public DeletFuncionario(String id, final Funcionario answer) {
 		super(id);
 
 		Form<Funcionario> form = new Form<>("resposta");
 
-		add(new Label("msg", "Deseja realmente excluir este cadastro?"));
+		add(new Label("msg", "Deseja realmente excluir este funcionario?"));
 
 		// Se a resposta == sim
 		AjaxButton yesButton = new AjaxButton("sim") {

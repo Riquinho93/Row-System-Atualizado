@@ -14,7 +14,6 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
-import org.apache.wicket.markup.html.navigation.paging.PagingNavigation;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
@@ -27,7 +26,7 @@ import com.myfinishproject.model.Funcionario;
 import com.myfinishproject.service.EnderecoService;
 import com.myfinishproject.service.FuncionarioService;
 
-public class Cadastro extends HomePage {
+public class FuncionarioForm extends HomePage {
 
 	private static final long serialVersionUID = 2474313326427632580L;
 
@@ -48,7 +47,7 @@ public class Cadastro extends HomePage {
 	private EnderecoService enderecoService;
 	private Funcionario filtrar;
 
-	public Cadastro() {
+	public FuncionarioForm() {
 
 		endereco = new Endereco();
 		funcionario = new Funcionario();
@@ -65,7 +64,6 @@ public class Cadastro extends HomePage {
 		add(container());
 
 		modalWindow = new ModalWindow("modalWindow");
-		// new CadastroPanel(modalWindow.getId());
 		// Tamanho do Modal
 		modalWindow.setInitialHeight(400);
 		modalWindow.setInitialWidth(800);
@@ -87,7 +85,7 @@ public class Cadastro extends HomePage {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 
-				CadastroPanel cadastroPanel = new CadastroPanel(modalWindow.getContentId()) {
+				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId()) {
 
 					private static final long serialVersionUID = 277997013286385910L;
 
@@ -102,9 +100,9 @@ public class Cadastro extends HomePage {
 					};
 
 				};
-				cadastroPanel.setOutputMarkupId(true);
-				add(cadastroPanel);
-				modalWindow.setContent(cadastroPanel);
+				funcionarioPanel.setOutputMarkupId(true);
+				add(funcionarioPanel);
+				modalWindow.setContent(funcionarioPanel);
 				modalWindow.show(target);
 			};
 
@@ -192,7 +190,7 @@ public class Cadastro extends HomePage {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				CadastroPanel cadastroPanel = new CadastroPanel(modalWindow.getContentId(), funcionario, endereco) {
+				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId(), funcionario, endereco) {
 
 					private static final long serialVersionUID = 1L;
 
@@ -205,8 +203,8 @@ public class Cadastro extends HomePage {
 						modalWindow.close(target);
 					};
 				};
-				cadastroPanel.setOutputMarkupId(true);
-				modalWindow.setContent(cadastroPanel);
+				funcionarioPanel.setOutputMarkupId(true);
+				modalWindow.setContent(funcionarioPanel);
 				modalWindow.show(target);
 			}
 		};
@@ -226,7 +224,7 @@ public class Cadastro extends HomePage {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				DeletCadastro deletCadastro = new DeletCadastro(modalWindowDel.getContentId(), answer) {
+				DeletFuncionario deletFuncionario = new DeletFuncionario(modalWindowDel.getContentId(), answer) {
 
 					private static final long serialVersionUID = 1L;
 
@@ -239,8 +237,8 @@ public class Cadastro extends HomePage {
 						modalWindowDel.close(target);
 					};
 				};
-				deletCadastro.setOutputMarkupId(true);
-				modalWindowDel.setContent(deletCadastro);
+				deletFuncionario.setOutputMarkupId(true);
+				modalWindowDel.setContent(deletFuncionario);
 				modalWindowDel.show(target);
 			}
 		};

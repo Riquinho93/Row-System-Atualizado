@@ -35,11 +35,11 @@ public abstract class GenericDao<Entidade, id extends Serializable> extends Gene
 	}
 
 //	@Transactional
-	public void SalvarOuAlterar(Entidade entidade) {
+	public void SalvarOuAlterar(Entidade entidades) {
 		session = getSessionFactory().openSession();
 		session.beginTransaction();
 
-		session.saveOrUpdate(entidade);
+		session.saveOrUpdate(entidades);
 
 		session.getTransaction().commit();
 		session.close();

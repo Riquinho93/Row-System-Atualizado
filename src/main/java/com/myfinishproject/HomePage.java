@@ -1,8 +1,9 @@
 package com.myfinishproject;
 
-import com.myfinishproject.view.Cadastro;
+import com.myfinishproject.view.FuncionarioForm;
 import com.myfinishproject.view.ColecaoForm;
 import com.myfinishproject.view.Login;
+import com.myfinishproject.view.UsuarioForm;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -19,6 +20,8 @@ public class HomePage extends WebPage {
 			 setResponsePage(Login.class);
 			 return;
 		}
+//		UsuarioForm usuarioForm = new UsuarioForm();
+//		usuarioForm.setEnabled(false);
 		
 		add(new Link<Void>("sair"){
 			
@@ -35,6 +38,7 @@ public class HomePage extends WebPage {
 		add(principalPagina());
 		
 		add(cadastro());
+		add(usuarios());
 
 	}
 
@@ -83,7 +87,7 @@ public class HomePage extends WebPage {
 
 				@Override
 				public void onClick(AjaxRequestTarget arg0) {
-					setResponsePage(Cadastro.class);
+					setResponsePage(FuncionarioForm.class);
 
 				}
 			};
@@ -91,6 +95,24 @@ public class HomePage extends WebPage {
 			add(button);
 			return button;
 		}
+		
+		// Chamada do usuario
+				public AjaxLink<?> usuarios() {
+					// Botão normal
+					AjaxLink<Object> button = new AjaxLink<Object>("pagUsuario") {
+
+						private static final long serialVersionUID = 1L;
+
+						@Override
+						public void onClick(AjaxRequestTarget arg0) {
+							setResponsePage(UsuarioForm.class);
+
+						}
+					};
+					button.setOutputMarkupId(true);
+					add(button);
+					return button;
+				}
 		
 
 }

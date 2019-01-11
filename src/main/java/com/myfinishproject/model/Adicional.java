@@ -19,7 +19,7 @@ public class Adicional implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String adicional;
+	private String nome;
 	private String descricao;
 
 	@ManyToOne
@@ -34,12 +34,12 @@ public class Adicional implements Serializable {
 		this.id = id;
 	}
 
-	public String getAdicional() {
-		return adicional;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setAdicional(String adicional) {
-		this.adicional = adicional;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getDescricao() {

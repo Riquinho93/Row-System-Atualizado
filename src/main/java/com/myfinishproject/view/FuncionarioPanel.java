@@ -1,10 +1,8 @@
 package com.myfinishproject.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -15,13 +13,12 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.apache.wicket.model.Model;
 
 import com.myfinishproject.model.Endereco;
 import com.myfinishproject.model.Funcao;
 import com.myfinishproject.model.Funcionario;
 
-public class CadastroPanel extends Panel {
+public class FuncionarioPanel extends Panel {
 
 	private static final long serialVersionUID = 8991195474675368668L;
 
@@ -30,11 +27,11 @@ public class CadastroPanel extends Panel {
 //	private Funcionario funcionario;
 //	private Endereco endereco;
 
-	public CadastroPanel(String id) {
+	public FuncionarioPanel(String id) {
 		this(id, new Funcionario(), new Endereco());
 	}
 
-	public CadastroPanel(String id, Funcionario funcionario, Endereco endereco) {
+	public FuncionarioPanel(String id, Funcionario funcionario, Endereco endereco) {
 		super(id);
 		formFunc = new Form<Funcionario>("formFunc", new CompoundPropertyModel<Funcionario>(funcionario));
 //		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(endereco));

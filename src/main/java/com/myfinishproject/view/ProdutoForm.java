@@ -5,17 +5,21 @@ import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import com.googlecode.genericdao.search.Search;
 import com.myfinishproject.HomePage;
 import com.myfinishproject.model.Colecao;
 import com.myfinishproject.model.Produto;
@@ -26,6 +30,8 @@ public class ProdutoForm extends HomePage {
 	private static final long serialVersionUID = 1050984839123848135L;
 
 	private Form<Produto> form = new Form<Produto>("form");
+	private Form<Produto> produtoForm;
+	private Produto filtrarProduto;
 	private ModalWindow modalWindow;
 	private List<Produto> produtoLista = new LinkedList<Produto>();
 	private PageableListView<Produto> listView;
@@ -52,6 +58,7 @@ public class ProdutoForm extends HomePage {
 		add(modalWindow);
 
 		add(container());
+		add(filtrar());
 
 		add(new AjaxLink<String>("criarProduto") {
 
@@ -146,5 +153,35 @@ public class ProdutoForm extends HomePage {
 		form.add(button1);
 		return button1;
 	}
+	
+	//Filtrar campos
+	public Form<Produto> filtrar(){
+		filtrarProduto = new Produto();
+		produtoForm = new Form<Produto>("filtrarForm", new CompoundPropertyModel<Produto>(filtrarProduto));
+		
+		TextField<String> modelo = new TextField<>("modelo");
+		modelo.setOutputMarkupId(true);
+		produtoForm.add(modelo);
+		
+		AjaxSubmitLink ajaxSubmitLink = new AjaxSubmitLink("filtrar", produtoForm) {
+			
+			@Override
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+				super.onSubmit(target, form);
+				
+				Search search = new Search();
+				
+				if(filtrarProduto.getModelo() != null && !filtrarProduto.getModelo().equals("")) {
+					search.addFilterLike("modelo", "%" + filtrarProduto.getModelo() + "%");
+				}
+				produtoLista = produtoService.search(search);
+				target.add(listcontainer);
+			}
+		};
+		produtoForm.setOutputMarkupId(true);
+		produtoForm.add(ajaxSubmitLink).setOutputMarkupId(true);
+		return produtoForm;
+	}
+	
 
 }
