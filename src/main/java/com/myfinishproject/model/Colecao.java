@@ -3,7 +3,6 @@ package com.myfinishproject.model;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import com.sun.mail.imap.protocol.UID;
 
 @Entity
 @Table(name = "colecao")

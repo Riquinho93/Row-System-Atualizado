@@ -33,7 +33,6 @@ public class FuncionarioForm extends HomePage {
 	private Form<Funcionario> formFunc = new Form<>("formFunc");
 //	private Form<Endereco> formEnd;
 	private Form<Funcionario> form2;
-	private Funcionario funcionario;
 	private Endereco endereco;
 	private List<Funcionario> funcionariosList = new ArrayList<>();
 	private PageableListView<Funcionario> listView;
@@ -50,7 +49,6 @@ public class FuncionarioForm extends HomePage {
 	public FuncionarioForm() {
 
 		endereco = new Endereco();
-		funcionario = new Funcionario();
 		// formEnd = new Form<>("formEnd", new
 		// CompoundPropertyModel<Endereco>(endereco));
 
@@ -90,7 +88,7 @@ public class FuncionarioForm extends HomePage {
 					private static final long serialVersionUID = 277997013286385910L;
 
 					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
-						
+						funcionario.setEndereco(endereco);
 						funcionarioService.SalvarOuAlterar(funcionario);
 						endereco.setFuncionario(funcionario);
 						enderecoService.SalvarOuAlterar(endereco);
@@ -138,7 +136,7 @@ public class FuncionarioForm extends HomePage {
 				item.add(new Label("funcao", user.getFuncao()));
 				item.add(new Label("telefone", user.getTelefone()));
 				item.add(new Label("email", user.getEmail()));
-				item.add(new Label("endereco", user.getEndereco().getId()));
+				/*item.add(new Label("endereco", user.getEndereco().getId()));*/
 				item.add(editando(user));
 				item.add(remover(user.getId()));
 			}
@@ -228,7 +226,8 @@ public class FuncionarioForm extends HomePage {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoExcluir(final AjaxRequestTarget target, Funcionario funcionario) {
+					@SuppressWarnings({ "unused", "unlikely-arg-type" })
+					public void executarAoExcluir(final AjaxRequestTarget target, final Funcionario funcionario) {
 						if (funcionario.isAnswer() == true) {
 							funcionariosList.remove(index);
 							funcionarioService.excluir(index);

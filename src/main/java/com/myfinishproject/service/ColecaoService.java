@@ -1,5 +1,6 @@
 package com.myfinishproject.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -11,10 +12,9 @@ import com.myfinishproject.model.Colecao;
 
 @Service
 public class ColecaoService implements IColecaoService {
-	
+
 	private ColecaoDao colecaoDao;
-	
-	
+
 	public void setColecaoDao(ColecaoDao colecaoDao) {
 		this.colecaoDao = colecaoDao;
 	}
@@ -22,8 +22,14 @@ public class ColecaoService implements IColecaoService {
 	@Override
 	@Transactional
 	public void SalvarOuAlterar(Colecao colecao) {
-		colecaoDao.SalvarOuAlterar(colecao);
-		
+		List<String> lista = new ArrayList<>();
+		lista = validacao(colecao);
+		if (lista == null) {
+			colecaoDao.SalvarOuAlterar(colecao);
+		}else {
+//			return lista;
+		}
+
 	}
 
 	@Override
@@ -36,7 +42,7 @@ public class ColecaoService implements IColecaoService {
 	@Transactional
 	public void excluir(Integer idColecao) {
 		colecaoDao.excluir(idColecao);
-		
+
 	}
 
 	@Override
@@ -44,10 +50,26 @@ public class ColecaoService implements IColecaoService {
 	public List<Colecao> listar() {
 		return colecaoDao.listar();
 	}
-	
+
 	public List<Colecao> search(Search search) {
 		return colecaoDao.searchDao(search);
 
+	}
+
+	private List<String> validacao(Colecao colecao) {
+		List<String> listaMsg = new ArrayList<String>();
+		String mensagem;
+		if (colecao.getNome() == null) {
+			mensagem = "Campo nome é Obrigatório!";
+			listaMsg.add(mensagem);
+			
+		}
+		if (colecao.getDtEntrada() == null) {
+			mensagem = "Campo data é Obrigatório!";
+			listaMsg.add(mensagem);
+		}
+
+		return listaMsg;
 	}
 
 }
