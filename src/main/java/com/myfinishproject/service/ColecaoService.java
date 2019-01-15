@@ -21,14 +21,13 @@ public class ColecaoService implements IColecaoService {
 
 	@Override
 	@Transactional
-	public void SalvarOuAlterar(Colecao colecao) {
+	public List<String> SalvarOuAlterar(Colecao colecao) {
 		List<String> lista = new ArrayList<>();
 		lista = validacao(colecao);
-		if (lista == null) {
+		if (lista.isEmpty()) {
 			colecaoDao.SalvarOuAlterar(colecao);
-		}else {
-//			return lista;
 		}
+		return lista;
 
 	}
 
@@ -62,7 +61,7 @@ public class ColecaoService implements IColecaoService {
 		if (colecao.getNome() == null) {
 			mensagem = "Campo nome é Obrigatório!";
 			listaMsg.add(mensagem);
-			
+
 		}
 		if (colecao.getDtEntrada() == null) {
 			mensagem = "Campo data é Obrigatório!";

@@ -6,17 +6,17 @@
 </wicket:head>
 <body>
 	<wicket:extend>
-		<div class="container">
+		<div class="container" style="background-color: white">
 		<h1>Tela do Usuário</h1><br />
 		<div class="container-fluid">
-				<form >
+				<form wicket:id="formFiltrar">
 					<div class="form-row">
 						<div class="col-sm-2">
 							<label type="text">Nome</label> <input
-								type="text" class="form-control" placeholder="Informe o nome">
+								wicket:id="nome" type="text" class="form-control" placeholder="Informe o nome">
 						</div>
 					</div>
-					<br /> <a class="btn btn-secondary"
+					<br /> <a wicket:id="filtrar" class="btn btn-secondary"
 						style="float: right; color: white;">Filtrar</a>
 				</form>
 				<div>
@@ -35,23 +35,24 @@
 						<th>Ações</th>
 					</tr>
 				</thead>
-				<tbody >
-					<tr>
-						<td class="text" ></td>
-						<td class="text" ></td>
-						<td class="text" ></td>
-						<td class="text"></td>
+				<tbody wicket:id="container">
+					<tr wicket:id="listViewUsuario">
+						<td wicket:id="nome" ></td>
+						<td wicket:id="login" ></td>
+						<td wicket:id="senha"></td>
+						<td wicket:id="perfil" ></td>
 						<td class="text-center">
-						 <a class="btn btn-default" rel="tooltip"
+						 <a wicket:id="alterar" class="btn btn-default" rel="tooltip"
 							title="Editar"> <i class="fas fa-pencil-alt"></i>
-						</a> <a class="btn btn-default modal-confirm"
+						</a> <a wicket:id="excluir" class="btn btn-default modal-confirm"
 							title="Excluir"> <i class="fa fa-trash"></i>
 						</a></td>
 					</tr>
 				</tbody>
-				<!-- <div wicket:id="pag"></div> -->
+				 <div wicket:id="pag"></div> 
 			</table>
 		<div wicket:id="modalWindow"></div>
+		<div wicket:id="modalWindowDel"></div><br />
 		</div>
 	</wicket:extend>
 </body>

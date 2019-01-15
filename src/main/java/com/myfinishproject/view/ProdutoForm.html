@@ -13,7 +13,7 @@
 </wicket:head>
 <body>
 	<wicket:extend>
-		<div class="container">
+		<div class="container" style="background-color: white">
 			<h1>PRODUTOS</h1>
 			<span><strong>COLEÇÃO: </strong></span> <span wicket:id="nome"></span>
 			<span><strong>DATA:</strong></span> <span wicket:id="dtEntrada"></span>
@@ -61,7 +61,7 @@
 						<td class="text-center"><a wicket:id="alt"
 							class="btn btn-default" rel="tooltip" title="Editar"> <i
 								class="fas fa-pencil-alt"></i>
-						</a> <a class="btn btn-default model-confirm" title="Excluir"> <i
+						</a> <a wicket:id="excluir" class="btn btn-default model-confirm" title="Excluir"> <i
 								class="fa fa-trash"></i>
 						</a> <a class="btn btn-default modal-confirm" title="Devolução"> <i
 								class="fas fa-share-square"></i>
@@ -73,6 +73,7 @@
 				<div wicket:id="pag"></div>
 			</table>
 			<div wicket:id="modalWindow"></div>
+			<div wicket:id="modalWindowDel"></div><br />
 		</div>
 	</wicket:extend>
 </body>

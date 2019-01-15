@@ -1,5 +1,6 @@
 package com.myfinishproject.view;
 
+import java.awt.Component;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class ProdutoForm extends HomePage {
 
 	private Form<Produto> form = new Form<Produto>("form");
 	private Form<Produto> produtoForm;
+	private ModalWindow modalWindowDel;
 	private Produto filtrarProduto;
 	private ModalWindow modalWindow;
 	private List<Produto> produtoLista = new LinkedList<Produto>();
@@ -56,6 +58,13 @@ public class ProdutoForm extends HomePage {
 		modalWindow.setInitialWidth(1000);
 		modalWindow.setOutputMarkupId(true);
 		add(modalWindow);
+
+		modalWindowDel = new ModalWindow("modalWindowDel");
+		// Tamanho do Modal Delete
+		modalWindowDel.setInitialHeight(200);
+		modalWindowDel.setInitialWidth(200);
+		modalWindowDel.setOutputMarkupId(true);
+		add(modalWindowDel);
 
 		add(container());
 		add(filtrar());
@@ -112,6 +121,7 @@ public class ProdutoForm extends HomePage {
 				item.add(new Label("largura", user.getLargura()));
 				item.add(new Label("tipoEnfesto", user.getTipoEnfesto()));
 				item.add(new Label("status", user.getStatus()));
+				item.add(remover(user.getId()));
 				item.add(editando(user));
 			}
 		};
@@ -153,25 +163,25 @@ public class ProdutoForm extends HomePage {
 		form.add(button1);
 		return button1;
 	}
-	
-	//Filtrar campos
-	public Form<Produto> filtrar(){
+
+	// Filtrar campos
+	public Form<Produto> filtrar() {
 		filtrarProduto = new Produto();
 		produtoForm = new Form<Produto>("filtrarForm", new CompoundPropertyModel<Produto>(filtrarProduto));
-		
+
 		TextField<String> modelo = new TextField<>("modelo");
 		modelo.setOutputMarkupId(true);
 		produtoForm.add(modelo);
-		
+
 		AjaxSubmitLink ajaxSubmitLink = new AjaxSubmitLink("filtrar", produtoForm) {
-			
+
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				
+
 				Search search = new Search();
-				
-				if(filtrarProduto.getModelo() != null && !filtrarProduto.getModelo().equals("")) {
+
+				if (filtrarProduto.getModelo() != null && !filtrarProduto.getModelo().equals("")) {
 					search.addFilterLike("modelo", "%" + filtrarProduto.getModelo() + "%");
 				}
 				produtoLista = produtoService.search(search);
@@ -182,6 +192,36 @@ public class ProdutoForm extends HomePage {
 		produtoForm.add(ajaxSubmitLink).setOutputMarkupId(true);
 		return produtoForm;
 	}
-	
+
+	protected AjaxLink<Produto> remover(Integer id) {
+		AjaxLink<Produto> ajaxLink = new AjaxLink<Produto>("excluir") {
+
+			private static final long serialVersionUID = 1L;
+			Produto answer = new Produto();
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+
+				DeletProduto deletProduto = new DeletProduto(modalWindowDel.getContentId(), answer) {
+
+					private static final long serialVersionUID = 1L;
+
+					public void executarAoExcluir(AjaxRequestTarget target, Produto produto) {
+						if (produto.isAnswer() == true) {
+							produtoService.excluir(id);
+							target.add(listcontainer);
+						}
+					};
+				};
+				deletProduto.setOutputMarkupId(true);
+				modalWindowDel.setContent(deletProduto);
+				modalWindowDel.show(target);
+
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		form.add(ajaxLink);
+		return ajaxLink;
+	}
 
 }

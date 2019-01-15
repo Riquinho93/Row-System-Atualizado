@@ -42,7 +42,7 @@ public class FuncionarioForm extends HomePage {
 	private ModalWindow modalWindowDel;
 	@SpringBean(name = "funcionarioService")
 	private FuncionarioService funcionarioService;
-	@SpringBean(name= "enderecoService")
+	@SpringBean(name = "enderecoService")
 	private EnderecoService enderecoService;
 	private Funcionario filtrar;
 
@@ -53,7 +53,7 @@ public class FuncionarioForm extends HomePage {
 		// CompoundPropertyModel<Endereco>(endereco));
 
 		funcionariosList = funcionarioService.listar();
-		
+
 		add(filtrar());
 
 //		add(formEnd);
@@ -106,7 +106,6 @@ public class FuncionarioForm extends HomePage {
 
 		});
 
-
 	}
 
 	private WebMarkupContainer container() {
@@ -136,7 +135,7 @@ public class FuncionarioForm extends HomePage {
 				item.add(new Label("funcao", user.getFuncao()));
 				item.add(new Label("telefone", user.getTelefone()));
 				item.add(new Label("email", user.getEmail()));
-				/*item.add(new Label("endereco", user.getEndereco().getId()));*/
+				/* item.add(new Label("endereco", user.getEndereco().getId())); */
 				item.add(editando(user));
 				item.add(remover(user.getId()));
 			}
@@ -183,12 +182,13 @@ public class FuncionarioForm extends HomePage {
 	// Editando
 	AjaxLink<Funcionario> editando(final Funcionario funcionario) {
 		AjaxLink<Funcionario> editar = new AjaxLink<Funcionario>("alterar") {
-			
+
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId(), funcionario, endereco) {
+				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId(), funcionario,
+						endereco) {
 
 					private static final long serialVersionUID = 1L;
 
@@ -212,13 +212,12 @@ public class FuncionarioForm extends HomePage {
 	}
 
 	// Removendo
-	private Component remover(final Integer index) {
+	public Component remover(final Integer index) {
 
 		AjaxLink<Funcionario> button = new AjaxLink<Funcionario>("excluir") {
 			Funcionario answer = new Funcionario();
-			
-			private static final long serialVersionUID = 1L;
 
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
@@ -226,10 +225,9 @@ public class FuncionarioForm extends HomePage {
 
 					private static final long serialVersionUID = 1L;
 
-					@SuppressWarnings({ "unused", "unlikely-arg-type" })
-					public void executarAoExcluir(final AjaxRequestTarget target, final Funcionario funcionario) {
+					public void executarAoExcluir(AjaxRequestTarget target, Funcionario funcionario) {
 						if (funcionario.isAnswer() == true) {
-							funcionariosList.remove(index);
+							enderecoService.excluir(index);
 							funcionarioService.excluir(index);
 							target.add(listContainer);
 						}

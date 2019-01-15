@@ -13,7 +13,7 @@ public interface IUsuarioService {
 
 	public void excluir(Integer id);
 
-	public List<Usuario> listar(Integer id);
+	public List<Usuario> listar();
 
 	public List<Usuario> search(Search search);
 }

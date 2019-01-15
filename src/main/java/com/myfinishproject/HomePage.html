@@ -11,12 +11,12 @@
 		crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </wicket:head>
-<body>
-	<div class="container-fluid">
+<body style="background-color: #004E95">
+	<div class="container-fluid" >
 		<!-- TOPO -->
 		<button wicket:id="sair" class="btn" style="float: right;">Sair</button>
 		<div class="row topo justify-context-between">
-			<h1 wicket:id="menu">Row System</h1>
+			<h1 wicket:id="menu" style="color: white">Row System</h1>
 		</div>
 
 		<!-- Menu horizontal -->
@@ -32,7 +32,7 @@
 				<a class="nav-link" wicket:id="principal">Home</a>
 			</div>
 			<div>
-				<a class="nav-link" href="#">Devolução</a>
+				<a class="nav-link" wicket:id="pagDevolucao">Devolução</a>
 			</div>
 			<div>
 				<a class="nav-link" wicket:id="pagCadastro">Funcionarios</a>

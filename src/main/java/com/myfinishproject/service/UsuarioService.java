@@ -38,7 +38,7 @@ public class UsuarioService implements IUsuarioService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Usuario> listar(Integer id) {
+	public List<Usuario> listar() {
 		return usuarioDao.listar();
 	}
 

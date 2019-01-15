@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name = "colecao")
 public class Colecao implements Serializable {
@@ -27,7 +29,7 @@ public class Colecao implements Serializable {
 	private String dtEntrada;
 	@Transient
 	private boolean answer;
-
+	
 	@OneToMany(mappedBy = "colecao", targetEntity = Produto.class , fetch =  FetchType.LAZY)
 	private Collection<Produto> listaProdutos;
 

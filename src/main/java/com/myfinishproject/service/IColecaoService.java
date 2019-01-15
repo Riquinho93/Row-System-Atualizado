@@ -7,7 +7,7 @@ import com.myfinishproject.model.Colecao;
 
 public interface IColecaoService {
 	
-	public void SalvarOuAlterar(Colecao colecao);
+	public List<String> SalvarOuAlterar(Colecao colecao);
 
 	public Colecao buscarPorId(Integer id);
 

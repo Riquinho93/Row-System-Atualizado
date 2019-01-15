@@ -6,19 +6,19 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import com.myfinishproject.model.Funcionario;
+import com.myfinishproject.model.Usuario;
 
-public class DeletFuncionario extends Panel {
-
+public class DeletUsuario extends Panel{
+	
 	private static final long serialVersionUID = 992459292576872017L;
-	private Funcionario user = new Funcionario();
+	private Usuario user = new Usuario();
 
-	public DeletFuncionario(String id, final Funcionario answer) {
+	public DeletUsuario(String id, final Usuario answer) {
 		super(id);
 		this.user = answer;
-		Form<Funcionario> form = new Form<>("resposta");
+		Form<Usuario> form = new Form<>("resposta");
 
-		add(new Label("msg", "Deseja realmente excluir este funcionario?"));
+		add(new Label("msg", "Deseja realmente excluir este Usuario?"));
 
 		// Se a resposta == sim
 		AjaxButton yesButton = new AjaxButton("sim") {
@@ -57,7 +57,7 @@ public class DeletFuncionario extends Panel {
 		form.add(naoButton);
 	}
 
-	public void executarAoExcluir(AjaxRequestTarget target, Funcionario user) {
+	public void executarAoExcluir(AjaxRequestTarget target, Usuario user) {
 
 	}
 

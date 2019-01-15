@@ -9,9 +9,13 @@ import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
 
+import com.myfinishproject.model.Usuario;
+
 public class Login extends WebPage{
 	
 	private static final long serialVersionUID = -2850628051987758424L;
+	
+	private Form<Usuario> formularioLogin;
 
 	public Login() {
 		
@@ -21,15 +25,16 @@ public class Login extends WebPage{
 		final Label errorLogin = new Label("errorLogin", Model.of("Erro ao realizar o login"));
 		errorLogin.setOutputMarkupId(true).setVisible(false);
 		
-		Form<String> formularioLogin = new Form<String>("formularioLogin") {
+		 formularioLogin = new Form<Usuario>("formularioLogin") {
 
 			private static final long serialVersionUID = -5095534494215850537L;
 			
 			@Override
 			protected void onSubmit() {
+				Usuario usuario = new Usuario();
 				String nomeUsuario = campoNomeUsuario.getModelObject();
 				String password = campoPassword.getModelObject();
-				if(nomeUsuario.equals("henrique") && password.equals("admin")) {
+				if(nomeUsuario.equals("123") && password.equals("123")) {
 					getSession().setAttribute("userName", nomeUsuario);
 					setResponsePage(ColecaoForm.class);
 				}else {

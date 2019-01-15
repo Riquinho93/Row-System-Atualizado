@@ -2,6 +2,7 @@ package com.myfinishproject;
 
 import com.myfinishproject.view.FuncionarioForm;
 import com.myfinishproject.view.ColecaoForm;
+import com.myfinishproject.view.DevolucaoForm;
 import com.myfinishproject.view.Login;
 import com.myfinishproject.view.UsuarioForm;
 
@@ -39,6 +40,7 @@ public class HomePage extends WebPage {
 		
 		add(cadastro());
 		add(usuarios());
+		add(devolucao());
 
 	}
 
@@ -106,6 +108,24 @@ public class HomePage extends WebPage {
 						@Override
 						public void onClick(AjaxRequestTarget arg0) {
 							setResponsePage(UsuarioForm.class);
+
+						}
+					};
+					button.setOutputMarkupId(true);
+					add(button);
+					return button;
+				}
+				
+				// Chamada de Devolucao
+				public AjaxLink<?> devolucao() {
+					// Botão normal
+					AjaxLink<Object> button = new AjaxLink<Object>("pagDevolucao") {
+
+						private static final long serialVersionUID = 1L;
+
+						@Override
+						public void onClick(AjaxRequestTarget arg0) {
+							setResponsePage(DevolucaoForm.class);
 
 						}
 					};

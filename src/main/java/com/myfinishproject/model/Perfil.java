@@ -6,10 +6,10 @@ import java.util.List;
 public enum Perfil {
 
 	USUARIO("Usuario"), ADMIN("Admin");
-	private String usuario;
+	private String descricao;
 
-	private Perfil(String usuario) {
-		this.usuario = usuario;
+	private Perfil(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public static List<Perfil> perfil() {
@@ -19,12 +19,12 @@ public enum Perfil {
 		return perfils;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 }
