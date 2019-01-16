@@ -140,6 +140,7 @@ public class ProdutoPanel extends Panel {
 		};
 
 		DropDownChoice<TipoEnfesto> tipoEnfesto = new DropDownChoice<>("tipoEnfesto", model, renderer);
+		formProduto.add(tipoEnfesto);
 
 		// Data entrada
 		DatePicker datePickerInicial = new DatePicker() {

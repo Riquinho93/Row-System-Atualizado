@@ -1,6 +1,5 @@
 package com.myfinishproject.view;
 
-import java.awt.Component;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -49,8 +48,11 @@ public class ProdutoForm extends HomePage {
 	public ProdutoForm(PageParameters parameters, Colecao colecao) {
 
 		add(new Label("nome", parameters.get("nome")));
-		add(new Label("dtEntrada", parameters.get("dtEntrada")));
+		add(new Label("data", parameters.get("data")));
 		produtoLista = produtoService.listar(colecao.getColecaoId());
+
+		add(container());
+		add(filtrar());
 
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
@@ -65,9 +67,6 @@ public class ProdutoForm extends HomePage {
 		modalWindowDel.setInitialWidth(200);
 		modalWindowDel.setOutputMarkupId(true);
 		add(modalWindowDel);
-
-		add(container());
-		add(filtrar());
 
 		add(new AjaxLink<String>("criarProduto") {
 
@@ -110,6 +109,8 @@ public class ProdutoForm extends HomePage {
 		};
 
 		listView = new PageableListView<Produto>("listView", atualizarLista, 5) {
+
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void populateItem(ListItem<Produto> item) {
@@ -175,6 +176,8 @@ public class ProdutoForm extends HomePage {
 
 		AjaxSubmitLink ajaxSubmitLink = new AjaxSubmitLink("filtrar", produtoForm) {
 
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
@@ -193,7 +196,7 @@ public class ProdutoForm extends HomePage {
 		return produtoForm;
 	}
 
-	protected AjaxLink<Produto> remover(Integer id) {
+	protected AjaxLink<Produto> remover(final Integer id) {
 		AjaxLink<Produto> ajaxLink = new AjaxLink<Produto>("excluir") {
 
 			private static final long serialVersionUID = 1L;
@@ -211,6 +214,7 @@ public class ProdutoForm extends HomePage {
 							produtoService.excluir(id);
 							target.add(listcontainer);
 						}
+						modalWindow.close(target);
 					};
 				};
 				deletProduto.setOutputMarkupId(true);

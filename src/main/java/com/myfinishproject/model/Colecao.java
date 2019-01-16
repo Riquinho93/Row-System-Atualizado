@@ -2,7 +2,9 @@ package com.myfinishproject.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,9 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-
-import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "colecao")
@@ -25,12 +27,12 @@ public class Colecao implements Serializable {
 	private Integer colecaoId;
 
 	private String nome;
-
-	private String dtEntrada;
+	@Temporal(TemporalType.DATE)
+	private Date data;
 	@Transient
 	private boolean answer;
-	
-	@OneToMany(mappedBy = "colecao", targetEntity = Produto.class , fetch =  FetchType.LAZY)
+
+	@OneToMany(mappedBy = "colecao", targetEntity = Produto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Collection<Produto> listaProdutos;
 
 	public Colecao() {
@@ -60,20 +62,20 @@ public class Colecao implements Serializable {
 		this.answer = answer;
 	}
 
-	public String getDtEntrada() {
-		return dtEntrada;
-	}
-
-	public void setDtEntrada(String dtEntrada) {
-		this.dtEntrada = dtEntrada;
-	}
-
 	public Collection<Produto> getListaProdutos() {
 		return listaProdutos;
 	}
 
 	public void setListaProdutos(Collection<Produto> listaProdutos) {
 		this.listaProdutos = listaProdutos;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 }

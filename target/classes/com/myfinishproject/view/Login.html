@@ -11,17 +11,17 @@
 		<div class="centerdiv">
 			<img alt="img" src="user.png" id="profile">
 			<h2>Row System</h2>
-			<p wicket:id="errorLogin"></p>
+			<!--  <p wicket:id="errorLogin"></p>  -->
 			<form wicket:id="formularioLogin">
 				<div>
-					<input wicket:id="nomeUsuario" class="inputbox" type="text" aria-label="Usuário" placeholder="Usuário">
+					<input wicket:id="login" class="inputbox" type="text" placeholder="Usuário">
 				</div>
  
 				<div>
-					<input wicket:id="password" class="inputbox" type="password" aria-label="Senha" placeholder="Senha">
+					<input wicket:id="senha" class="inputbox" type="password" placeholder="Senha">
 				</div><br>
  				<div>
-					<button type="submit" name="submit">Login</button>
+					<button wicket:id="submit" type="submit" name="submit">Login</button>
 				</div>
 		</form><br>
 		<div class="forget-section">

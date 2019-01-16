@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
@@ -30,7 +32,9 @@ public class Produto implements Serializable {
 	private String cortador;
 	@Transient
 	private boolean answer;
+	@Temporal(TemporalType.DATE)
 	private Date dataSaida;
+	@Temporal(TemporalType.DATE)
 	private Date dataRetorno;
 	private TipoEnfesto tipoEnfesto;
 	private String largura;
@@ -40,16 +44,16 @@ public class Produto implements Serializable {
 	@JoinColumn(name = "idColecao")
 	private Colecao colecao;
 
-	@OneToMany(mappedBy = "produto", targetEntity = Peca.class, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "produto", targetEntity = Peca.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Peca> listaPecas;
 
-	@OneToMany(mappedBy = "produto", targetEntity = Servico.class, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "produto", targetEntity = Servico.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Servico> listaServico;
 
-	@OneToMany(mappedBy = "produto", targetEntity = Material.class, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "produto", targetEntity = Material.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Material> listaMateriais;
 
-	@OneToMany(mappedBy = "produto", targetEntity = Adicional.class, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "produto", targetEntity = Adicional.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Adicional> listaAdicionais;
 
 	public Integer getId() {

@@ -169,7 +169,7 @@ public class ColecaoForm extends HomePage {
 
 				// item.add(new Label("ID", user.getId()));
 				item.add(new Label("nome", user.getNome()));
-				item.add(new Label("dtEntrada", user.getDtEntrada()));
+				item.add(new Label("data", user.getData()));
 				item.add(visualizar(item.getIndex(), user));
 				item.add(editando(user));
 				item.add(removendo(user.getColecaoId()));
@@ -201,7 +201,7 @@ public class ColecaoForm extends HomePage {
 				PageParameters parametro = new PageParameters();
 				parametro.add("colecaoId", colecao.getColecaoId());
 				parametro.add("nome", colecao.getNome());
-				parametro.add("dtEntrada", colecao.getDtEntrada());
+				parametro.add("data", colecao.getData());
 //				setResponsePage(ProdutoForm.class, parametro);
 				setResponsePage(new ProdutoForm(parametro, colecao));
 			}
@@ -227,7 +227,6 @@ public class ColecaoForm extends HomePage {
 					public void executarAoSalvar(AjaxRequestTarget target, Colecao colecaoModel) {
 						if (colecaoModel.isAnswer() == true) {
 							// colecaoModels.remove(index);
-							System.out.println("ID " + index);
 							colecaoService.excluir(index);
 							target.add(listContainer);
 						}
@@ -281,7 +280,7 @@ public class ColecaoForm extends HomePage {
 		colecaoForm = new Colecao();
 		form2 = new Form<Colecao>("form2", new CompoundPropertyModel<Colecao>(colecaoForm));
 		TextField<String> nome = new TextField<String>("nome");
-		TextField<String> data = new TextField<String>("dtEntrada");
+		TextField<String> data = new TextField<String>("data");
 		nome.setOutputMarkupId(true);
 		data.setOutputMarkupId(true);
 		form2.add(nome);
@@ -297,8 +296,8 @@ public class ColecaoForm extends HomePage {
 				if (colecaoForm.getNome() != null && !colecaoForm.getNome().equals("")) {
 					search.addFilterLike("nome", "%" + colecaoForm.getNome() + "%");
 				}
-				if (colecaoForm.getDtEntrada() != null && !colecaoForm.getDtEntrada().equals("")) {
-					search.addFilterILike("dtEntrada", "%" + colecaoForm.getDtEntrada() + "%");
+				if (colecaoForm.getData() != null && !colecaoForm.getData().equals("")) {
+					search.addFilterILike("dtEntrada", "%" + colecaoForm.getData() + "%");
 				}
 				colecaoModels = colecaoService.search(search);
 				target.add(listContainer);

@@ -1,6 +1,7 @@
 package com.myfinishproject;
 
 import com.myfinishproject.view.FuncionarioForm;
+import com.myfinishproject.model.Usuario;
 import com.myfinishproject.view.ColecaoForm;
 import com.myfinishproject.view.DevolucaoForm;
 import com.myfinishproject.view.Login;
@@ -16,7 +17,7 @@ public class HomePage extends WebPage {
 
 	public HomePage() {
 		
-		String userName = (String) getSession().getAttribute("userName");
+		Usuario userName = (Usuario) getSession().getAttribute("userName");
 		if (userName == null) {
 			 setResponsePage(Login.class);
 			 return;

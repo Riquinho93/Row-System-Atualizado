@@ -63,7 +63,7 @@ public class ColecaoService implements IColecaoService {
 			listaMsg.add(mensagem);
 
 		}
-		if (colecao.getDtEntrada() == null) {
+		if (colecao.getData() == null) {
 			mensagem = "Campo data é Obrigatório!";
 			listaMsg.add(mensagem);
 		}
