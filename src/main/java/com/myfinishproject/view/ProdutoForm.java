@@ -1,5 +1,8 @@
 package com.myfinishproject.view;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,19 +14,26 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.request.handler.resource.ResourceStreamRequestHandler;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.ContentDisposition;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.resource.AbstractResourceStreamWriter;
 
 import com.googlecode.genericdao.search.Search;
 import com.myfinishproject.HomePage;
 import com.myfinishproject.model.Colecao;
 import com.myfinishproject.model.Produto;
+import com.myfinishproject.relatorio.RelatorioProduto;
 import com.myfinishproject.service.ProdutoService;
+
+import net.sf.jasperreports.engine.JRException;
 
 public class ProdutoForm extends HomePage {
 
@@ -124,6 +134,7 @@ public class ProdutoForm extends HomePage {
 				item.add(new Label("status", user.getStatus()));
 				item.add(remover(user.getId()));
 				item.add(editando(user));
+				item.add(gerarRelatorio(user));
 			}
 		};
 		add(listView);
@@ -227,5 +238,50 @@ public class ProdutoForm extends HomePage {
 		form.add(ajaxLink);
 		return ajaxLink;
 	}
+	
+	// Gerar relatorio de Produto
+		public Link<?> gerarRelatorio(Produto user) {
+			final RelatorioProduto r = new RelatorioProduto();
+			final HashMap<String, Object> produtos = new HashMap<String, Object>();
+			// Chave para o Jasper
+			produtos.put("user", user);
+			Link<?> button = new Link<Object>("relatorio") {
+
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void onClick() {
+					try {
+						final byte[] bytes;
+						bytes = r.gerarRelatorio(produtos);
+						if (bytes != null) {
+							AbstractResourceStreamWriter Stream = new AbstractResourceStreamWriter() {
+
+								private static final long serialVersionUID = 1L;
+
+								@Override
+								public void write(OutputStream output) throws IOException {
+									output.write(bytes);
+									output.close();
+								}
+
+							};
+
+							ResourceStreamRequestHandler handler = new ResourceStreamRequestHandler(Stream);
+							handler.setContentDisposition(ContentDisposition.ATTACHMENT);
+							// nome do pdf
+							handler.setFileName("Produto.pdf");
+							getRequestCycle().scheduleRequestHandlerAfterCurrent(handler);
+						}
+					} catch (JRException e) {
+						e.printStackTrace();
+					}
+
+				}
+			};
+			button.setOutputMarkupId(true);
+			return button;
+
+		}
 
 }

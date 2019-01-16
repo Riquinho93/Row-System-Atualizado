@@ -59,7 +59,7 @@ public class FuncionarioPanel extends Panel {
 		estado.setOutputMarkupId(true);
 
 		ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao");
-		IModel<List<Funcao>> model = new LoadableDetachableModel() {
+		IModel<List<Funcao>> model = new LoadableDetachableModel<List<Funcao>>() {
 
 			private static final long serialVersionUID = 1L;
 
