@@ -27,7 +27,7 @@ public class Endereco implements Serializable {
 	private String estado;
 
 	@OneToOne
-	@JoinColumn(name = "idFuncionario")
+	@JoinColumn(name = "funcionario")
 	private Funcionario funcionario;
 
 	public Integer getId() {

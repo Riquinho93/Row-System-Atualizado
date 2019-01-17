@@ -10,11 +10,10 @@ import com.myfinishproject.dao.FuncionarioDao;
 import com.myfinishproject.model.Funcionario;
 
 @Service
-public class FuncionarioService implements IFuncionarioService{
-	
+public class FuncionarioService implements IFuncionarioService {
+
 	private FuncionarioDao funcionarioDao;
-	
-	
+
 	public void setFuncionarioDao(FuncionarioDao funcionarioDao) {
 		this.funcionarioDao = funcionarioDao;
 	}
@@ -42,10 +41,15 @@ public class FuncionarioService implements IFuncionarioService{
 	public List<Funcionario> listar() {
 		return funcionarioDao.listar();
 	}
-	
+
 	public List<Funcionario> search(Search search) {
 		return funcionarioDao.searchDao(search);
 
+	}
+	
+	@Transactional(readOnly = true)
+	public Funcionario alterar(Integer id) {
+		return funcionarioDao.alterar(id);
 	}
 
 }

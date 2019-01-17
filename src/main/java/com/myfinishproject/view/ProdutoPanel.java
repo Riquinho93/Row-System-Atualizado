@@ -103,6 +103,8 @@ public class ProdutoPanel extends Panel {
 		// Chamada metodo de Adicional
 		adicionalMetodo();
 		add(adicionalWebMarkupContainer());
+		
+		listaPecas = pecaService.listar();
 
 		formProduto = new Form<>("formProduto", new CompoundPropertyModel<Produto>(produto));
 
@@ -256,7 +258,7 @@ public class ProdutoPanel extends Panel {
 	// Aqui começa aba de peças
 	// Metodo Peças
 	private void pecaMetodo() {
-
+		
 		CompoundPropertyModel<Peca> compoundPropertyModel = new CompoundPropertyModel<Peca>(peca);
 		formPeca = new Form<Peca>("formPeca", compoundPropertyModel);
 

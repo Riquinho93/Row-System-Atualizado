@@ -34,7 +34,7 @@ public class FuncionarioPanel extends Panel {
 	public FuncionarioPanel(String id, Funcionario funcionario, Endereco endereco) {
 		super(id);
 		formFunc = new Form<Funcionario>("formFunc", new CompoundPropertyModel<Funcionario>(funcionario));
-		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(endereco));
+		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(funcionario.getEndereco()));
 
 		TextField<String> nome = new TextField<>("nome");
 		TextField<String> telefone = new TextField<>("telefone");

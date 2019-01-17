@@ -23,6 +23,7 @@ import com.googlecode.genericdao.search.Search;
 import com.myfinishproject.HomePage;
 import com.myfinishproject.model.Endereco;
 import com.myfinishproject.model.Funcionario;
+import com.myfinishproject.model.Usuario;
 import com.myfinishproject.service.EnderecoService;
 import com.myfinishproject.service.FuncionarioService;
 
@@ -53,7 +54,7 @@ public class FuncionarioForm extends HomePage {
 		// CompoundPropertyModel<Endereco>(endereco));
 
 		funcionariosList = funcionarioService.listar();
-
+		
 		add(filtrar());
 
 //		add(formEnd);
@@ -180,19 +181,25 @@ public class FuncionarioForm extends HomePage {
 	}
 
 	// Editando
-	AjaxLink<Funcionario> editando(final Funcionario funcionario) {
+	AjaxLink<Funcionario> editando(Funcionario funcionario) {
 		AjaxLink<Funcionario> editar = new AjaxLink<Funcionario>("alterar") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
+//				Funcionario user = funcionarioService.alterar(funcionario.getId());
 				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId(), funcionario,
 						endereco) {
 
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
+						/*Search search = new Search(Funcionario.class);
+						search.addFilterEqual("id", funcionario.getId());
+						search.addFilterEqual("funcionario", endereco.getFuncionario().getId());
+						List<Funcionario> lista = funcionarioService.search(search);
+						funcionariosList = lista;*/
 						enderecoService.buscarPorId(funcionario.getId());
 						funcionarioService.SalvarOuAlterar(funcionario);
 						endereco.setFuncionario(funcionario);
