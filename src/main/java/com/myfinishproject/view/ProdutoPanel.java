@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
@@ -42,7 +43,7 @@ public class ProdutoPanel extends Panel {
 	private static final long serialVersionUID = -4953874588297206972L;
 
 	private Form<Produto> formProduto;
-// Atributos da peca
+	// Atributos da peca
 	@SpringBean(name = "pecaService")
 	private PecaService pecaService;
 
@@ -53,7 +54,7 @@ public class ProdutoPanel extends Panel {
 	private List<Peca> listaPecas = new ArrayList<Peca>();
 	private Peca peca = new Peca();
 
-// Atributos do Servico
+	// Atributos do Servico
 	@SpringBean(name = "servicoServico")
 	private ServicoService servicoService;
 	private Form<Servico> formServico;
@@ -63,7 +64,7 @@ public class ProdutoPanel extends Panel {
 	private List<Servico> listaServicos = new LinkedList<>();
 	private Servico servico = new Servico();
 
-// Atributos do Material
+	// Atributos do Material
 	@SpringBean(name = "materialService")
 	private MaterialService materialService;
 	private Form<Material> formMaterial;
@@ -73,7 +74,7 @@ public class ProdutoPanel extends Panel {
 	private List<Material> listaMateriais = new LinkedList<>();
 	private Material material = new Material();
 
-// Atributos do Adicional
+	// Atributos do Adicional
 	@SpringBean(name = "adicionalService")
 	private AdicionalService adicionalService;
 	private Form<Adicional> formAdicional;
@@ -203,28 +204,28 @@ public class ProdutoPanel extends Panel {
 				for (Peca lista : listaPecas) {
 					pecaService.SalvarOuAlterar(lista);
 				}
-				
-				for (Servico lista: listaServicos) {
+
+				for (Servico lista : listaServicos) {
 					lista.setProduto(produto);
 				}
-				
-				for(Servico lista: listaServicos) {
+
+				for (Servico lista : listaServicos) {
 					servicoService.SalvarOuAlterar(lista);
 				}
-				
-				for(Material lista: listaMateriais) {
+
+				for (Material lista : listaMateriais) {
 					lista.setProduto(produto);
 				}
-				
-				for(Material lista: listaMateriais) {
+
+				for (Material lista : listaMateriais) {
 					materialService.SalvarOuAlterar(lista);
 				}
-				
-				for(Adicional lista: listaAdicionais) {
+
+				for (Adicional lista : listaAdicionais) {
 					lista.setProduto(produto);
 				}
-				
-				for(Adicional lista: listaAdicionais) {
+
+				for (Adicional lista : listaAdicionais) {
 					adicionalService.SalvarOuAlterar(lista);
 				}
 
@@ -288,7 +289,7 @@ public class ProdutoPanel extends Panel {
 		};
 		ajaxButton.setOutputMarkupId(true);
 
-//			formProduto.add(formPeca);
+		// formProduto.add(formPeca);
 		add(formPeca);
 		formPeca.add(cor);
 		formPeca.add(tamanho);
@@ -323,7 +324,7 @@ public class ProdutoPanel extends Panel {
 				item.add(new Label("cor", user.getCor()));
 				item.add(new Label("tamanho", user.getTamanho()));
 				item.add(new Label("quantidade", user.getQuantidade()));
-//					item.add(removendo(user));
+				item.add(remover(item.getIndex()));
 			}
 
 		};
@@ -334,6 +335,23 @@ public class ProdutoPanel extends Panel {
 		listContainerPecas.add(listViewPecas);
 		add(new PagingNavigator("pagPeca", listViewPecas));
 		return listContainerPecas;
+	}
+
+	// Metodo de remoção da Peça
+	protected AjaxLink<Peca> remover(final Integer index) {
+		AjaxLink<Peca> ajaxLink = new AjaxLink<Peca>("excluir") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				listaPecas.remove(index);
+				target.add(listContainerPecas);
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		formPeca.add(ajaxLink);
+		return ajaxLink;
 	}
 
 	// Metodo do Servico
@@ -549,4 +567,6 @@ public class ProdutoPanel extends Panel {
 		add(new PagingNavigator("pagAdicional", listViewAdicionais));
 		return listaContainerAdicional;
 	}
+	
+	
 }

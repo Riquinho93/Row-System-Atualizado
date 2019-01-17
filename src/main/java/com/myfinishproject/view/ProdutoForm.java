@@ -1,5 +1,6 @@
 package com.myfinishproject.view;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -33,6 +34,7 @@ import com.myfinishproject.model.Produto;
 import com.myfinishproject.relatorio.RelatorioProduto;
 import com.myfinishproject.service.ProdutoService;
 
+import excel.RelatorioExcel;
 import net.sf.jasperreports.engine.JRException;
 
 public class ProdutoForm extends HomePage {
@@ -134,6 +136,7 @@ public class ProdutoForm extends HomePage {
 				item.add(new Label("status", user.getStatus()));
 				item.add(remover(user.getId()));
 				item.add(editando(user));
+				item.add(Devolucao(item.getIndex(), user));
 				item.add(gerarRelatorio(user));
 			}
 		};
@@ -158,7 +161,7 @@ public class ProdutoForm extends HomePage {
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoSalvar(AjaxRequestTarget target, Produto produto) {
-//						produtoService.SalvarOuAlterar(produto);
+						// produtoService.SalvarOuAlterar(produto);
 						target.add(listcontainer);
 						modalWindow.close(target);
 					};
@@ -238,50 +241,116 @@ public class ProdutoForm extends HomePage {
 		form.add(ajaxLink);
 		return ajaxLink;
 	}
-	
+
 	// Gerar relatorio de Produto
-		public Link<?> gerarRelatorio(Produto user) {
-			final RelatorioProduto r = new RelatorioProduto();
-			final HashMap<String, Object> produtos = new HashMap<String, Object>();
-			// Chave para o Jasper
-			produtos.put("user", user);
-			Link<?> button = new Link<Object>("relatorio") {
+	public Link<?> gerarRelatorio(Produto user) {
+		final RelatorioProduto r = new RelatorioProduto();
+		final HashMap<String, Object> produtos = new HashMap<String, Object>();
+		// Chave para o Jasper
+		produtos.put("user", user);
+		Link<?> button = new Link<Object>("relatorio") {
 
-				private static final long serialVersionUID = 1L;
+			private static final long serialVersionUID = 1L;
 
-				@Override
-				public void onClick() {
-					try {
-						final byte[] bytes;
-						bytes = r.gerarRelatorio(produtos);
-						if (bytes != null) {
-							AbstractResourceStreamWriter Stream = new AbstractResourceStreamWriter() {
+			@Override
+			public void onClick() {
+				try {
+					final byte[] bytes;
+					bytes = r.gerarRelatorio(produtos);
+					if (bytes != null) {
+						AbstractResourceStreamWriter Stream = new AbstractResourceStreamWriter() {
 
-								private static final long serialVersionUID = 1L;
+							private static final long serialVersionUID = 1L;
 
-								@Override
-								public void write(OutputStream output) throws IOException {
-									output.write(bytes);
-									output.close();
-								}
+							@Override
+							public void write(OutputStream output) throws IOException {
+								output.write(bytes);
+								output.close();
+							}
 
-							};
+						};
 
-							ResourceStreamRequestHandler handler = new ResourceStreamRequestHandler(Stream);
-							handler.setContentDisposition(ContentDisposition.ATTACHMENT);
-							// nome do pdf
-							handler.setFileName("Produto.pdf");
-							getRequestCycle().scheduleRequestHandlerAfterCurrent(handler);
-						}
-					} catch (JRException e) {
-						e.printStackTrace();
+						ResourceStreamRequestHandler handler = new ResourceStreamRequestHandler(Stream);
+						handler.setContentDisposition(ContentDisposition.ATTACHMENT);
+						// nome do pdf
+						handler.setFileName("Produto.pdf");
+						getRequestCycle().scheduleRequestHandlerAfterCurrent(handler);
 					}
-
+				} catch (JRException e) {
+					e.printStackTrace();
 				}
-			};
-			button.setOutputMarkupId(true);
-			return button;
 
-		}
+			}
+		};
+		button.setOutputMarkupId(true);
+		return button;
+
+	}
+
+	// Gerar file do excel
+	public Link<?> gerarExcel(final Produto user) {
+
+		final RelatorioExcel relatorio = new RelatorioExcel();
+
+		Link<ByteArrayOutputStream> button = new Link<ByteArrayOutputStream>("excel") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick() {
+
+				final ByteArrayOutputStream bytes = relatorio.gerarRelatorio(user);
+				if (bytes != null) {
+					AbstractResourceStreamWriter Stream = new AbstractResourceStreamWriter() {
+
+						private static final long serialVersionUID = 1L;
+
+						@Override
+						public void write(OutputStream output) throws IOException {
+							output.write(bytes.toByteArray());
+							output.close();
+						}
+
+					};
+
+					ResourceStreamRequestHandler handler = new ResourceStreamRequestHandler(Stream);
+					handler.setContentDisposition(ContentDisposition.ATTACHMENT);
+					// nome do excel
+					handler.setFileName("Produtos.xlsx");
+					getRequestCycle().scheduleRequestHandlerAfterCurrent(handler);
+				}
+
+			}
+		};
+		button.setOutputMarkupId(true);
+		add(button);
+		return button;
+	}
+
+	// Enviando para Pagina DevolucaoForm
+	AjaxLink<DevolucaoForm> Devolucao(final int index, final Produto user) {
+		AjaxLink<DevolucaoForm> button1 = new AjaxLink<DevolucaoForm>("devolucao") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				PageParameters parameters = new PageParameters();
+				parameters.add("modelo", user.getModelo());
+				parameters.add("largura", user.getLargura());
+				parameters.add("tipoEnfesto", user.getTipoEnfesto());
+				parameters.add("dataSaida", user.getDataSaida());
+				parameters.add("dataRetorno", user.getDataRetorno());
+				parameters.add("status", user.getStatus());
+				setResponsePage(DevolucaoForm.class, parameters);
+
+			}
+
+		};
+
+		button1.setOutputMarkupId(true);
+		form.add(button1);
+		return button1;
+	}
 
 }

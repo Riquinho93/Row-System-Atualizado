@@ -207,6 +207,8 @@ public class ColecaoForm extends HomePage {
 			}
 
 		};
+		button.setOutputMarkupId(true);
+		form.add(button);
 		return button;
 	}
 
