@@ -34,18 +34,18 @@ public class FuncionarioPanel extends Panel {
 	public FuncionarioPanel(String id, Funcionario funcionario, Endereco endereco) {
 		super(id);
 		formFunc = new Form<Funcionario>("formFunc", new CompoundPropertyModel<Funcionario>(funcionario));
-		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(funcionario.getEndereco()));
+//		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(funcionario.getEndereco()));
 
 		TextField<String> nome = new TextField<>("nome");
 		TextField<String> telefone = new TextField<>("telefone");
 		TextField<String> email = new TextField<>("email");
 
-		TextField<String> cep = new TextField<String>("cep");
-		TextField<String> logradouro = new TextField<>("logradouro");
-		NumberTextField<Integer> numero = new NumberTextField<>("numero");
-		TextField<String> bairro = new TextField<>("bairro");
-		TextField<String> cidade = new TextField<>("cidade");
-		TextField<String> estado = new TextField<>("estado");
+		TextField<String> cep = new TextField<String>("endereco.cep");
+		TextField<String> logradouro = new TextField<>("endereco.logradouro");
+		NumberTextField<Integer> numero = new NumberTextField<>("endereco.numero");
+		TextField<String> bairro = new TextField<>("endereco.bairro");
+		TextField<String> cidade = new TextField<>("endereco.cidade");
+		TextField<String> estado = new TextField<>("endereco.estado");
 		
 
 		nome.setOutputMarkupId(true);
@@ -80,7 +80,7 @@ public class FuncionarioPanel extends Panel {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
 
-				executarAoSalvar(target, funcionario, endereco);
+				executarAoSalvar(target, funcionario);
 				target.add(nome);
 				target.add(telefone);
 				target.add(email);
@@ -95,19 +95,19 @@ public class FuncionarioPanel extends Panel {
 		};
 		button.setOutputMarkupId(true);
 	
-		add(formEnd);
+//		add(formEnd);
 		formFunc.add(nome);
 		formFunc.add(telefone);
 		formFunc.add(email);
 		formFunc.add(funcoes);
 		
-		formEnd.add(cep);
-		formEnd.add(logradouro);
-		formEnd.add(numero);
-		formEnd.add(bairro);
-		formEnd.add(cidade);
-		formEnd.add(estado);
-		formFunc.add(formEnd);
+		formFunc.add(cep);
+		formFunc.add(logradouro);
+		formFunc.add(numero);
+		formFunc.add(bairro);
+		formFunc.add(cidade);
+		formFunc.add(estado);
+//		formFunc.add(formEnd);
 		formFunc.add(button);
 		add(formFunc);
 		
@@ -115,7 +115,7 @@ public class FuncionarioPanel extends Panel {
 	}
 
 	// Enviando os dados para o HomePage
-	public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
+	public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario) {
 
 	}
 

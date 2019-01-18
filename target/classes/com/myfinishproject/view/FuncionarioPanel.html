@@ -42,35 +42,35 @@
 				<input type="text" class="form-control" wicket:id="email" placeholder="example@example.com" />
 			</div>
 		</div>
-		<form wicket:id="formEnd">
+		<!-- <form wicket:id="formEnd"> -->
 		<div class="row">
 			<div class="col-md-3">
 				<label class="text">Cep</label>
-				<input wicket:id="cep" name="cep" id="#cep" type="text" class="form-control" size="10" maxlength="9"
+				<input wicket:id="endereco.cep" name="cep" id="#cep" type="text" class="form-control" size="10" maxlength="9"
                 onblur="pesquisacep(this.value);" placeholder="Digite o cep" />
 			</div>
 			<div class="col-md-3">
 				<label class="text">Logradouro</label>
-				<input wicket:id="logradouro"  name="rua" id="rua" type="text" class="form-control" placeholder="Digite o nome" />
+				<input wicket:id="endereco.logradouro"  name="rua" id="rua" type="text" class="form-control" placeholder="Digite o nome" />
 			</div>
 			<div class="col-md-3">
 				<label class="text">Numero</label>
-				<input wicket:id="numero" type="number" class="number form-control" placeholder="Digite o n°" />
+				<input wicket:id="endereco.numero" type="number" class="number form-control" placeholder="Digite o n°" />
 			</div>
 			<div class="col-md-3">
 				<label class="text">Bairro</label>
-				<input wicket:id="bairro"  name="bairro" id="bairro"  size="40" type="text" class="form-control" placeholder="Digite o bairro" />
+				<input wicket:id="endereco.bairro"  name="bairro" id="bairro"  size="40" type="text" class="form-control" placeholder="Digite o bairro" />
 			</div>
 			<div class="col-md-3">
 				<label class="text">Cidade</label>
-				<input wicket:id="cidade"   name="cidade" id="cidade" size="40" type="text" class="form-control" placeholder="Digite a cidade" />
+				<input wicket:id="endereco.cidade"   name="cidade" id="cidade" size="40" type="text" class="form-control" placeholder="Digite a cidade" />
 			</div>		
 			<div class="col-md-3">
 				<label class="text">Estado</label>
-				<input wicket:id="estado"  name="uf" id="uf"  size="2" type="text" class="form-control" placeholder="Digite o estado" />
+				<input wicket:id="endereco.estado"  name="uf" id="uf"  size="2" type="text" class="form-control" placeholder="Digite o estado" />
 			</div>		
 		</div>	
-	</form>
+	<!-- </form> -->
 		<br /><a wicket:id="submit" class="btn btn-success" type="submit">Salvar</a>
 	</form>
 	

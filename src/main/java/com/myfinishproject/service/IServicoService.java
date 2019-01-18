@@ -13,7 +13,7 @@ public interface IServicoService {
 	
 	public void excluir(Integer id);
 	
-	public List<Servico> listar(Integer id);
+	public List<Servico> listar();
 	
 	public List<Servico> search(Search search);
 }

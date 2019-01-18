@@ -38,7 +38,7 @@ public class ServicoService implements IServicoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Servico> listar(Integer id) {
+	public List<Servico> listar() {
 		return servicoDao.listar();
 	}
 

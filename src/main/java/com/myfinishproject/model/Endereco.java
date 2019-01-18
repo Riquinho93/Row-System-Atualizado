@@ -3,6 +3,7 @@ package com.myfinishproject.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,8 +27,7 @@ public class Endereco implements Serializable {
 	private String cidade;
 	private String estado;
 
-	@OneToOne
-	@JoinColumn(name = "funcionario")
+	@OneToOne(mappedBy = "endereco", targetEntity = Funcionario.class, fetch = FetchType.LAZY)
 	private Funcionario funcionario;
 
 	public Integer getId() {

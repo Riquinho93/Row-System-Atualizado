@@ -104,7 +104,11 @@ public class ProdutoPanel extends Panel {
 		adicionalMetodo();
 		add(adicionalWebMarkupContainer());
 		
+		//Listas
 		listaPecas = pecaService.listar();
+		listaServicos = servicoService.listar();
+		listaMateriais = materialService.listar();
+		listaAdicionais = adicionalService.listar();
 
 		formProduto = new Form<>("formProduto", new CompoundPropertyModel<Produto>(produto));
 

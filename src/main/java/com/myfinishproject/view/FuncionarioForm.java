@@ -88,11 +88,11 @@ public class FuncionarioForm extends HomePage {
 
 					private static final long serialVersionUID = 277997013286385910L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
-						funcionario.setEndereco(endereco);
+					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario) {
+//						funcionario.setEndereco(endereco);
 						funcionarioService.SalvarOuAlterar(funcionario);
-						endereco.setFuncionario(funcionario);
-						enderecoService.SalvarOuAlterar(endereco);
+//						endereco.setFuncionario(funcionario);
+//						enderecoService.SalvarOuAlterar(endereco);
 						funcionariosList.add(funcionario);
 						target.add(listContainer);
 						modalWindow.close(target);
@@ -188,22 +188,22 @@ public class FuncionarioForm extends HomePage {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-//				Funcionario user = funcionarioService.alterar(funcionario.getId());
-				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId(), funcionario,
+				Funcionario user = funcionarioService.alterar(funcionario.getId());
+				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId(), user,
 						endereco) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario, Endereco endereco) {
+					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario) {
 						/*Search search = new Search(Funcionario.class);
 						search.addFilterEqual("id", funcionario.getId());
 						search.addFilterEqual("funcionario", endereco.getFuncionario().getId());
 						List<Funcionario> lista = funcionarioService.search(search);
 						funcionariosList = lista;*/
-						enderecoService.buscarPorId(funcionario.getId());
+	//					enderecoService.buscarPorId(funcionario.getId());
 						funcionarioService.SalvarOuAlterar(funcionario);
-						endereco.setFuncionario(funcionario);
-						enderecoService.SalvarOuAlterar(endereco);
+//						endereco.setFuncionario(funcionario);
+//						enderecoService.SalvarOuAlterar(endereco);
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -234,7 +234,7 @@ public class FuncionarioForm extends HomePage {
 
 					public void executarAoExcluir(AjaxRequestTarget target, Funcionario funcionario) {
 						if (funcionario.isAnswer() == true) {
-							enderecoService.excluir(index);
+	//						enderecoService.excluir(index);
 							funcionarioService.excluir(index);
 							target.add(listContainer);
 						}

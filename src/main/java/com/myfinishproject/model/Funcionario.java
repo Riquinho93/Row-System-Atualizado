@@ -2,11 +2,13 @@ package com.myfinishproject.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -25,7 +27,8 @@ public class Funcionario implements Serializable {
 	private String telefone;
 	private String email;
 	
-	@OneToOne(mappedBy = "funcionario", targetEntity = Endereco.class, fetch = FetchType.LAZY) 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "endereco")
 	private Endereco endereco;
 	
 	@Transient

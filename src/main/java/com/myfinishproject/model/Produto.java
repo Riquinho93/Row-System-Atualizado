@@ -44,7 +44,7 @@ public class Produto implements Serializable {
 	@JoinColumn(name = "idColecao")
 	private Colecao colecao;
 
-	@OneToMany(mappedBy = "produto", targetEntity = Peca.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Peca> listaPecas;
 
 	@OneToMany(mappedBy = "produto", targetEntity = Servico.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)

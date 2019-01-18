@@ -27,7 +27,7 @@ public class Peca implements Serializable {
 	private boolean answer;
 
 	@ManyToOne
-	@JoinColumn(name = "idProduto")
+	@JoinColumn(name = "produto")
 	private Produto produto;
 
 	public Integer getId() {
