@@ -40,5 +40,10 @@ public class AdicionalService implements IAdicionalService {
 	public List<Adicional> listar() {
 		return adicionalDao.listar();
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Adicional> alterar(Integer id){
+		return adicionalDao.alterar(id);
+	}
 
 }

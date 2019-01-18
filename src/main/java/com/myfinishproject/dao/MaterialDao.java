@@ -19,4 +19,16 @@ public class MaterialDao extends GenericDao<Material, Serializable>{
 		List<Material> userList = query.list();
 		return userList;
 	}
+	
+	@SuppressWarnings("unchecked")
+//	@Transactional(readOnly = true)
+	public List<Material> alterar(Integer id) {
+		String hql = "select m from Material m left join fetch m.produto pr "
+				+ "where pr.id = :id";
+		
+		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		List<Material> user =  query.list();
+		return user;
+	}
 }

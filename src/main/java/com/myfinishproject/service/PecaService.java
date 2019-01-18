@@ -38,5 +38,9 @@ public class PecaService implements IPecaService {
 	public List<Peca> listar() {
 		return pecaDao.listar();
 	}
-
+	
+	@Transactional
+	public List<Peca> alterar(Integer id) {
+		return pecaDao.alterar(id);
+	}
 }

@@ -46,5 +46,10 @@ public class ServicoService implements IServicoService {
 	public List<Servico> search(Search search) {
 		return servicoDao.searchDao(search);
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Servico> alterar(Integer id){
+		return servicoDao.alterar(id);
+	}
 
 }

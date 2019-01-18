@@ -19,4 +19,16 @@ public class ServicoDao extends GenericDao<Servico, Serializable>{
 		List<Servico> userList = query.list();
 		return userList;
 	}
+	
+	@SuppressWarnings("unchecked")
+//	@Transactional(readOnly = true)
+	public List<Servico> alterar(Integer id) {
+		String hql = "select s from Servico s left join fetch s.produto pr "
+				+ "where pr.id = :id";
+		
+		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		List<Servico> user =  query.list();
+		return user;
+	}
 }

@@ -19,4 +19,16 @@ public class AdicionalDao extends GenericDao<Adicional, Serializable>{
 		List<Adicional> userList = query.list();
 		return userList;
 	}
+	
+	@SuppressWarnings("unchecked")
+//	@Transactional(readOnly = true)
+	public List<Adicional> alterar(Integer id) {
+		String hql = "select a from Adicional a left join fetch a.produto pr "
+				+ "where pr.id = :id";
+		
+		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		List<Adicional> user =  query.list();
+		return user;
+	}
 }

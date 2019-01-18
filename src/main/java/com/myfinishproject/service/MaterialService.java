@@ -40,5 +40,11 @@ public class MaterialService implements IMaterialService {
 	public List<Material> listar() {
 		return materialDao.listar();
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Material> alterar(Integer id){
+		return materialDao.alterar(id);
+	}
+
 
 }

@@ -17,5 +17,17 @@ public class PecaDao extends GenericDao<Peca, Serializable> {
 		List<Peca> userList = query.list();
 		return userList;
 	}
+	
+	@SuppressWarnings("unchecked")
+//	@Transactional(readOnly = true)
+	public List<Peca> alterar(Integer id) {
+		String hql = "select p from Peca p left join fetch p.produto pr "
+				+ "where pr.id = :id";
+		
+		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		List<Peca> user =  query.list();
+		return user;
+	}
 
 }
