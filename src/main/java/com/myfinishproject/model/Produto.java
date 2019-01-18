@@ -175,5 +175,5 @@ public class Produto implements Serializable {
 	public void setListaAdicionais(List<Adicional> listaAdicionais) {
 		this.listaAdicionais = listaAdicionais;
 	}
-
+	
 }

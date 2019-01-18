@@ -3,6 +3,7 @@ package excel;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
@@ -15,17 +16,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.myfinishproject.model.Produto;
 
-public class RelatorioExcel implements Serializable{
+public class RelatorioExcel{
 	
-private static final long serialVersionUID = 1L;
 	
 	private XSSFWorkbook workbook;
 	private XSSFSheet sheet;
 //	ByteArrayOutputStream filleOut;
 
-	public ByteArrayOutputStream gerarRelatorio(Produto user) {
+	public ByteArrayOutputStream gerarRelatorio(List<Produto> users) {
 
-		final String[] colunas = { "Modelo", "Largura", "Tipo Enfesto", "Data de criação", "Data de retorno",
+		final String[] colunas = { "Modelo", "Largura", "Faccionista", "Cortador", "Data de saida", "Data de retorno",
 				"Status" };
 
 		// Criando arquivo execel com os dados do produtoModel
@@ -52,13 +52,20 @@ private static final long serialVersionUID = 1L;
 
 		// Criando as rows com Produto
 		int rowNum = 1;
-		XSSFRow row = sheet.createRow(rowNum++);
-		row.createCell(0).setCellValue(user.getModelo());
-		row.createCell(1).setCellValue(user.getLargura());
-//		row.createCell(2).setCellValue(user.getTipoEnfesto());
-		row.createCell(3).setCellValue(user.getDataSaida());
-		row.createCell(4).setCellValue(user.getDataRetorno());
-//		row.createCell(5).setCellValue(user.getStatus());
+		
+		for (Produto lista : users) {
+			XSSFRow row = sheet.createRow(rowNum++);
+			Produto aux = new Produto();
+			row.createCell(0).setCellValue(lista.getModelo());
+			row.createCell(1).setCellValue(lista.getLargura());
+			row.createCell(2).setCellValue(lista.getFaccionista());
+			row.createCell(3).setCellValue(lista.getCortador());
+			row.createCell(4).setCellValue(lista.getDataSaida());
+			row.createCell(5).setCellValue(lista.getDataRetorno());
+			row.createCell(6).setCellValue(lista.getStatus().converterParaString(1));
+			System.out.println("teste: " + lista.getStatus().converterParaString(0));
+			System.out.println("Id: " + lista.getStatus());
+		}
 
 		// Tamanho das colunas
 		for (int i = 0; i < colunas.length; i++) {

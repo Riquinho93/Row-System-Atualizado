@@ -65,7 +65,8 @@ public class ProdutoForm extends HomePage {
 
 		add(container());
 		add(filtrar());
-
+		add(gerarExcel(produtoLista));
+		
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
 		modalWindow.setInitialHeight(550);
@@ -288,7 +289,7 @@ public class ProdutoForm extends HomePage {
 	}
 
 	// Gerar file do excel
-	public Link<?> gerarExcel(final Produto user) {
+	public Link<?> gerarExcel(List<Produto> users) {
 
 		final RelatorioExcel relatorio = new RelatorioExcel();
 
@@ -299,7 +300,7 @@ public class ProdutoForm extends HomePage {
 			@Override
 			public void onClick() {
 
-				final ByteArrayOutputStream bytes = relatorio.gerarRelatorio(user);
+				final ByteArrayOutputStream bytes = relatorio.gerarRelatorio(users);
 				if (bytes != null) {
 					AbstractResourceStreamWriter Stream = new AbstractResourceStreamWriter() {
 
