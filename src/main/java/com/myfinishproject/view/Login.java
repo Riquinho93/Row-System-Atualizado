@@ -5,10 +5,14 @@ import java.util.List;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
+import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.googlecode.genericdao.search.Search;
@@ -25,30 +29,28 @@ public class Login extends WebPage {
 	private UsuarioService usuarioService;
 
 	public Login() {
+		
+	/*	FeedbackPanel feedbackPanel = new FeedbackPanel("feedbackMessage");*/
+		
 		filtrarUsuario = new Usuario();
-		formularioLogin = new Form<Usuario>("formularioLogin", new CompoundPropertyModel<>(filtrarUsuario));
 		final TextField<String> login = new TextField<String>("login");
 		final PasswordTextField senha = new PasswordTextField("senha");
-
+		login.setRequired(true);
+		senha.setRequired(true);
 		login.setOutputMarkupId(true);
 		senha.setOutputMarkupId(true);
+		
+		 final Label errorLogin = new Label("errorLogin",
+		 Model.of("Login Incorreto!!"));
+		 errorLogin.setOutputMarkupId(true).setVisible(false);
+		 
 
-		formularioLogin.add(login);
-		formularioLogin.add(senha);
-
-		/*
-		 * final Label errorLogin = new Label("errorLogin",
-		 * Model.of("Erro ao realizar o login"));
-		 * errorLogin.setOutputMarkupId(true).setVisible(false);
-		 */
-
-		AjaxSubmitLink ajaxSubmitLink = new AjaxSubmitLink("submit", formularioLogin) {
+		 formularioLogin = new Form<Usuario>("formularioLogin",new  CompoundPropertyModel<>(filtrarUsuario)) {
 
 			private static final long serialVersionUID = -5095534494215850537L;
-
 			@Override
-			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-				super.onSubmit(target, form);
+			protected void onSubmit() {
+				super.onSubmit();
 				Search search = new Search(Usuario.class);
 
 				search.addFilterEqual("login", login.getModelObject());
@@ -60,14 +62,17 @@ public class Login extends WebPage {
 
 					getSession().setAttribute("userName", lista.get(0));
 					setResponsePage(ColecaoForm.class);
+				}else {
+					errorLogin.setVisible(true);
+				//	feedbackPanel.error("Deu Error");
 				}
 
-				super.onSubmit();
 			}
+			
 
 		};
-		formularioLogin.setOutputMarkupId(true);
-		formularioLogin.add(ajaxSubmitLink).setOutputMarkupId(true);
-		add(formularioLogin);
+	/*	add(feedbackPanel);*/
+		add(errorLogin, formularioLogin);
+		formularioLogin.add(login, senha).setOutputMarkupId(true);
 	}
 }

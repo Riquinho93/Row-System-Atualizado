@@ -16,17 +16,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.myfinishproject.model.Produto;
 
-public class RelatorioExcel{
-	
-	
+public class RelatorioExcel implements Serializable {
+
+	private static final long serialVersionUID = -6353684850147490264L;
+
 	private XSSFWorkbook workbook;
 	private XSSFSheet sheet;
 //	ByteArrayOutputStream filleOut;
 
 	public ByteArrayOutputStream gerarRelatorio(List<Produto> users) {
 
-		final String[] colunas = { "Modelo", "Largura", "Faccionista", "Cortador", "Data de saida", "Data de retorno",
-				"Status" };
+		final String[] colunas = { "Modelo", "Largura", "Faccionista", "Cortador", "Tipo de enfesto", "Data de saida",
+				"Data de retorno", "Status" };
 
 		// Criando arquivo execel com os dados do produtoModel
 		workbook = new XSSFWorkbook();
@@ -52,19 +53,18 @@ public class RelatorioExcel{
 
 		// Criando as rows com Produto
 		int rowNum = 1;
-		
+
 		for (Produto lista : users) {
 			XSSFRow row = sheet.createRow(rowNum++);
-			Produto aux = new Produto();
+			// Produto aux = new Produto();
 			row.createCell(0).setCellValue(lista.getModelo());
 			row.createCell(1).setCellValue(lista.getLargura());
 			row.createCell(2).setCellValue(lista.getFaccionista());
 			row.createCell(3).setCellValue(lista.getCortador());
-			row.createCell(4).setCellValue(lista.getDataSaida());
-			row.createCell(5).setCellValue(lista.getDataRetorno());
-			row.createCell(6).setCellValue(lista.getStatus().converterParaString(1));
-			System.out.println("teste: " + lista.getStatus().converterParaString(0));
-			System.out.println("Id: " + lista.getStatus());
+			row.createCell(4).setCellValue(lista.getTipoEnfesto().ConverterParaString(lista.getTipoEnfesto()));
+			row.createCell(5).setCellValue(lista.getDataSaida());
+			row.createCell(6).setCellValue(lista.getDataRetorno());
+			row.createCell(7).setCellValue(lista.getStatus().converterParaString(lista.getStatus()));
 		}
 
 		// Tamanho das colunas
@@ -73,12 +73,12 @@ public class RelatorioExcel{
 		}
 		ByteArrayOutputStream filleOut = new ByteArrayOutputStream();
 		try {
-			
+
 			workbook.write(filleOut);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return filleOut;
 
 	}

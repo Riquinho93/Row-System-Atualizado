@@ -3,32 +3,61 @@
 <wicket:head>
 	<meta charset="UTF-8">
 	<title>ROW SYSTEM</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" type="text/css" href="login.css">
-	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet"> 
+	<!-- <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">  -->
 </wicket:head>
 <body>
+	<script>
+	/*  setTimeout(function() {
+	        $(".alert").alert('close');
+	    }, 100);
+
+	$(".alert").alert('close') */
+	$(document).ready(function () {
+		 
+		window.setTimeout(function() {
+		    $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+		        $(this).remove(); 
+		    });
+		}, 1000);
+		 
+		});
+</script>
 	<div class="bgimg">
 		<div class="centerdiv">
 			<img alt="img" src="user.png" id="profile">
 			<h2>Row System</h2>
-			<!--  <p wicket:id="errorLogin"></p>  -->
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			<!-- 	<p wicket:id="feedbackMessage"></p> -->
+
+				<p wicket:id="errorLogin"></p>
+			</div>
 			<form wicket:id="formularioLogin">
 				<div>
-					<input wicket:id="login" class="inputbox" type="text" placeholder="Usuário">
+					<input wicket:id="login" class="inputbox" type="text"
+						placeholder="Usuário">
 				</div>
- 
+
 				<div>
-					<input wicket:id="senha" class="inputbox" type="password" placeholder="Senha">
-				</div><br>
- 				<div>
-					<button wicket:id="submit" type="submit" name="submit">Login</button>
+					<input wicket:id="senha" class="inputbox" type="password"
+						placeholder="Senha">
 				</div>
-		</form><br>
-		<div class="forget-section">
-			<a href="#"><h4>Esqueci minha senha?</h4></a>
-		</div>
+				<br>
+				<div>
+					<button id="#validacao" type="submit" name="submit">Login</button>
+				</div>
+			</form>
+			<br>
+			<!-- <div class="forget-section">
+				<a href="#"><h4>Esqueci minha senha?</h4></a>
+			</div> -->
 		</div>
 	</div>
-  
+
 </body>
 </html>

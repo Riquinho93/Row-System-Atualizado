@@ -1,10 +1,11 @@
 package com.myfinishproject.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum Status {
-	
+public enum Status implements Serializable{
+
 	ANDAMENTO("Andamento"), ATRASADO("Atrasado"), ADIATADO("Adiatado"), FINALIZADO("Finalizado");
 	private String descricaoStatus;
 
@@ -36,28 +37,20 @@ public enum Status {
 	public void setDescricaoStatus(String descricaoStatus) {
 		this.descricaoStatus = descricaoStatus;
 	}
-	
-	public String converterParaString(int num) {
+
+	public String converterParaString(Status status2) {
 		String status = "";
-		List<Status> listaStatus = new ArrayList<>();
-		for(Status lista:  listaStatus) {
-			if (lista.equals(0) && num == 0) {
-				status = "Andamento";
+			if (status2.equals(ADIATADO)) {
+				status = "ADIATADO";
 				return status;
-			}
-			if (lista.equals(1) && num == 1) {
-				status = "Adiatado";
-				return status;
-			}
-			if (lista.equals(2) && num == 2) 
-				status = "Atrasado";
-			 if (lista.equals(3) && num == 3) 
-				status = "Finalizado";
-			
+			}else if (status2.equals(ANDAMENTO)) {
+			status = "ANDAMENTO";
+			return status;
 		}
-		System.out.println("Status: " + status);
+			System.out.println("Status: " + status2);
+
 		return status;
 	}
-	
+
 
 }

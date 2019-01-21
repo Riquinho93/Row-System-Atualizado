@@ -34,6 +34,10 @@
     	color: black;
 }
 
+/* .tabela:hover{
+	background-color: #ddd;
+} */
+
 /* PASSANDO POR CIMA DO LINK */
 .topnav a.active {
     	background-color: #4CAF50;

@@ -23,8 +23,9 @@ public class Usuario implements Serializable {
 	@Column(unique = true)
 	private String login;
 	private String senha;
+	private String confirmarSenha;
 	private Perfil perfil;
-	
+
 	@Transient
 	private boolean answer;
 
@@ -58,6 +59,14 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
 	}
 
 	public Perfil getPerfil() {

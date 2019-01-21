@@ -7,6 +7,7 @@ import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 
@@ -24,11 +25,14 @@ public class ColecaoPanel extends Panel {
 		super(id);
 
 		add(new Label("message", "COLEÇÃO"));
-
+		FeedbackPanel feedbackPanel = new FeedbackPanel("feedbackMessage");
+		add(feedbackPanel);
+		
 		Form<Colecao> form = new Form<Colecao>("form", new CompoundPropertyModel<Colecao>(colecaoModel));
 
 		final TextField<String> nome = new TextField<String>("nome");
 
+		nome.setRequired(true);
 		nome.setOutputMarkupId(true);
 
 		// Criando botão de enviar
@@ -71,6 +75,7 @@ public class ColecaoPanel extends Panel {
 		data.add(datePickerInicial);
 		data.setOutputMarkupId(true);
 		form.add(data);
+		
 		
 	}
 

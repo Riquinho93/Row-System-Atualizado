@@ -11,7 +11,7 @@ public class ProdutoDao extends GenericDao<Produto, Serializable> {
 
 	@SuppressWarnings("unchecked")
 	public List<Produto> listar(Integer id) {
-		Query query = getSessionFactory().getCurrentSession().createQuery("select distinct p from Produto p, Colecao c where "+id +" = p.colecao");
+		Query query = getSessionFactory().getCurrentSession().createQuery("select distinct p from Produto p, Colecao c where "+id +" = p.colecao order by p.modelo");
 		List<Produto> lists = query.list();
 		return lists;
 	}

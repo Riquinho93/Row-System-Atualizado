@@ -27,6 +27,18 @@ public enum TipoEnfesto {
 		this.descricao = descricao;
 	}
 	
-	
+	public String ConverterParaString(TipoEnfesto enfesto) {
+		String tipoEnfesto = "";
+		
+		if(enfesto.equals(UNICO)) {
+			tipoEnfesto = "UNICO";
+			return tipoEnfesto;
+		}
+		if(enfesto.equals(DUPLO)) {
+			tipoEnfesto = "DUPLO";
+			return tipoEnfesto;
+		}
+		return tipoEnfesto;
+	}
 
 }

@@ -47,6 +47,13 @@ public class FuncionarioPanel extends Panel {
 		TextField<String> cidade = new TextField<>("endereco.cidade");
 		TextField<String> estado = new TextField<>("endereco.estado");
 		
+		nome.setRequired(true);
+		telefone.setRequired(true);
+		logradouro.setRequired(true);
+		bairro.setRequired(true);
+		cidade.setRequired(true);
+		estado.setRequired(true);
+		
 
 		nome.setOutputMarkupId(true);
 		telefone.setOutputMarkupId(true);

@@ -35,10 +35,17 @@ public class UsuarioPanel extends Panel{
 		TextField<String> nome = new TextField<>("nome");
 		TextField<String> login = new TextField<>("login");
 		PasswordTextField senha = new PasswordTextField("senha");
+		PasswordTextField confirmarSenha = new PasswordTextField("confirmarSenha");
+		
+		nome.setRequired(true);
+		login.setRequired(true);
+		senha.setRequired(true);
+		confirmarSenha.setRequired(true);
 		
 		nome.setOutputMarkupId(true);
 		login.setOutputMarkupId(true);
 		senha.setOutputMarkupId(true);
+		confirmarSenha.setOutputMarkupId(true);
 		
 		ChoiceRenderer<Perfil> renderer = new ChoiceRenderer<>("descricao");
 		IModel<List<Perfil>> model = new LoadableDetachableModel<List<Perfil>>() {
@@ -65,6 +72,7 @@ public class UsuarioPanel extends Panel{
 				target.add(nome);
 				target.add(login);
 				target.add(senha);
+				target.add(confirmarSenha);
 			}
 		};
 		button.setOutputMarkupId(true);
@@ -73,6 +81,7 @@ public class UsuarioPanel extends Panel{
 		formUsuario.add(nome);
 		formUsuario.add(login);
 		formUsuario.add(senha);
+		formUsuario.add(confirmarSenha);
 		formUsuario.add(perfis);
 		formUsuario.add(button);
 	}

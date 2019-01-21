@@ -117,6 +117,11 @@ public class ProdutoPanel extends Panel {
 		final TextField<String> largura = new TextField<String>("largura");
 		final TextField<String> faccionista = new TextField<String>("faccionista");
 		final TextField<String> cortador = new TextField<String>("cortador");
+		
+		modelo.setRequired(true);
+		largura.setRequired(true);
+		faccionista.setRequired(true);
+		cortador.setRequired(true);
 
 		modelo.setOutputMarkupId(true);
 		largura.setOutputMarkupId(true);
@@ -135,6 +140,7 @@ public class ProdutoPanel extends Panel {
 		};
 
 		DropDownChoice<Status> status = new DropDownChoice<>("status", model2, choiceRenderer);
+		status.setRequired(true);
 
 		// Botão do tipo enfesto
 		ChoiceRenderer<TipoEnfesto> renderer = new ChoiceRenderer<TipoEnfesto>("descricao");
@@ -148,6 +154,7 @@ public class ProdutoPanel extends Panel {
 		};
 
 		DropDownChoice<TipoEnfesto> tipoEnfesto = new DropDownChoice<>("tipoEnfesto", model, renderer);
+		tipoEnfesto.setRequired(true);
 		formProduto.add(tipoEnfesto);
 
 		// Data entrada
