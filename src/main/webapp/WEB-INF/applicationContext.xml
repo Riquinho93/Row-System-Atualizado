@@ -21,7 +21,7 @@
 		<property name="driverClassName"
 			value="com.mysql.jdbc.Driver"></property>
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/row_system"></property>
+			value="jdbc:mysql://localhost:3306/unika"></property>
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -33,14 +33,6 @@
 		<property name="annotatedClasses">
 			<!-- passando a bean anotado -->
 			<list>
-				<value>com.myfinishproject.model.Colecao</value>
-				<value>com.myfinishproject.model.Funcionario</value>
-				<value>com.myfinishproject.model.Endereco</value>
-				<value>com.myfinishproject.model.Produto</value>
-				<value>com.myfinishproject.model.Peca</value>
-				<value>com.myfinishproject.model.Servico</value>
-				<value>com.myfinishproject.model.Material</value>
-				<value>com.myfinishproject.model.Adicional</value>
 				<value>com.myfinishproject.model.Usuario</value>
 			</list>
 		</property>
@@ -54,71 +46,6 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="colecaoDao" class="com.myfinishproject.dao.ColecaoDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-
-	<bean id="colecaoService" class="com.myfinishproject.service.ColecaoService">
-		<property name="colecaoDao" ref="colecaoDao"></property>
-
-	</bean>
-	
-	<bean id="funcionarioDao" class="com.myfinishproject.dao.FuncionarioDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="funcionarioService" class="com.myfinishproject.service.FuncionarioService">
-		<property name="funcionarioDao" ref="funcionarioDao"></property>
-	</bean>
-	
-	<bean id="enderecoDao" class="com.myfinishproject.dao.EnderecoDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="enderecoService" class="com.myfinishproject.service.EnderecoService">
-		<property name="enderecoDao" ref="enderecoDao"></property>
-	</bean>
-	
-	<bean id="produtoDao" class="com.myfinishproject.dao.ProdutoDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="produtoService" class="com.myfinishproject.service.ProdutoService">
-		<property name="produtoDao" ref="produtoDao"></property>
-	</bean>
-	
-	<bean id="pecaDao" class="com.myfinishproject.dao.PecaDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="pecaService" class="com.myfinishproject.service.PecaService">
-		<property name="pecaDao" ref="pecaDao"></property>
-	</bean>
-	
-	<bean id="servicoDao" class="com.myfinishproject.dao.ServicoDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="servicoServico" class="com.myfinishproject.service.ServicoService">
-		<property name="servicoDao" ref="servicoDao"></property>
-	</bean>
-	
-	<bean id="materialDao" class="com.myfinishproject.dao.MaterialDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="materialService" class="com.myfinishproject.service.MaterialService">
-		<property name="materialDao" ref="materialDao"></property>
-	</bean>
-	
-	<bean id="adicionalDao" class="com.myfinishproject.dao.AdicionalDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="adicionalService" class="com.myfinishproject.service.AdicionalService">
-		<property name="adicionalDao" ref="adicionalDao"></property>
-	</bean>
-	
 	
 	<bean id="usuarioDao" class="com.myfinishproject.dao.UsuarioDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>

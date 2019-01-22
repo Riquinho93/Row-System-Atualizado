@@ -41,7 +41,7 @@ public class FuncionarioForm extends HomePage {
 	private WebMarkupContainer listContainer = null;
 	private ModalWindow modalWindow;
 	private ModalWindow modalWindowDel;
-	@SpringBean(name = "funcionarioService")
+	/*@SpringBean(name = "funcionarioService")*/
 	private FuncionarioService funcionarioService;
 	@SpringBean(name = "enderecoService")
 	private EnderecoService enderecoService;
@@ -53,7 +53,7 @@ public class FuncionarioForm extends HomePage {
 		// formEnd = new Form<>("formEnd", new
 		// CompoundPropertyModel<Endereco>(endereco));
 
-		funcionariosList = funcionarioService.listar();
+		/*funcionariosList = funcionarioService.listar();*/
 		
 		add(filtrar());
 

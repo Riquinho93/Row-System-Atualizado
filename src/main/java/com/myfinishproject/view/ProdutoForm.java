@@ -50,7 +50,7 @@ public class ProdutoForm extends HomePage {
 	private PageableListView<Produto> listView;
 	private WebMarkupContainer listcontainer;
 	private LoadableDetachableModel<List<Produto>> atualizarLista;
-	@SpringBean(name = "produtoService")
+	/*@SpringBean(name = "produtoService")*/
 	private ProdutoService produtoService;
 
 	public ProdutoForm(Colecao colecao) {
@@ -61,7 +61,7 @@ public class ProdutoForm extends HomePage {
 
 		add(new Label("nome", parameters.get("nome")));
 		add(new Label("data", parameters.get("data")));
-		produtoLista = produtoService.listar(colecao.getColecaoId());
+		/*produtoLista = produtoService.listar(colecao.getColecaoId());*/
 
 		add(container());
 		add(filtrar());
