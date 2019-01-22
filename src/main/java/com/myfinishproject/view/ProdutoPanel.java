@@ -103,9 +103,9 @@ public class ProdutoPanel extends Panel {
 		// Chamada metodo de Adicional
 		adicionalMetodo();
 		add(adicionalWebMarkupContainer());
-		Integer prod = produto.getId(); 
-		
-		//Listas
+		Integer prod = produto.getId();
+
+		// Listas
 		listaPecas = pecaService.alterar(prod);
 		listaServicos = servicoService.alterar(prod);
 		listaMateriais = materialService.alterar(prod);
@@ -117,7 +117,7 @@ public class ProdutoPanel extends Panel {
 		final TextField<String> largura = new TextField<String>("largura");
 		final TextField<String> faccionista = new TextField<String>("faccionista");
 		final TextField<String> cortador = new TextField<String>("cortador");
-		
+
 		modelo.setRequired(true);
 		largura.setRequired(true);
 		faccionista.setRequired(true);
@@ -270,7 +270,7 @@ public class ProdutoPanel extends Panel {
 	// Aqui começa aba de peças
 	// Metodo Peças
 	private void pecaMetodo() {
-		
+
 		CompoundPropertyModel<Peca> compoundPropertyModel = new CompoundPropertyModel<Peca>(peca);
 		formPeca = new Form<Peca>("formPeca", compoundPropertyModel);
 
@@ -338,7 +338,7 @@ public class ProdutoPanel extends Panel {
 				item.add(new Label("cor", user.getCor()));
 				item.add(new Label("tamanho", user.getTamanho()));
 				item.add(new Label("quantidade", user.getQuantidade()));
-				item.add(remover(item.getIndex()));
+				item.add(remover(user));
 			}
 
 		};
@@ -352,14 +352,18 @@ public class ProdutoPanel extends Panel {
 	}
 
 	// Metodo de remoção da Peça
-	protected AjaxLink<Peca> remover(final Integer index) {
+	protected AjaxLink<Peca> remover(Peca user) {
 		AjaxLink<Peca> ajaxLink = new AjaxLink<Peca>("excluir") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				listaPecas.remove(index);
+				if (user.getId() != null) {
+					pecaService.excluir(user.getId());
+				} else {
+					listaPecas.remove(user);
+				}
 				target.add(listContainerPecas);
 			}
 		};
@@ -439,12 +443,35 @@ public class ProdutoPanel extends Panel {
 				item.add(new Label("composicao", user.getComposicao()));
 				item.add(new Label("quantidade", user.getQuantidade()));
 				item.add(new Label("valor", user.getValor()));
+				item.add(remover(user));
 			}
 		};
 		listViewServico.setOutputMarkupId(true);
 		listContainerServico.add(listViewServico);
 		add(new PagingNavigator("pagServico", listViewServico));
 		return listContainerServico;
+	}
+
+	// Removendo Serviço
+	private AjaxLink<Servico> remover(Servico user) {
+		AjaxLink<Servico> ajaxLink = new AjaxLink<Servico>("excluir") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+
+				if (user.getId() != null) {
+					servicoService.excluir(user.getId());
+				} else {
+					listaServicos.remove(user);
+				}
+				target.add(listContainerServico);
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		formServico.add(ajaxLink);
+		return ajaxLink;
 	}
 
 	// Metodo do Material
@@ -509,12 +536,35 @@ public class ProdutoPanel extends Panel {
 				item.add(new Label("material", user.getMaterial()));
 				item.add(new Label("quantidade", user.getQuantidade()));
 				item.add(new Label("medida", user.getMedida()));
+				item.add(remover(user));
 			}
 		};
 		listViewMaterial.setOutputMarkupId(true);
 		listaContainerMaterial.add(listViewMaterial);
 		add(new PagingNavigator("pagMaterial", listViewMaterial));
 		return listaContainerMaterial;
+	}
+
+	// Remover Material
+	private AjaxLink<Material> remover(Material user) {
+		AjaxLink<Material> ajaxLink = new AjaxLink<Material>("excluir") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				if (user.getId() != null) {
+					materialService.excluir(user.getId());
+				} else {
+					listaMateriais.remove(user);
+				}
+				target.add(listaContainerMaterial);
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		formMaterial.add(ajaxLink);
+		return ajaxLink;
+
 	}
 
 	// Metodo do Adicional
@@ -574,6 +624,7 @@ public class ProdutoPanel extends Panel {
 				Adicional user = item.getModelObject();
 				item.add(new Label("nome", user.getNome()));
 				item.add(new Label("descricao", user.getDescricao()));
+				item.add(remover(user));
 			}
 		};
 		listViewAdicionais.setOutputMarkupId(true);
@@ -581,6 +632,25 @@ public class ProdutoPanel extends Panel {
 		add(new PagingNavigator("pagAdicional", listViewAdicionais));
 		return listaContainerAdicional;
 	}
-	
-	
+
+	// Remover Adicionais
+	private AjaxLink<Adicional> remover(Adicional user) {
+		AjaxLink<Adicional> ajaxLink = new AjaxLink<Adicional>("excluir") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				if (user.getId() != null) {
+					adicionalService.excluir(user.getId());
+				} else {
+					listaAdicionais.remove(user);
+				}
+				target.add(listaContainerAdicional);
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		formAdicional.add(ajaxLink);
+		return ajaxLink;
+	}
 }
