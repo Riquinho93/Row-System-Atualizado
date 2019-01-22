@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
@@ -50,7 +52,13 @@ public class RelatorioExcel implements Serializable {
 			cell.setCellValue(colunas[i]);
 			cell.setCellStyle(headerCellStyle);
 		}
-
+		
+		CreationHelper creationHelper = workbook.getCreationHelper();
+		CellStyle dateStyle = workbook.createCellStyle();
+		dateStyle.setDataFormat(creationHelper.createDataFormat().getFormat("dd-MM-yyyy"));
+		
+		
+		
 		// Criando as rows com Produto
 		int rowNum = 1;
 
@@ -62,8 +70,12 @@ public class RelatorioExcel implements Serializable {
 			row.createCell(2).setCellValue(lista.getFaccionista());
 			row.createCell(3).setCellValue(lista.getCortador());
 			row.createCell(4).setCellValue(lista.getTipoEnfesto().ConverterParaString(lista.getTipoEnfesto()));
-			row.createCell(5).setCellValue(lista.getDataSaida());
-			row.createCell(6).setCellValue(lista.getDataRetorno());
+			Cell cell = row.createCell(5);
+			cell.setCellValue(lista.getDataSaida());
+			cell.setCellStyle(dateStyle);
+			Cell cell2 = row.createCell(6);
+			cell2.setCellValue(lista.getDataRetorno());
+			cell2.setCellStyle(dateStyle);
 			row.createCell(7).setCellValue(lista.getStatus().converterParaString(lista.getStatus()));
 		}
 

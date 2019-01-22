@@ -18,6 +18,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -26,6 +27,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.googlecode.genericdao.search.Search;
 import com.myfinishproject.HomePage;
 import com.myfinishproject.model.Colecao;
+import com.myfinishproject.service.AlertFeedback;
 import com.myfinishproject.service.ColecaoService;
 
 public class ColecaoForm extends HomePage {
@@ -50,7 +52,7 @@ public class ColecaoForm extends HomePage {
 	public ColecaoForm() {
 		
 		colecaoModels = colecaoService.listar();
-
+		
 		/*
 		 * Session session = HibernateUtil.getFactory().openSession();
 		 * 
@@ -106,7 +108,9 @@ public class ColecaoForm extends HomePage {
 
 						target.add(listContainer);
 						// modalWindow.clearOriginalDestination();
+						
 						modalWindow.close(target);
+						
 					};
 				};
 				colecaoPanel.setOutputMarkupId(true);
@@ -230,8 +234,8 @@ public class ColecaoForm extends HomePage {
 						if (colecaoModel.isAnswer() == true) {
 							// colecaoModels.remove(index);
 							colecaoService.excluir(index);
-							target.add(listContainer);
 						}
+						target.add(listContainer);
 
 						modalWindowDel.close(target);
 					};

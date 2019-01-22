@@ -8,35 +8,51 @@
 	<!-- <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">  -->
 </wicket:head>
 <body>
-	<script>
-	/*  setTimeout(function() {
-	        $(".alert").alert('close');
+	<!--  <script>
+	  setTimeout(function() {
+	        $("#goaway").alert('close');
 	    }, 100);
 
-	$(".alert").alert('close') */
-	$(document).ready(function () {
+	$(".alert").alert('close') 
+	/* $(document).ready(function () {
 		 
 		window.setTimeout(function() {
-		    $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+		    $("#goaway").fadeTo(1000, 0).slideUp(1000, function(){
 		        $(this).remove(); 
 		    });
 		}, 1000);
 		 
-		});
-</script>
+		}); */
+</script>  -->
+ <!-- jQUery-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!--  Ação para ocultar a div depois de 5 segundos -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function(){ 
+            setTimeout(function() {
+                $("#goaway").fadeOut().empty();
+            }, 4000);
+        }, false);
+    </script>
+     
+	<div id="goaway">
+		<span wicket:id="feedbackMessage"></span> 
+	</div>
 	<div class="bgimg">
 		<div class="centerdiv">
 			<img alt="img" src="user.png" id="profile">
 			<h2>Row System</h2>
-			<div class="alert alert-danger">
+			<!-- <div class="alert alert-danger">
 				<button type="button" class="close" data-dismiss="alert"
 					aria-label="close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-			<!-- 	<p wicket:id="feedbackMessage"></p> -->
+			 	<p wicket:id="feedbackMessage"></p> 
 
-				<p wicket:id="errorLogin"></p>
-			</div>
+			</div> -->
+			<!-- <p wicket:id="validacao"></p> -->
+			<!-- <p class="alert alert-danger" data-dismiss="alert" wicket:id="errorLogin"><span aria-hidden="true">&times;</span></p> -->
 			<form wicket:id="formularioLogin">
 				<div>
 					<input wicket:id="login" class="inputbox" type="text"

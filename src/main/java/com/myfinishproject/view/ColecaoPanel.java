@@ -10,8 +10,10 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 
 import com.myfinishproject.model.Colecao;
+import com.myfinishproject.service.AlertFeedback;
 
 public class ColecaoPanel extends Panel {
 
@@ -25,15 +27,22 @@ public class ColecaoPanel extends Panel {
 		super(id);
 
 		add(new Label("message", "COLEÇÃO"));
-		FeedbackPanel feedbackPanel = new FeedbackPanel("feedbackMessage");
-		add(feedbackPanel);
 		
+		AlertFeedback alertFeedback = new AlertFeedback("feedbackMessage");
+		
+		
+
 		Form<Colecao> form = new Form<Colecao>("form", new CompoundPropertyModel<Colecao>(colecaoModel));
 
 		final TextField<String> nome = new TextField<String>("nome");
 
 		nome.setRequired(true);
 		nome.setOutputMarkupId(true);
+		
+		  final Label errorLogin = new Label("errorLogin",
+		  Model.of("Login Incorreto!!"));
+		  errorLogin.setOutputMarkupId(true).setVisible(false);
+		 add(errorLogin);
 
 		// Criando botão de enviar
 		// Botão Ajax
@@ -44,14 +53,14 @@ public class ColecaoPanel extends Panel {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-
+				
+				alertFeedback.success("Coleção cadastrada com sucesso!!!");
 				executarAoSalvar(target, colecaoModel);
-
 				target.add(nome);
 			}
 		};
 		ajaxButton.setOutputMarkupId(true);
-
+		add(alertFeedback);
 		add(form);
 		form.add(nome);
 		form.add(ajaxButton);
@@ -75,8 +84,7 @@ public class ColecaoPanel extends Panel {
 		data.add(datePickerInicial);
 		data.setOutputMarkupId(true);
 		form.add(data);
-		
-		
+
 	}
 
 	// Enviando os dados para o HomePage

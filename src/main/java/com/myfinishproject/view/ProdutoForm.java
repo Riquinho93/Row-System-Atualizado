@@ -329,22 +329,27 @@ public class ProdutoForm extends HomePage {
 	}
 
 	// Enviando para Pagina DevolucaoForm
-	AjaxLink<DevolucaoForm> Devolucao(final int index, final Produto user) {
+	AjaxLink<DevolucaoForm> Devolucao(final int index, Produto user) {
 		AjaxLink<DevolucaoForm> button1 = new AjaxLink<DevolucaoForm>("devolucao") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				PageParameters parameters = new PageParameters();
+				/*PageParameters parameters = new PageParameters();
 				parameters.add("modelo", user.getModelo());
 				parameters.add("largura", user.getLargura());
 				parameters.add("tipoEnfesto", user.getTipoEnfesto());
 				parameters.add("dataSaida", user.getDataSaida());
 				parameters.add("dataRetorno", user.getDataRetorno());
-				parameters.add("status", user.getStatus());
-				setResponsePage(DevolucaoForm.class, parameters);
+				parameters.add("status", user.getStatus());*/
+				setResponsePage(DevolucaoForm.class, user);
 
+			}
+
+			private void setResponsePage(Class<DevolucaoForm> class1, Produto user) {
+				// TODO Auto-generated method stub
+				
 			}
 
 		};

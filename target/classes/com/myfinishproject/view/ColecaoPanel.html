@@ -1,6 +1,20 @@
 <wicket:panel>
+<!-- jQUery-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!--  Ação para ocultar a div depois de 5 segundos -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function(){ 
+            setTimeout(function() {
+                $("#goaway").fadeOut().empty();
+            }, 4000);
+        }, false);
+    </script>
+	<div id="goaway">
+		<span wicket:id="feedbackMessage"></span> 
+	</div>
 	<h1 wicket:id="message"></h1>
-	<p wicket:id="feedbackMessage" class="feedbackPanelERROR"></p>
+	<p  wicket:id="errorLogin"></p>
 	<form wicket:id="form">
 		<div>
 			<Label class="text">Nome: </label>

@@ -18,6 +18,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.googlecode.genericdao.search.Search;
 import com.myfinishproject.model.Usuario;
 import com.myfinishproject.service.UsuarioService;
+import com.myfinishproject.service.AlertFeedback;
 
 public class Login extends WebPage {
 
@@ -30,19 +31,19 @@ public class Login extends WebPage {
 
 	public Login() {
 		
-	/*	FeedbackPanel feedbackPanel = new FeedbackPanel("feedbackMessage");*/
+		AlertFeedback alertFeedback = new AlertFeedback("feedbackMessage");
 		
 		filtrarUsuario = new Usuario();
 		final TextField<String> login = new TextField<String>("login");
 		final PasswordTextField senha = new PasswordTextField("senha");
-		login.setRequired(true);
-		senha.setRequired(true);
+		/*login.setRequired(true);
+		senha.setRequired(true);*/
 		login.setOutputMarkupId(true);
 		senha.setOutputMarkupId(true);
 		
-		 final Label errorLogin = new Label("errorLogin",
+		/* final Label errorLogin = new Label("errorLogin",
 		 Model.of("Login Incorreto!!"));
-		 errorLogin.setOutputMarkupId(true).setVisible(false);
+		 errorLogin.setOutputMarkupId(true).setVisible(false);*/
 		 
 
 		 formularioLogin = new Form<Usuario>("formularioLogin",new  CompoundPropertyModel<>(filtrarUsuario)) {
@@ -60,19 +61,22 @@ public class Login extends WebPage {
 
 				if (lista != null && !lista.isEmpty()) {
 
+					alertFeedback.success("Login com sucesso!!");
 					getSession().setAttribute("userName", lista.get(0));
 					setResponsePage(ColecaoForm.class);
 				}else {
-					errorLogin.setVisible(true);
-				//	feedbackPanel.error("Deu Error");
+				
+					alertFeedback.error("Login Incorreto");;
+					/*errorLogin.setVisible(true);
+					validacao.anySucessMessage();*/
+					/*feedbackPanel.error("Deu Error");*/
 				}
 
 			}
 			
 
 		};
-	/*	add(feedbackPanel);*/
-		add(errorLogin, formularioLogin);
+		add(alertFeedback, formularioLogin);
 		formularioLogin.add(login, senha).setOutputMarkupId(true);
 	}
 }
