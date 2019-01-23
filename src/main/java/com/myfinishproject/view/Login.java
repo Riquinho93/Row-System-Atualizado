@@ -36,14 +36,14 @@ public class Login extends WebPage {
 		filtrarUsuario = new Usuario();
 		final TextField<String> login = new TextField<String>("login");
 		final PasswordTextField senha = new PasswordTextField("senha");
-		/*login.setRequired(true);
-		senha.setRequired(true);*/
+		login.setRequired(true);
+		senha.setRequired(true);
 		login.setOutputMarkupId(true);
 		senha.setOutputMarkupId(true);
 		
-		/* final Label errorLogin = new Label("errorLogin",
+		final Label errorLogin = new Label("errorLogin",
 		 Model.of("Login Incorreto!!"));
-		 errorLogin.setOutputMarkupId(true).setVisible(false);*/
+		 errorLogin.setOutputMarkupId(true).setVisible(false);
 		 
 
 		 formularioLogin = new Form<Usuario>("formularioLogin",new  CompoundPropertyModel<>(filtrarUsuario)) {
@@ -67,9 +67,7 @@ public class Login extends WebPage {
 				}else {
 				
 					alertFeedback.error("Login Incorreto");;
-					/*errorLogin.setVisible(true);
-					validacao.anySucessMessage();*/
-					/*feedbackPanel.error("Deu Error");*/
+					errorLogin.setVisible(true);
 				}
 
 			}

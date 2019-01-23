@@ -46,12 +46,12 @@ public class ColecaoForm extends HomePage {
 	private LoadableDetachableModel<List<Colecao>> loadList;
 	private Colecao colecaoForm;
 
-	/*@SpringBean(name = "colecaoService")*/
+	@SpringBean(name = "colecaoService")
 	private ColecaoService colecaoService;
 
 	public ColecaoForm() {
 		
-		/*colecaoModels = colecaoService.listar();*/
+		colecaoModels = colecaoService.listar();
 		
 		/*
 		 * Session session = HibernateUtil.getFactory().openSession();
