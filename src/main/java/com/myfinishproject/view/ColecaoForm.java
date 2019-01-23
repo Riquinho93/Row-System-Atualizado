@@ -46,12 +46,12 @@ public class ColecaoForm extends HomePage {
 	private LoadableDetachableModel<List<Colecao>> loadList;
 	private Colecao colecaoForm;
 
-	@SpringBean(name = "colecaoService")
+	/*@SpringBean(name = "colecaoService")*/
 	private ColecaoService colecaoService;
 
 	public ColecaoForm() {
 		
-		colecaoModels = colecaoService.listar();
+		/*colecaoModels = colecaoService.listar();*/
 		
 		/*
 		 * Session session = HibernateUtil.getFactory().openSession();
@@ -195,7 +195,7 @@ public class ColecaoForm extends HomePage {
 	}
 
 	// Indo para a pagina dos produtos
-	private AjaxLink<ProdutoForm> visualizar(final int index, Colecao colecao) {
+	private AjaxLink<ProdutoForm> visualizar(final int index, final Colecao colecao) {
 		AjaxLink<ProdutoForm> button = new AjaxLink<ProdutoForm>("vis") {
 
 			private static final long serialVersionUID = -2066063362744885278L;

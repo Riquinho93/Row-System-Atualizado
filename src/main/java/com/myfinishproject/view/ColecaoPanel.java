@@ -28,7 +28,7 @@ public class ColecaoPanel extends Panel {
 
 		add(new Label("message", "COLEÇÃO"));
 		
-		AlertFeedback alertFeedback = new AlertFeedback("feedbackMessage");
+		final AlertFeedback alertFeedback = new AlertFeedback("feedbackMessage");
 		
 		
 
